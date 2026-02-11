@@ -1,0 +1,245 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      /* ===== ANIMATIONS ===== */
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+
+      /* ===== TESTIMONIAL SECTION ===== */
+      .travelers {
+        background-color: white;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        padding: 10px;
+        background-size: cover;
+        margin: 20px;
+        padding-bottom: 50px;
+      }
+
+      .travelers h2 {
+        animation: fadeInScale 0.8s ease-out;
+        color: #2c3e50;
+        font-weight: bold;
+      }
+
+      .travelers1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 25px;
+        padding: 20px 0;
+      }
+
+      /* ===== TESTIMONIAL CARD ===== */
+      .arun,
+      .priya,
+      .meena {
+        width: 235px;
+        height: auto;
+        border: 2px solid #667eea;
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Alternating animations */
+      .arun {
+        animation: slideInLeft 0.6s ease-out;
+        border-color: #667eea;
+      }
+
+      .priya {
+        animation: slideInUp 0.6s ease-out;
+        border-color: #764ba2;
+      }
+
+      .meena {
+        animation: slideInRight 0.6s ease-out;
+        border-color: #43e97b;
+      }
+
+      /* Hover effects */
+      .arun:hover,
+      .priya:hover,
+      .meena:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        animation: float 2s ease-in-out infinite;
+      }
+
+      /* Image styling */
+      .arun img,
+      .priya img,
+      .meena img {
+        width: 200px;
+        height: 200px;
+        border-radius: 20px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+
+      .arun:hover img,
+      .priya:hover img,
+      .meena:hover img {
+        transform: scale(1.05);
+      }
+
+      /* Heading and text styling */
+      .arun h4,
+      .priya h4,
+      .meena h4 {
+        text-align: center;
+        color: #2c3e50;
+        font-weight: 600;
+        margin-top: 15px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        transition: color 0.3s ease;
+      }
+
+      .arun:hover h4,
+      .priya:hover h4,
+      .meena:hover h4 {
+        color: #667eea;
+      }
+
+      /* ===== RESPONSIVE DESIGN ===== */
+      @media (max-width: 768px) {
+        .travelers1 {
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+
+        .arun,
+        .priya,
+        .meena {
+          width: 90%;
+          max-width: 300px;
+          padding: 12px;
+        }
+
+        .arun img,
+        .priya img,
+        .meena img {
+          width: 180px;
+          height: 180px;
+        }
+
+        .travelers h2 {
+          font-size: 28px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .travelers {
+          margin: 15px 5px;
+          padding: 10px;
+          padding-bottom: 30px;
+        }
+
+        .arun,
+        .priya,
+        .meena {
+          width: 95%;
+          padding: 10px;
+        }
+
+        .arun img,
+        .priya img,
+        .meena img {
+          width: 150px;
+          height: 150px;
+          margin-top: 8px;
+        }
+
+        .arun h4,
+        .priya h4,
+        .meena h4 {
+          font-size: 0.9rem;
+          margin-top: 10px;
+        }
+
+        .travelers h2 {
+          font-size: 22px;
+        }
+      }
+    </style>
+</head>
+<body><section class="travelers">
+<h2 style="font-size: 41px; text-align: center;">Our Happy Travelers</h2> 
+<section class="travelers1">
+<section class="arun">
+<img src="C:\Users\Kaar User\Desktop\Assgnment\html-css-practice\images\Arun.png" style="width: 200px; height: 200px; border-radius: 20px; margin-top: 10px; margin-left: 20px;">
+<h4 style="text-align: center;">“The travel arrangements were smooth and well planned. Hotels and flights were perfectly coordinated.”
+<br><b>-Arun Kumar, Chennai</b></h4>
+</section>
+<section class="priya">
+<img src="C:\Users\Kaar User\Desktop\Assgnment\html-css-practice\images\Priya.png" style="width :200px; height: 200px; border-radius: 20px; margin-top: 10px; margin-left: 20px;">
+<h4 style="text-align: center;">“We had an amazing honeymoon experience. The hotel and houseboat stay were unforgettable.”
+<br><b>-Priya R, Bengaluru</b></h4>
+</section>
+<section class="meena">
+<img src="C:\Users\Kaar User\Desktop\Assgnment\html-css-practice\images\Meena.png" style="width: 200px; height: 200px;border-radius: 20px; margin-top: 10px; margin-left: 20px;">
+<h4 style="text-align: center;">“Affordable packages and excellent support throughout the journey. Highly recommended.”
+<br><b>-Meena S, Coimbatore</b></h4>
+</section>
+</section>
+</section>
+</body>
