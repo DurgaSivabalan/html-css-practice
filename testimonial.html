@@ -1,61 +1,15 @@
 <head>
     <link rel="stylesheet" href="style.css">
     <style>
-      /* ===== ANIMATIONS ===== */
-      @keyframes slideInUp {
+      @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(40px);
         }
         to {
           opacity: 1;
-          transform: translateY(0);
         }
       }
 
-      @keyframes slideInLeft {
-        from {
-          opacity: 0;
-          transform: translateX(-40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes slideInRight {
-        from {
-          opacity: 0;
-          transform: translateX(40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes fadeInScale {
-        from {
-          opacity: 0;
-          transform: scale(0.9);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      @keyframes float {
-        0%, 100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-8px);
-        }
-      }
-
-      /* ===== TESTIMONIAL SECTION ===== */
       .travelers {
         background-color: white;
         background-repeat: no-repeat;
@@ -67,7 +21,7 @@
       }
 
       .travelers h2 {
-        animation: fadeInScale 0.8s ease-out;
+        animation: fadeIn 1.2s ease-in-out;
         color: #2c3e50;
         font-weight: bold;
       }
@@ -80,7 +34,6 @@
         padding: 20px 0;
       }
 
-      /* ===== TESTIMONIAL CARD ===== */
       .arun,
       .priya,
       .meena {
@@ -97,30 +50,27 @@
 
       /* Alternating animations */
       .arun {
-        animation: slideInLeft 0.6s ease-out;
+        animation: fadeIn 1.2s ease-in-out;
         border-color: #667eea;
       }
 
       .priya {
-        animation: slideInUp 0.6s ease-out;
+        animation: fadeIn 1.2s ease-in-out;
         border-color: #764ba2;
       }
 
       .meena {
-        animation: slideInRight 0.6s ease-out;
+        animation: fadeIn 1.2s ease-in-out;
         border-color: #43e97b;
       }
 
-      /* Hover effects */
       .arun:hover,
       .priya:hover,
       .meena:hover {
         transform: translateY(-15px);
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-        animation: float 2s ease-in-out infinite;
       }
 
-      /* Image styling */
       .arun img,
       .priya img,
       .meena img {
@@ -140,7 +90,6 @@
         transform: scale(1.05);
       }
 
-      /* Heading and text styling */
       .arun h4,
       .priya h4,
       .meena h4 {
@@ -159,7 +108,6 @@
         color: #667eea;
       }
 
-      /* ===== RESPONSIVE DESIGN ===== */
       @media (max-width: 768px) {
         .travelers1 {
           flex-direction: column;
