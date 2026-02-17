@@ -64,13 +64,16 @@ nav ul li a {
   text-decoration: none;
   color: black;
 }
-
+.explore button:hover + .logo{
+transform: rotate(360deg);
+  }
 .welcome .explore button:hover {
   background-color: white;
   color: cadetblue;
 }
+.explore:hover .logo{
+background-color: red;}
 
-/* === GRID SECTION === */
 .grid-section {
   padding: 40px 20px;
   background-color: #f9f9f9;
@@ -339,7 +342,7 @@ nav ul li a {
 }
 
 .contact-box p {
-  color: #d84315;
+  color black;
   margin: 10px 0;
   font-size: 0.85rem;
 }
@@ -348,7 +351,7 @@ nav ul li a {
   display: inline-block;
   margin-top: 12px;
   padding: 10px 15px;
-  background-color: #ff9800;
+  background-color: skyblue;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -360,7 +363,7 @@ nav ul li a {
 }
 
 .contact-link:hover {
-  background-color: #e65100;
+  background-color: cadetblue;
 }
 
 .close-btn {
