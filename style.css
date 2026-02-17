@@ -1,5 +1,8 @@
 :root{
   --text-align:center;
+  --border: 1px solid black;
+  --flex:none;
+  --opacity:0.7;
 }
 body {
   background-image: url(images/vacation.png);
@@ -13,14 +16,14 @@ body {
 
 .navi {
   padding: 10px;
-  border: 1px solid black;
+  border: var(--border);
   background-color: whitesmoke;
   border-radius: 10px;
-  opacity: 0.7;
+  opacity: var(--opacity)
 }
 
 nav ul {
-  list-style-type: none;
+  flex-type: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -100,7 +103,7 @@ background-color: red;}
 
 .grid-item {
   background: white;
-  border: 1px solid #ddd;
+  border: var(--border);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -171,7 +174,7 @@ background-color: red;}
 
 .newsletter-input:focus {
   outline: none;
-  border: 2px solid white;
+  border: var(--border);
 }
 
 .newsletter-button {
@@ -226,7 +229,7 @@ background-color: red;}
 }
 
 .footer-box ul {
-  list-style: none;
+  flex: none;
   padding: 0;
   margin: 0;
 }
@@ -295,7 +298,7 @@ background-color: red;}
 }
 
 .sidebar ul {
-  list-style: none;
+  flex: none;
   padding: 0;
   margin: 0;
 }
