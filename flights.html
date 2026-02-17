@@ -13,7 +13,9 @@
         background-image: url(images/BD.png);
         opacity: 0.95;
       }
-
+:root{
+  --background-color:white;
+}
       h2 {
         animation: fadeIn 1.5s ease-in-out;
         color: #2c3e50;
@@ -21,7 +23,7 @@
       }
 
       .flights {
-        background-color: white;
+        background-color:var(--background-color);
         background-repeat: no-repeat;
         border-radius: 20px;
         padding: 10px;
@@ -78,7 +80,7 @@
       }
 
       .places {
-        background-color: white;
+        background-color: var(--background-color);
         background-repeat: no-repeat;
         border-radius: 20px;
         padding: 20px;
@@ -134,7 +136,7 @@
       }
 
       .Hotels {
-        background-color: white;
+        background-color: var(--background-color);
         background-repeat: no-repeat;
         border-radius: 20px;
         padding: 10px;
@@ -215,7 +217,7 @@
         padding: 10px 15px;
         border-radius: 8px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        color: var(--background-color);
         border: none;
         cursor: pointer;
         font-weight: 600;

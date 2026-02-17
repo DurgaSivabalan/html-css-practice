@@ -1,4 +1,6 @@
-
+:root{
+  --text-align:center;
+}
 body {
   background-image: url(images/vacation.png);
   background-size: cover;
@@ -45,7 +47,7 @@ nav ul li a {
 }
 
 .welcome {
-  text-align: center;
+  text-align: var(--text-align);
   margin-top: 100px;
   padding: 20px;
 }
@@ -76,7 +78,7 @@ background-color: red;}
 
 .grid-section {
   padding: 40px 20px;
-  background-color: #f9f9f9;
+  background-color: white;
   margin: 30px 20px;
   border-radius: 10px;
 }
@@ -511,5 +513,13 @@ background-color: red;}
   nav ul {
     font-size: 0.9rem;
   }
+}
+
+header:has(.explore button:hover) .logo {
+  filter: hue-rotate(30deg) brightness(1.2);
+}
+
+header:has(.explore button:hover) .logo img {
+  filter:  brightness(1.2) saturate(1.3);
 }
 
