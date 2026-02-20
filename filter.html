@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuestVoyage Filter</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f6fb;
+}
+
+h1{
+    text-align:center;
+    padding:20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color:white;
+    margin:0;
+}
+
+.filter-box{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    padding:20px;
+    background:white;
+}
+
+select{
+    padding:8px;
+    border-radius:5px;
+}
+
+button{
+    padding:8px 12px;
+    border:none;
+    border-radius:5px;
+    background:#1565c0;
+    color:white;
+    cursor:pointer;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin:0 0 8px;
+}
+
+.price{
+    color:green;
+    font-weight:bold;
+}
+
+.no-result{
+    text-align:center;
+    color:red;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>QuestVoyage Travel Packages</h1>
+
+<div class="filter-box">
+    <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="low">Below ₹20000</option>
+        <option value="mid">₹20000 - ₹40000</option>
+        <option value="high">Above ₹40000</option>
+    </select>
+
+    <select id="durationFilter">
+        <option value="all">All Duration</option>
+        <option value="short">1-3 Days</option>
+        <option value="medium">4-6 Days</option>
+        <option value="long">7+ Days</option>
+    </select>
+
+    <select id="themeFilter">
+        <option value="all">All Theme</option>
+        <option value="beach">Beach</option>
+        <option value="mountain">Mountain</option>
+        <option value="city">City</option>
+    </select>
+
+    <button onclick="resetFilter()">Reset</button>
+</div>
+
+<div class="container" id="packageContainer"></div>
+
+<script>
+
+const packages = [
+    {name:"Goa Trip", price:15000, duration:3, theme:"beach"},
+    {name:"Manali Tour", price:35000, duration:5, theme:"mountain"},
+    {name:"Delhi Visit", price:18000, duration:2, theme:"city"},
+    {name:"Maldives Luxury", price:60000, duration:7, theme:"beach"},
+    {name:"Kashmir Tour", price:45000, duration:6, theme:"mountain"},
+    
+    {name:"Andaman Escape", price:41000, duration:7, theme:"beach"},
+    {name:"Ooty Hills", price:22000, duration:3, theme:"mountain"},
+    {name:"Mumbai Explorer", price:25000, duration:4, theme:"city"},
+    {name:"Shimla Retreat", price:32000, duration:5, theme:"mountain"},
+    {name:"Pondicherry Relax", price:17000, duration:2, theme:"beach"},
+    
+    {name:"Jaipur Heritage", price:21000, duration:3, theme:"city"},
+    {name:"Ladakh Adventure", price:55000, duration:8, theme:"mountain"},
+    {name:"Kerala Backwaters", price:38000, duration:6, theme:"beach"},
+    {name:"Hyderabad City Tour", price:16000, duration:2, theme:"city"},
+    {name:"Darjeeling Delight", price:34000, duration:5, theme:"mountain"}
+];
+function displayPackages(data){
+    const container = document.getElementById("packageContainer");
+    container.innerHTML = "";
+
+    if(data.length === 0){
+        container.innerHTML = "<p class='no-result'>No Packages Found</p>";
+        return;
+    }
+
+    data.forEach(pkg => {
+        container.innerHTML += `
+        <div class="card">
+            <h3>${pkg.name}</h3>
+            <p class="price">₹${pkg.price}</p>
+            <p>Duration: ${pkg.duration} Days</p>
+            <p>Theme: ${pkg.theme}</p>
+        </div>
+        `;
+    });
+}
+
+function filterPackages(){
+
+    const priceValue = document.getElementById("priceFilter").value;
+    const durationValue = document.getElementById("durationFilter").value;
+    const themeValue = document.getElementById("themeFilter").value;
+
+    const filtered = packages.filter(pkg => {
+
+        let priceMatch = false;
+        if(priceValue === "all") priceMatch = true;
+        else if(priceValue === "low" && pkg.price < 20000) priceMatch = true;
+        else if(priceValue === "mid" && pkg.price >= 20000 && pkg.price <= 40000) priceMatch = true;
+        else if(priceValue === "high" && pkg.price > 40000) priceMatch = true;
+
+        let durationMatch = false;
+        if(durationValue === "all") durationMatch = true;
+        else if(durationValue === "short" && pkg.duration <= 3) durationMatch = true;
+        else if(durationValue === "medium" && pkg.duration >= 4 && pkg.duration <= 6) durationMatch = true;
+        else if(durationValue === "long" && pkg.duration >= 7) durationMatch = true;
+
+        let themeMatch = (themeValue === "all" || pkg.theme === themeValue);
+
+        return priceMatch && durationMatch && themeMatch;
+    });
+
+    displayPackages(filtered);
+}
+
+function resetFilter(){
+    document.getElementById("priceFilter").value = "all";
+    document.getElementById("durationFilter").value = "all";
+    document.getElementById("themeFilter").value = "all";
+    displayPackages(packages);
+}
+
+document.getElementById("priceFilter").addEventListener("change", filterPackages);
+document.getElementById("durationFilter").addEventListener("change", filterPackages);
+document.getElementById("themeFilter").addEventListener("change", filterPackages);
+
+displayPackages(packages);
+
+</script>
+
+</body>
+</html>

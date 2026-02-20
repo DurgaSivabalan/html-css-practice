@@ -15,15 +15,27 @@ body {
 }
 
 .navi {
-  padding: 10px;
-  border: var(--border);
-  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;              
+  padding: 20px;
+  background: rgba(255,255,255,0.7);
   border-radius: 10px;
-  opacity: var(--opacity)
 }
-
+.logo {
+  display: flex;
+  align-items: center;   
+  gap: 10px;
+}
+.logo img{
+  height: 40px;
+}
+.nav{
+  display: flex;
+  align-items: center;  
+  gap: 20px;
+}
 nav ul {
-  flex-type: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -32,8 +44,10 @@ nav ul {
 }
 
 nav ul li {
-  display: inline;
+  display: flex;
+  padding-top: 2px;;
   margin-left: 10px;
+  list-style-type: none;
 }
 
 nav ul li a {
@@ -74,7 +88,7 @@ transform: rotate(360deg);
   }
 .welcome .explore button:hover {
   background-color: white;
-  color: cadetblue;
+  color: cadetblue ;
 }
 .explore:hover .logo{
 background-color: red;}
@@ -143,16 +157,16 @@ background-color: red;}
 }
 
 .newsletter-section h2 {
-  color: white;
+  color: white ;
   font-size: 2rem;
   margin-bottom: 10px;
 }
 
-.newsletter-section > p:first-of-type {
-  color: white;
-  font-size: 1rem;
-  margin-bottom: 25px;
-}
+  .newsletter-section > p:first-of-type {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
 
 .newsletter-form {
   display: flex;
@@ -229,14 +243,17 @@ background-color: red;}
 }
 
 .footer-box ul {
-  flex: none;
   padding: 0;
   margin: 0;
+
 }
 
 .footer-box ul li {
   margin-bottom: 8px;
   color: #555;
+    display: flex;
+
+
 }
 
 .footer-box a {
@@ -270,6 +287,11 @@ background-color: red;}
   align-items: center;
   gap: 5px;
 }
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
 .socialmedia a:hover {
   color: #667eea;
@@ -278,7 +300,8 @@ background-color: red;}
 .sidebar {
   display: none;
   position: fixed;
-  left: -250px;
+  right: -250px;
+  border-radius: 5px;
   top: 100px;
   width: 250px;
   height: 100vh;
@@ -408,7 +431,7 @@ background-color: red;}
 
 #sidebar-toggle:checked ~ main .sidebar {
   display: block;
-  left: 0;
+  right: 0;
 }
 
 

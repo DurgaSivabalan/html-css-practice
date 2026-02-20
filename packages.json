@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Maldives",
+    "duration": "5 Days",
+    "type": "Beach Resort",
+    "image": "images/dubai.jpg"
+  },
+  {
+    "title": "Switzerland",
+    "duration": "7 Days",
+    "type": "Mountain Tour",
+    "image": "images/dubai.jpg"
+  },
+  {
+    "title": "Dubai",
+    "duration": "4 Days",
+    "type": "Desert Safari",
+    "image": "images/dubai.jpg"
+  }
+]

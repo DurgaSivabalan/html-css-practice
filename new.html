@@ -13,7 +13,7 @@
   </head>
 
   <body class="Hero-bg">
-    <header>
+    <header style="display:flex; flex-direction: column; gap: 20px">
       <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" />
       <section class="navi" id="navi">
         <section class="logo">
@@ -22,8 +22,46 @@
         </section>
         <nav id="navika">
           <ul>
+      <section class="logout">
+        <li
+          style="
+          padding-top: 10px;
+            list-style-type: none;
+            
+            background-color: cadetblue;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
+            float: right;">
+          <a href="login.html" style="text-decoration: none; color: black"
+            ><b>Logout</b></a
+          >
+        </li>
+      </section>
             <li>
-              <a href="#home" style="color: black"><b>Home</b></a>
+              <label
+                for="sidebar-toggle"
+                class="hamburger"
+                style="padding-top: 8px"
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </label>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      
+      <main class="welcome">
+        <aside class="sidebar" id="sidebar">
+          <label for="sidebar-toggle" class="close-btn">✕</label>
+
+          <h3>Quick Links</h3>
+          <ul>
+           <ul>
+            <li>
+              <a href="#home" style="color: black; list-style-type: none;"><b>Home</b></a>
             </li>
             <li>
               <a href="flights.html" target="_blank" style="color: black"
@@ -45,26 +83,6 @@
                 ><b>Contact</b></a
               >
             </li>
-            <li>
-              <label for="sidebar-toggle" class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-              </label>
-            </li>
-          </ul>
-        </nav>
-      </section>
-      <main class="welcome">
-        <aside class="sidebar" id="sidebar">
-          <label for="sidebar-toggle" class="close-btn">✕</label>
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#destinations">Popular Destinations</a></li>
-            <li><a href="#offers">Special Offers</a></li>
-            <li><a href="Packages.html">Tour Packages</a></li>
-            <li><a href="#reviews">Customer Reviews</a></li>
-            <li><a href="#newsletter">Newsletter</a></li>
           </ul>
           <section class="sidebar-box contact-box">
             <h4>📞 Contact Us</h4>
@@ -76,8 +94,9 @@
         <section class="main-content">
           <h1>Welcome to "Dream Destination"</h1>
           <h3>
-            "Travel far enough, you meet yourself."<strong> "Let us plan the journey
-            you'll never forget."</strong>
+            "Travel far enough, you meet yourself."<em>
+              "Let us plan the journey you'll never forget."</em
+            >
           </h3>
           <section class="explore">
             <button><a href="flights.html">Explore More</a></button>
@@ -138,18 +157,18 @@
       </p>
       <form class="newsletter-form">
         <input
+          type="name"
+          class="newsletter-input"
+          id="nameInput"
+          placeholder="Enter your Name"
+        />
+        <input
           type="email"
           class="newsletter-input"
           id="emailInput"
           placeholder="Enter your email address"
-          required
-          aria-label="Email address"
         />
-        <button
-          type="submit"
-          class="newsletter-button"
-          onclick="subscribe()"
-        >
+        <button type="submit" class="newsletter-button" id="subscribe">
           Subscribe
         </button>
       </form>
@@ -159,10 +178,10 @@
         >
       </p>
     </section>
-    ]s
+
     <footer class="footer">
       <section class="footer-container">
-        <section class="footer-box">
+        <section class="flex">
           <h3>Branch Offices</h3>
           <ul>
             <li>Chennai</li>
@@ -172,40 +191,42 @@
           </ul>
         </section>
 
-        <section class="footer-box">
+        <section class="flex">
           <h3>Follow Us</h3>
           <section class="socialmedia">
-            <a href="https://www.instagram.com" target="_blank"
-              ><img
-                src="C:\Users\Kaar User\Desktop\Assgnment\html-css-practice\images\insta.png"
+            <a href="https://www.instagram.com" target="_blank">
+              <img
+                src="images/Insta.png"
                 style="width: 30px; height: 30px"
               />Instagram</a
             ><br />
             <a href="https://www.facebook.com" target="_blank"
               ><img
-                src="C:\Users\Kaar User\Desktop\Assgnment\html-css-practice\images\Face.png"
+                src="images/Face.png"
                 style="width: 30px; height: 30px"
               />Facebook</a
             ><br />
             <a href="https://www.twitter.com" target="_blank"
               ><img
-                src="C:\Users\Kaar User\Desktop\Assgnment\html-css-practice\images\twitterss.png"
+                src="images/twitterss.png"
                 style="width: 30px; height: 30px"
               />Twitter</a
             >
           </section>
         </section>
 
-        <section class="footer-box">
+        <section class="flex">
           <h3>Contact</h3>
           <p>📞 +91 98765 43210</p>
           <p>✉️ support@travelagency.com</p>
-          <a href="https://maps.google.com" target="_blank">📍 View on Map</a>
+          <a href="https://maps.google.com" target="_blank" style="text-decoration: none; color: black  ;">📍 View on Map</a>
         </section>
       </section>
 
       <p class="footer-bottom">© 2026 Travel Agency. All Rights Reserved.</p>
     </footer>
-    <script src="script.js"></script>
+
+    <script src="auth.js"></script>
+    <script src="newsletter.js"></script>
   </body>
 </html>

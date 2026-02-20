@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuestVoyage - Register</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>Create Account</h2>
+
+    <form id="registerForm">
+
+      <input type="text" id="regName" placeholder="Full Name" required>
+
+      <input type="tel" id="regPhone" placeholder="Phone Number" 
+             pattern="[0-9]{10}" 
+             title="Enter 10 digit phone number"
+             required>
+
+      <input type="email" id="regEmail" placeholder="Enter Email" required>
+
+      <input type="password" id="regPassword" placeholder="Create Password" required>
+
+      <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+
+      <button type="submit" style="padding:15px 146px">Register</button>
+
+    </form>
+
+    <p id="registerMessage" class="message"></p>
+
+    <p class="switch-link">
+      Already have account? <a href="login.html">Login here</a>
+    </p>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>
