@@ -153,7 +153,7 @@ background-color: red;}
   padding: 40px 20px;
   margin: 30px 20px;
   border-radius: 10px;
-  text-align: center;
+  text-align: cnter;
 }
 
 .newsletter-section h2 {
@@ -180,7 +180,9 @@ background-color: red;}
 .newsletter-input {
   flex: 1;
   min-width: 200px;
-  padding: 12px 15px;
+  padding-top:15px;
+  padding-bottom: 10px;
+  padding-left: 10px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
@@ -200,11 +202,13 @@ background-color: red;}
   background-color: white;
     cursor: pointer;
   color: #667eea;
+  padding-right: 20px;
   transition: background-color 0.3s ease;
 }
 
 .newsletter-button:hover {
-  background-color: #e6e6e6;
+  background-color:#667eea ;
+  color: white;
 }
 
 .newsletter-info {

@@ -79,21 +79,24 @@ button{
 <h1>QuestVoyage Travel Packages</h1>
 
 <div class="filter-box">
-    <select id="priceFilter">
+    <label for="priceFilter">Price:</label>
+    <select id="priceFilter" aria-label="Filter by price">
         <option value="all">All Prices</option>
         <option value="low">Below ₹20000</option>
         <option value="mid">₹20000 - ₹40000</option>
         <option value="high">Above ₹40000</option>
     </select>
 
-    <select id="durationFilter">
+    <label for="durationFilter">Duration:</label>
+    <select id="durationFilter" aria-label="Filter by duration">
         <option value="all">All Duration</option>
         <option value="short">1-3 Days</option>
         <option value="medium">4-6 Days</option>
         <option value="long">7+ Days</option>
     </select>
 
-    <select id="themeFilter">
+    <label for="themeFilter">Theme:</label>
+    <select id="themeFilter" aria-label="Filter by theme">
         <option value="all">All Theme</option>
         <option value="beach">Beach</option>
         <option value="mountain">Mountain</option>
