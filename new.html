@@ -22,12 +22,35 @@
         </section>
         <nav id="navika">
           <ul>
+   <div class="nav-right">
+
+    <!-- Wishlist Icon -->
+    <a href="wishlist.html" class="wishlist-icon">
+        <img src="images/wishlist1.jpg" alt="Wishlist">
+        <span id="wishlistCount" class="wishlist-count">0</span>
+    </a>
+
+    <!-- Book Trip Button -->
+    <a href="filter.html" class="book-trip-btn" style="
+            padding-top: 10px;
+            list-style-type: none;
+            background-color: cadetblue;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
+            float: right;
+            text-decoration: none;
+            color:black"
+          
+>   <b> Book Trip</b>  
+    </a>
+
+
       <section class="logout">
         <li
           style="
           padding-top: 10px;
             list-style-type: none;
-            
             background-color: cadetblue;
             display: inline-block;
             padding: 10px;
@@ -49,6 +72,7 @@
                 <span></span>
               </label>
             </li>
+            
           </ul>
         </nav>
       </section>
@@ -83,10 +107,12 @@
                 ><b>Filter</b></a
               >
             </li>
+            <li onclick="window.location.href='history.html'" style="font-weight: bolder; cursor: pointer;">
+    Booking History 
+            </li>
             <li>
               <a href="form.html" target="_blank" style="color: black"
-                ><b>Contact</b></a
-              >
+                ><b>Contact</b></a>
             </li>
              
           </ul>
@@ -155,9 +181,9 @@
         </div>
       </div>
     </section>
-    <section class="newsletter-section">
-      <h2>Subscribe to Our Newsletter</h2>
-      <p>
+    <section class="newsletter-section" style="text-align: center;">
+      <h2 style="color: black ;">Subscribe to Our Newsletter</h2>
+      <p style="color: black;">
         Get exclusive travel deals, destination guides, and special offers
         delivered to your inbox!
       </p>
@@ -177,12 +203,9 @@
         <button type="submit" class="newsletter-button" id="subscribe" style="padding-right:20px;">
           Subscribe
         </button>
+        <p style="text-align: center;">No spam,Unsubscribe anytime.</p>
       </form>
-      <p class="newsletter-info">
-        <a href="#" style="text-decoration: none; color: black"
-          >No spam. Unsubscribe anytime.</a
-        >
-      </p>
+     
     </section>
 
     <footer class="footer">
@@ -234,5 +257,19 @@
 
     <script src="auth.js"></script>
     <script src="newsletter.js"></script>
+<script>
+function updateWishlistCount(){
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let countElement = document.getElementById("wishlistCount");
+
+    if(countElement){
+        countElement.textContent = wishlist.length;
+    }
+}
+
+updateWishlistCount();
+</script>
   </body>
 </html>

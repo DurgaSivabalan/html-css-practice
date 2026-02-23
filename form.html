@@ -240,7 +240,7 @@
     <h1>Queries/Support</h1>
     <h4>Having any queries,related to bookings?</h4>
     <section class="forming">
-      <form>
+      <form id="contactForm">
         <section class="fname">
           <label name="fname">First Name </label>
           <input
@@ -279,19 +279,109 @@
         </section>
         <section class="enquiry">
           <label name="">Enqueries Related to:</label><br />
-          <input type="radio" id="flights" name="flights" value="Flight Booking"/>
+          <input type="radio" id="flights" name="enquiryType" value="Flight Booking" required/>
           <label name="flights">Flight Booking</label><br />
-          <input type="radio" id="Hotels" name="Hotels" value="Hotel Booking" />
+          <input type="radio" id="Hotels" name="enquiryType" value="Hotel Booking" />
           <label name="Hotels">Hotel Booking</label><br />
-          <input type="radio" id="Packages" name="Packages" value="Packages" />
+          <input type="radio" id="Packages" name="enquiryType" value="Package Booking" />
           <label name="Packages">Package Booking</label><br />
-          <input type="radio" id="Place" name="Place" value="Place Booking" />
+          <input type="radio" id="Place" name="enquiryType" value="Place Booking" />
           <label name="Places">Place Booking</label><br />
         </section>
         <section class="button">
-          <button onclick="SubmitEvent">Submit</button>
+          <button type="submit">Submit</button>
         </section>
+        <p id="successMessage" style="color: green; font-weight: bold; margin-top: 15px; display: none;"></p>
+        <p id="errorMessage" style="color: red; font-weight: bold; margin-top: 15px; display: none;"></p>
       </form>
     </section>
   </section>
+
+  <script>
+    const contactForm = document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", function(e){
+      e.preventDefault();  // Stop page refresh
+
+      const fname = document.getElementById("fname").value.trim();
+      const lname = document.getElementById("lname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const number = document.getElementById("number").value.trim();
+      
+      const enquiryType = document.querySelector("input[name='enquiryType']:checked")?.value;
+
+      const errorMsg = document.getElementById("errorMessage");
+      const successMsg = document.getElementById("successMessage");
+
+      // ❌ VALIDATION
+      if(!fname || !lname || !email || !number || !enquiryType){
+        errorMsg.style.display = "block";
+        errorMsg.innerText = "❌ Please fill all fields!";
+        successMsg.style.display = "none";
+        return;
+      }
+
+      if(number.length !== 10){
+        errorMsg.innerText = " Phone number must be 10 digits!";
+        successMsg.style.display = "none";
+        return;
+      }
+
+      
+      const contactData = {
+        id: Date.now(),  
+        firstName: fname,
+        lastName: lname,
+        email: email,
+        phone: number,
+        enquiry: enquiryType,
+        submittedAt: new Date().toLocaleString()
+      };
+
+      let contacts = JSON.parse(localStorage.getItem("contactSubmissions")) || [];
+
+      contacts.push(contactData);
+
+      localStorage.setItem("contactSubmissions", JSON.stringify(contacts));
+
+      errorMsg.style.display = "none";
+      successMsg.style.display = "block";
+      successMsg.innerText = ` Thank you ${fname}! Your query has been saved. We'll contact you soon.`;
+
+      console.log("Contact saved:", contactData);
+      console.log("All contacts:", contacts);
+
+      setTimeout(() => {
+        contactForm.reset();
+        successMsg.style.display = "none";
+      }, 3000);
+    });
+
+    function viewAllContacts(){
+      const contacts = JSON.parse(localStorage.getItem("contactSubmissions")) || [];
+      console.log("All saved contacts:", contacts);
+      return contacts;
+    }
+
+    function deleteContact(id){
+      let contacts = JSON.parse(localStorage.getItem("contactSubmissions")) || [];
+      contacts = contacts.filter(contact => contact.id !== id);
+      localStorage.setItem("contactSubmissions", JSON.stringify(contacts));
+      console.log("Contact deleted. Remaining contacts:", contacts);
+    }
+
+    function downloadContacts(){
+      const contacts = JSON.parse(localStorage.getItem("contactSubmissions")) || [];
+      const dataStr = JSON.stringify(contacts, null, 2);
+      const dataBlob = new Blob([dataStr], {type: "application/json"});
+      const url = URL.createObjectURL(dataBlob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `Contacts_${new Date().getTime()}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+  </script>
 </body>

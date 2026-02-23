@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice - QuestVoyage</title>
+    <style>
+        body{
+            font-family:Arial;
+            background:#f4f6fb;
+            padding:30px;
+        }
+        .invoice-box{
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            max-width:600px;
+            margin:auto;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+        }
+        h2{
+            text-align:center;
+            color:#1565c0;
+        }
+        p{
+            margin:8px 0;
+        }
+        .total{
+            font-weight:bold;
+            font-size:18px;
+            color:green;
+        }
+        button{
+            padding:10px;
+            margin-top:15px;
+            width:100%;
+            background:#1565c0;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="invoice-box">
+    <h2>QuestVoyage Invoice</h2>
+    <div id="invoiceData"></div>
+    <button onclick="printInvoice()">Print Invoice</button>
+</div>
+
+<script>
+
+const booking = JSON.parse(localStorage.getItem("currentBooking"));
+
+if(!booking){
+    document.getElementById("invoiceData").innerHTML =
+    "<p style='color:red;'>No Invoice Data Found</p>";
+}
+else{
+
+    document.getElementById("invoiceData").innerHTML = `
+        <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
+        <p><strong>Customer:</strong> ${booking.name}</p>
+        <p><strong>Email:</strong> ${booking.email}</p>
+        <p><strong>Mobile:</strong> ${booking.mobile}</p>
+        <p><strong>Package:</strong> ${booking.package}</p>
+        <p><strong>Members:</strong> ${booking.members}</p>
+        <p><strong>Payment Mode:</strong> ${booking.payment}</p>
+        <p class="total">Total Paid: ₹${booking.total}</p>
+        <p style="margin-top:15px;color:gray;">
+            Thank you for booking with QuestVoyage!
+        </p>
+    `;
+}
+
+function printInvoice(){
+    window.print();
+}
+
+</script>
+
+</body>
+</html>

@@ -22,16 +22,36 @@ h1{
 
 .filter-box{
     display:flex;
-    justify-content:center;
+    flex-direction:column;
     gap:15px;
-    flex-wrap:wrap;
     padding:20px;
     background:white;
 }
 
-select{
+.search-box{
+    display:flex;   
+    justify-content:center;
+    width:100%;
+}
+
+.filter-controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+input[type="text"]{
+    width:100%;
+    max-width:400px;
+}
+
+select, input[type="text"]{
     padding:8px;
     border-radius:5px;
+    border:1px solid #ccc;
+    font-size:14px;
 }
 
 button{
@@ -71,6 +91,21 @@ button{
     color:red;
     font-weight:bold;
 }
+.button-group{
+    margin-top:10px;
+    display:flex;
+    gap:10px;
+}
+
+.wishlist-btn{
+    background:#ff9800;
+    color:white;
+}
+
+.book-btn{
+    background:#4caf50;
+    color:white;
+}
 </style>
 </head>
 
@@ -79,56 +114,64 @@ button{
 <h1>QuestVoyage Travel Packages</h1>
 
 <div class="filter-box">
-    <label for="priceFilter">Price:</label>
-    <select id="priceFilter" aria-label="Filter by price">
-        <option value="all">All Prices</option>
-        <option value="low">Below ₹20000</option>
-        <option value="mid">₹20000 - ₹40000</option>
-        <option value="high">Above ₹40000</option>
-    </select>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search packages..." aria-label="Search packages">
+    </div>
 
-    <label for="durationFilter">Duration:</label>
-    <select id="durationFilter" aria-label="Filter by duration">
-        <option value="all">All Duration</option>
-        <option value="short">1-3 Days</option>
-        <option value="medium">4-6 Days</option>
-        <option value="long">7+ Days</option>
-    </select>
+    <div class="filter-controls">
+        <label for="priceFilter">Price:</label>
+        <select id="priceFilter" aria-label="Filter by price">
+            <option value="all">All Prices</option>
+            <option value="low">Below ₹20000</option>
+            <option value="mid">₹20000 - ₹40000</option>
+            <option value="high">Above ₹40000</option>
+        </select>
 
-    <label for="themeFilter">Theme:</label>
-    <select id="themeFilter" aria-label="Filter by theme">
-        <option value="all">All Theme</option>
+        <label for="durationFilter">Duration:</label>
+        <select id="durationFilter" aria-label="Filter by duration">
+            <option value="all">All Duration</option>
+            <option value="short">1-3 Days</option>
+            <option value="medium">4-6 Days</option>
+            <option value="long">7+ Days</option>
+        </select>
+
+        <label for="themeFilter">Theme:</label>
+        <select id="themeFilter" aria-label="Filter by theme">
+            <option value="all">All Theme</option>
         <option value="beach">Beach</option>
         <option value="mountain">Mountain</option>
         <option value="city">City</option>
     </select>
 
     <button onclick="resetFilter()">Reset</button>
+    </div>
 </div>
 
 <div class="container" id="packageContainer"></div>
 
 <script>
+function bookTrip(id){
+    window.location.href = `book.html?id=${id}`;
+}
 
 const packages = [
-    {name:"Goa Trip", price:15000, duration:3, theme:"beach"},
-    {name:"Manali Tour", price:35000, duration:5, theme:"mountain"},
-    {name:"Delhi Visit", price:18000, duration:2, theme:"city"},
-    {name:"Maldives Luxury", price:60000, duration:7, theme:"beach"},
-    {name:"Kashmir Tour", price:45000, duration:6, theme:"mountain"},
-    
-    {name:"Andaman Escape", price:41000, duration:7, theme:"beach"},
-    {name:"Ooty Hills", price:22000, duration:3, theme:"mountain"},
-    {name:"Mumbai Explorer", price:25000, duration:4, theme:"city"},
-    {name:"Shimla Retreat", price:32000, duration:5, theme:"mountain"},
-    {name:"Pondicherry Relax", price:17000, duration:2, theme:"beach"},
-    
-    {name:"Jaipur Heritage", price:21000, duration:3, theme:"city"},
-    {name:"Ladakh Adventure", price:55000, duration:8, theme:"mountain"},
-    {name:"Kerala Backwaters", price:38000, duration:6, theme:"beach"},
-    {name:"Hyderabad City Tour", price:16000, duration:2, theme:"city"},
-    {name:"Darjeeling Delight", price:34000, duration:5, theme:"mountain"}
+    {id:1,name:"Goa Trip", price:15000, duration:3, theme:"beach"},
+    {id:2,name:"Manali Tour", price:35000, duration:5, theme:"mountain"},
+    {id:3,name:"Delhi Visit", price:18000, duration:2, theme:"city"},
+    {id:4,name:"Maldives Luxury", price:60000, duration:7, theme:"beach"},
+    {id:5,name:"Kashmir Tour", price:45000, duration:6, theme:"mountain"},
+    {id:6,name:"Andaman Escape", price:41000, duration:7, theme:"beach"},
+    {id:7,name:"Ooty Hills", price:22000, duration:3, theme:"mountain"},
+    {id:8,name:"Mumbai Explorer", price:25000, duration:4, theme:"city"},
+    {id:9,name:"Shimla Retreat", price:32000, duration:5, theme:"mountain"},
+    {id:10,name:"Pondicherry Relax", price:17000, duration:2, theme:"beach"},
+    {id:11,name:"Jaipur Heritage", price:21000, duration:3, theme:"city"},
+    {id:12,name:"Ladakh Adventure", price:55000, duration:8, theme:"mountain"},
+    {id:13,name:"Kerala Backwaters", price:38000, duration:6, theme:"beach"},
+    {id:14,name:"Hyderabad City Tour", price:16000, duration:2, theme:"city"},
+    {id:15,name:"Darjeeling Delight", price:34000, duration:5, theme:"mountain"}
 ];
+localStorage.setItem("allPackages", JSON.stringify(packages));
 function displayPackages(data){
     const container = document.getElementById("packageContainer");
     container.innerHTML = "";
@@ -145,6 +188,15 @@ function displayPackages(data){
             <p class="price">₹${pkg.price}</p>
             <p>Duration: ${pkg.duration} Days</p>
             <p>Theme: ${pkg.theme}</p>
+
+            <div class="button-group">
+                <button class="wishlist-btn" onclick="addToWishlist(${pkg.id})">
+                    Wishlist
+                </button>
+                <button class="book-btn" onclick="window.location.href='book.html?package=${pkg.name}'">
+    Book Trip
+</button>
+            </div>
         </div>
         `;
     });
@@ -152,11 +204,14 @@ function displayPackages(data){
 
 function filterPackages(){
 
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
     const priceValue = document.getElementById("priceFilter").value;
     const durationValue = document.getElementById("durationFilter").value;
     const themeValue = document.getElementById("themeFilter").value;
 
     const filtered = packages.filter(pkg => {
+
+        let searchMatch = pkg.name.toLowerCase().includes(searchValue);
 
         let priceMatch = false;
         if(priceValue === "all") priceMatch = true;
@@ -172,25 +227,75 @@ function filterPackages(){
 
         let themeMatch = (themeValue === "all" || pkg.theme === themeValue);
 
-        return priceMatch && durationMatch && themeMatch;
+        return searchMatch && priceMatch && durationMatch && themeMatch;
     });
 
     displayPackages(filtered);
 }
 
 function resetFilter(){
+    document.getElementById("searchInput").value = "";
     document.getElementById("priceFilter").value = "all";
     document.getElementById("durationFilter").value = "all";
     document.getElementById("themeFilter").value = "all";
     displayPackages(packages);
 }
 
+/* ================= WISHLIST FUNCTION ================= */
+
+function addToWishlist(id){
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    const selectedPackage = packages.find(pkg => pkg.id === id);
+
+    let alreadyAdded = wishlist.some(item => item.id === id);
+
+    if(!alreadyAdded){
+        wishlist.push(selectedPackage);
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        alert("Added to Wishlist");
+    } else {
+        alert("Already in Wishlist");
+    }
+
+    updateWishlistCount();
+}
+function updateWishlistCount(){
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let countElement = document.getElementById("wishlistCount");
+
+    if(countElement){
+        countElement.textContent = wishlist.length;
+    }
+}
+
+/* ================= BOOK TRIP FUNCTION ================= */
+
+function bookTrip(id){
+
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    const selectedPackage = packages.find(pkg => pkg.id === id);
+
+    bookings.push(selectedPackage);
+
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    alert("Trip Booked Successfully 🎉");
+}
+
+/* ================= EVENT LISTENERS ================= */
+
+document.getElementById("searchInput").addEventListener("input", filterPackages);
 document.getElementById("priceFilter").addEventListener("change", filterPackages);
 document.getElementById("durationFilter").addEventListener("change", filterPackages);
 document.getElementById("themeFilter").addEventListener("change", filterPackages);
 
 displayPackages(packages);
-
+updateWishlistCount();
 </script>
 
 </body>

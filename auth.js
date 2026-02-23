@@ -2,6 +2,24 @@ console.log("Register JS Connected");
 
 const registerForm = document.getElementById("registerForm");
 
+function updateWishlistCount(){
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let countElement = document.getElementById("wishlistCount");
+
+    if(countElement){
+        countElement.textContent = wishlist.length;
+    }
+}
+updateWishlistCount();
+
+// ✅ PASSWORD STRENGTH VALIDATION FUNCTION
+function isStrongPassword(pwd) {
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*])[A-Za-z\d@$!%*]{8,}$/;
+  return regex.test(pwd);
+}
+
 if (registerForm) {
   registerForm.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -19,6 +37,13 @@ console.log("Form Submitted");
     if (password !== confirmPassword) {
       message.style.color = "red";
       message.innerText = "Passwords do not match!";
+      return;
+    }
+
+    // ✅ CHECK PASSWORD STRENGTH
+    if (!isStrongPassword(password)) {
+      message.style.color = "red";
+      message.innerText = "Weak password! Use 8+ chars, uppercase, number & symbol (e.g., @$!%*)";
       return;
     }
 
@@ -53,38 +78,45 @@ console.log("Form Submitted");
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
-  loginForm.addEventListener("submit", function(e) {
+
+  loginForm.addEventListener("submit", function(e){
     e.preventDefault();
 
-    let email = document.getElementById("loginEmail").value.trim();
-    let password = document.getElementById("loginPassword").value.trim();
-    let message = document.getElementById("loginMessage");
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    const role = document.getElementById("role").value;
 
-    let users = JSON.parse(localStorage.getItem("users"));
+    const adminEmail = "admin@questvoyage.com";
+    const adminPassword = "admin123";
 
-    if (!users || users.length === 0) {
-      message.style.color = "red";
-      message.innerText = "Not registered yet. Please register first.";
-      return;
+    if(role === "admin"){
+
+        if(email === adminEmail && password === adminPassword){
+            localStorage.setItem("adminLoggedIn", "true");
+            window.location.href = "admin-dashboard.html";
+        } else{
+            alert("Invalid Admin Credentials");
+        }
+
+    } 
+    else if(role === "user"){
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        let validUser = users.find(user => 
+            user.email === email && user.password === password
+        );
+
+        if(validUser){
+            localStorage.setItem("userLoggedIn", "true");
+            localStorage.setItem("currentUser", email);
+            window.location.href = "new.html";
+        } else{
+            alert("Invalid User Credentials");
+        }
     }
-
-    let user = users.find(user => user.email === email);
-
-    if (!user) {
-      message.style.color = "red";
-      message.innerText = "Not registered yet. Please register first.";
-    }
-    else if (user.password !== password) {
-      message.style.color = "red";
-      message.innerText = "Incorrect password.";
-    }
-    else {
-      message.style.color = "green";
-      message.innerText = "Login successful! Redirecting...";
-
-      setTimeout(() => {
-        window.location.href = "new.html"; 
-      }, 1500);
+    else{
+        alert("Please select a role");
     }
   });
 }

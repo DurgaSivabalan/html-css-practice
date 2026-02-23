@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Trip - QuestVoyage</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6fb;
+}
+
+h1{
+    text-align:center;
+    padding:20px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    margin:0;
+}
+
+.form-container{
+    max-width:800px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+input, select, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+button{
+    padding:10px;
+    background:#1565c0;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.member-box{
+    background:#f0f3ff;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:8px;
+}
+
+.success{
+    text-align:center;
+    color:green;
+    font-weight:bold;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Book Your Trip</h1>
+
+<div class="form-container">
+
+<form id="bookingForm">
+
+<label>Your Name</label>
+<input type="text" id="customerName" required>
+
+<label>Email</label>
+<input type="email" id="email" required>
+
+<label>Mobile Number</label>
+<input type="tel" id="mobile" required>
+
+<label>Select Package</label>
+<select id="packageName" required>
+    <option value="">--Select--</option>
+    <option>Goa Trip</option>
+    <option>Manali Tour</option>
+    <option>Maldives Luxury</option>
+    <option>Delhi visit</option>
+    <option>Andhaman Escapes</option>
+    <option>Ooty Hills</option>
+    <option>Mumbai Explorer</option>
+    <option>Shimla Retreat</option>
+    <option>Pondicherry Relax</option>
+    <option>Jaipur Heritage</option>
+    <option>Ladakh Adventure</option>
+    <option>Kerala Backwaterss</option>
+    <option>Hyderabad City Tour</option>
+    <option>Shimla Retreat</option>
+</select>
+
+<label>Number of Members</label>
+<select id="memberCount" required>
+    <option value="">--Select--</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+</select>
+
+<div id="membersContainer"></div>
+
+<label>Payment Option</label>
+<select id="payment" required>
+    <option value="">--Select--</option>
+    <option>UPI</option>
+    <option>Credit Card</option>
+    <option>Debit Card</option>
+    <option>Net Banking</option>
+</select>
+
+<label>Extra Query</label>
+<textarea id="query" rows="4"></textarea>
+
+<button type="submit">Confirm Booking</button>
+
+</form>
+
+<div id="successMessage" class="success"></div>
+
+</div>
+
+<script>
+
+// � Get all packages from localStorage
+const packages = JSON.parse(localStorage.getItem("allPackages")) || [];
+let selectedPackagePrice = 0;
+
+// 🔍 Get package ID from URL
+const urlParams = new URLSearchParams(window.location.search);
+const packageId = parseInt(urlParams.get("id"));
+
+console.log("All packages:", packages);
+console.log("Package ID from URL:", packageId);
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const packageSelect = document.getElementById("packageName");
+    const form = document.getElementById("bookingForm");
+
+    // 🎯 Function to update price when package changes
+    function updatePackagePrice(){
+        const selectedName = packageSelect.value;
+        const selectedPackage = packages.find(pkg => pkg.name === selectedName);
+        
+        if(selectedPackage){
+            selectedPackagePrice = selectedPackage.price;
+            console.log("Selected package:", selectedPackage.name, "Price:", selectedPackagePrice);
+        } else {
+            selectedPackagePrice = 0;
+            console.log("Package not found:", selectedName);
+        }
+    }
+
+    // ✅ Pre-fill package name if coming from filter.html
+    if(packageId){
+        const selectedPackage = packages.find(pkg => pkg.id === packageId);
+        
+        if(selectedPackage){
+            packageSelect.value = selectedPackage.name;
+            selectedPackagePrice = selectedPackage.price;
+            console.log("Pre-filled package:", selectedPackage.name, "Price:", selectedPackagePrice);
+        }
+    }
+
+    // 📍 Update price when user changes package selection
+    packageSelect.addEventListener("change", updatePackagePrice);
+
+    // 📝 Form submission
+    form.addEventListener("submit", function(e){
+
+        e.preventDefault();  // 🚨 THIS STOPS PAGE REFRESH
+
+        // ✅ Use the ACTUAL price instead of hardcoded 20000
+        const bookingData = {
+            package: document.getElementById("packageName").value,
+            name: document.getElementById("customerName").value,
+            email: document.getElementById("email").value,
+            mobile: document.getElementById("mobile").value,
+            members: parseInt(document.getElementById("memberCount").value),
+            payment: document.getElementById("payment").value,
+            price: selectedPackagePrice  // ✅ NOW USING ACTUAL PRICE
+        };
+
+        console.log("Final booking data:", bookingData);
+
+        localStorage.setItem("currentBooking", JSON.stringify(bookingData));
+
+        window.location.href = "summary.html";
+    });
+
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login</title>
+<style>
+body{
+    font-family:Arial;
+    background:#f4f6fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.login-box{
+    background:white;
+    padding:30px;
+    width:300px;
+    border-radius:8px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+button{
+    width:100%;
+    padding:10px;
+    background:#1565c0;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+.error{
+    color:red;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+    <h2>Admin Login</h2>
+
+    <input type="text" id="adminUser" placeholder="Username">
+    <input type="password" id="adminPass" placeholder="Password">
+
+    <button onclick="loginAdmin()">Login</button>
+
+    <p id="errorMsg" class="error"></p>
+</div>
+
+<script>
+
+// Hardcoded Admin Credentials
+const ADMIN_USERNAME = "Admin@gmail.com";
+const ADMIN_PASSWORD = "admin@1234";
+function loginAdmin(){
+
+    const username = document.getElementById("adminUser").value.trim();
+    const password = document.getElementById("adminPass").value.trim();
+
+    if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD){
+
+        localStorage.setItem("adminLoggedIn", "true");
+        window.location.href = "admin-dashboard.html";
+
+    } else {
+
+        document.getElementById("errorMsg").innerText = "Invalid Credentials!";
+    }
+}
+
+console.log("Entered:", username, password);
+
+</script>
+
+</body>
+</html>

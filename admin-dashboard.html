@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard - QuestVoyage</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6fb;
+}
+
+header{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.dashboard{
+    padding:30px;
+}
+
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    flex:1;
+    min-width:200px;
+}
+
+.card h3{
+    margin:0;
+}
+
+.table-container{
+    margin-top:30px;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+button{
+    padding:6px 10px;
+    background:#1565c0;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.logout{
+    background:red;
+}
+
+.save-section{
+    margin-top:40px;
+    padding:20px;
+    background:white;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.save-btn{
+    padding:12px 30px;
+    background:#4caf50;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:10px 5px;
+}
+
+.save-btn:hover{
+    background:#45a049;
+    transform:scale(1.05);
+    transition:all 0.3s ease;
+}
+
+.save-message{
+    margin-top:15px;
+    font-weight:bold;
+    font-size:14px;
+    padding:10px;
+    border-radius:5px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>Admin Dashboard</h2>
+<button onclick="adminLogout()">Logout</button></header>
+
+<div class="dashboard">
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Bookings</h3>
+            <p id="totalBookings">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Revenue</h3>
+            <p id="totalRevenue">₹0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Wishlist Items</h3>
+            <p id="totalWishlist">0</p>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <h3>All Bookings</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Name</th>
+                    <th>Package</th>
+                    <th>Members</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="bookingTable"></tbody>
+        </table>
+    </div>
+
+    <div class="save-section">
+        <h3>💾 Save Progress</h3>
+        <p>Backup and save all admin dashboard data</p>
+        <button class="save-btn" onclick="saveProgress()">Save All Data</button>
+        <button class="save-btn" style="background:#ff9800;" onclick="downloadBackup()">Download Backup</button>
+        <div id="saveMessage" class="save-message"></div>
+    </div>
+
+</div>
+
+<script>
+
+// 🔐 Protect Page
+if(localStorage.getItem("adminLoggedIn") !== "true"){
+    window.location.href = "admin-login.html";
+}
+
+// 📊 Load Data
+function loadDashboard(){
+
+    const bookings = JSON.parse(localStorage.getItem("bookingHistory")) || [];
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    document.getElementById("totalBookings").innerText = bookings.length;
+    document.getElementById("totalWishlist").innerText = wishlist.length;
+
+    let totalRevenue = 0;
+    const table = document.getElementById("bookingTable");
+    table.innerHTML = "";
+
+    bookings.forEach((booking, index) => {
+
+        totalRevenue += booking.total || 0;
+
+        table.innerHTML += `
+            <tr>
+                <td>${booking.bookingId}</td>
+                <td>${booking.name}</td>
+                <td>${booking.package}</td>
+                <td>${booking.members}</td>
+                <td>₹${booking.total}</td>
+                <td>
+                    <button onclick="cancelBooking(${index})">Cancel</button>
+                </td>
+            </tr>
+        `;
+    });
+
+    document.getElementById("totalRevenue").innerText = "₹" + totalRevenue;
+}
+
+// ❌ Cancel Booking
+function cancelBooking(index){
+
+    let bookings = JSON.parse(localStorage.getItem("bookingHistory")) || [];
+
+    bookings.splice(index, 1);
+
+    localStorage.setItem("bookingHistory", JSON.stringify(bookings));
+
+    loadDashboard();
+}
+
+// � SAVE PROGRESS FUNCTION
+function saveProgress(){
+    const bookings = JSON.parse(localStorage.getItem("bookingHistory")) || [];
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    
+    // Create backup object
+    const backup = {
+        bookingHistory: bookings,
+        wishlist: wishlist,
+        users: users,
+        savedAt: new Date().toLocaleString(),
+        totalBookings: bookings.length,
+        totalRevenue: bookings.reduce((sum, b) => sum + (b.total || 0), 0)
+    };
+    
+    // Save backup to localStorage
+    localStorage.setItem("adminBackup", JSON.stringify(backup));
+    
+    const messageDiv = document.getElementById("saveMessage");
+    messageDiv.style.display = "block";
+    messageDiv.style.background = "#d4edda";
+    messageDiv.style.color = "#155724";
+    messageDiv.style.border = "1px solid #c3e6cb";
+    messageDiv.innerText = `✅ Progress saved successfully at ${backup.savedAt}`;
+    
+    // Hide message after 5 seconds
+    setTimeout(() => {
+        messageDiv.style.display = "none";
+    }, 5000);
+    
+    console.log("Backup saved:", backup);
+}
+
+// 📥 DOWNLOAD BACKUP AS JSON FILE
+function downloadBackup(){
+    const backup = JSON.parse(localStorage.getItem("adminBackup")) || 
+                   JSON.parse(localStorage.getItem("bookingHistory")) || {};
+    
+    const dataStr = JSON.stringify(backup, null, 2);
+    const dataBlob = new Blob([dataStr], {type: "application/json"});
+    const url = URL.createObjectURL(dataBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `QuestVoyage_Backup_${new Date().getTime()}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    const messageDiv = document.getElementById("saveMessage");
+    messageDiv.style.display = "block";
+    messageDiv.style.background = "#cfe2ff";
+    messageDiv.style.color = "#084298";
+    messageDiv.style.border = "1px solid #b6d4fe";
+    messageDiv.innerText = "📥 Backup downloaded successfully!";
+    
+    setTimeout(() => {
+        messageDiv.style.display = "none";
+    }, 5000);
+}
+
+// �🚪 Logout
+function logoutAdmin(){
+    localStorage.removeItem("adminLoggedIn");
+    window.location.href = "admin-login.html";
+}
+
+loadDashboard();
+if(localStorage.getItem("adminLoggedIn") !== "true"){
+    window.location.href = "login.html";
+}
+function adminLogout(){
+    localStorage.removeItem("adminLoggedIn");
+    window.location.href = "login.html";
+}
+</script>
+
+
+</body>
+</html>

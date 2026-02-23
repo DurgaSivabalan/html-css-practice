@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Summary</title>
+    <style>
+        body{
+            font-family:Arial;
+            background:#f4f6fb;
+            padding:30px;
+        }
+        .box{
+            background:white;
+            padding:20px;
+            border-radius:8px;
+            max-width:500px;
+            margin:auto;
+            box-shadow:0 3px 8px rgba(0,0,0,0.1);
+        }
+        h2{
+            text-align:center;
+            color:#1565c0;
+        }
+        p{
+            margin:8px 0;
+        }
+        .total{
+            font-weight:bold;
+            color:green;
+            font-size:18px;
+        }
+        button{
+            padding:10px;
+            margin-top:15px;
+            width:100%;
+            background:#1565c0;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Booking Summary</h2>
+    <div id="summaryData"></div>
+    <button onclick="confirmBooking()">Confirm Booking</button>
+</div>
+
+<script>
+
+// Get booking
+let booking = JSON.parse(localStorage.getItem("currentBooking"));
+const summaryDiv = document.getElementById("summaryData");
+
+if(!booking){
+    summaryDiv.innerHTML = "<p style='color:red;'>No Booking Found</p>";
+}
+else{
+
+    // Generate booking ID
+    booking.bookingId = "QV" + Math.floor(Math.random() * 100000);
+
+    // Calculate total
+    booking.total = booking.price * booking.members;
+    localStorage.setItem("currentBooking", JSON.stringify(booking));
+
+    summaryDiv.innerHTML = `
+        <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
+        <p><strong>Package:</strong> ${booking.package}</p>
+        <p><strong>Name:</strong> ${booking.name}</p>
+        <p><strong>Email:</strong> ${booking.email}</p>
+        <p><strong>Mobile:</strong> ${booking.mobile}</p>
+        <p><strong>Members:</strong> ${booking.members}</p>
+        <p><strong>Payment:</strong> ${booking.payment}</p>
+        <p style="color:green; font-weight:bold;">
+            Total Amount: ₹${booking.total}
+        </p>
+    `;
+
+    localStorage.setItem("currentBooking", JSON.stringify(booking));
+}
+
+
+function confirmBooking(){
+
+    if(!booking){
+        alert("No booking data found!");
+        return;
+    }
+
+    // Save booking to history
+    let history = JSON.parse(localStorage.getItem("bookingHistory")) || [];
+    history.push(booking);
+    localStorage.setItem("bookingHistory", JSON.stringify(history));
+
+    // VERY IMPORTANT: Save updated booking again
+    localStorage.setItem("currentBooking", JSON.stringify(booking));
+
+    // Redirect to invoice
+    window.location.href = "invoice.html";
+}
+
+</script>
+
+</body>
+</html>
