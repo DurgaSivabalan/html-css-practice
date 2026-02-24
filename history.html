@@ -1,61 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Booking History</title>
-    <style>
-        body{
-            font-family:Arial;
-            background:#f4f6fb;
-            padding:30px;
-        }
-        h2{
-            text-align:center;
-            color:#1565c0;
-        }
-        .card{
-            background:white;
-            padding:20px;
-            margin:15px auto;
-            border-radius:8px;
-            max-width:600px;
-            box-shadow:0 3px 8px rgba(0,0,0,0.1);
-        }
-        .total{
-            color:green;
-            font-weight:bold;
-        }
-    </style>
+<title>Booking History</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f6fb;
+padding:30px;
+}
+.card{
+background:white;
+padding:20px;
+margin:15px auto;
+max-width:600px;
+border-radius:8px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+}
+</style>
 </head>
+
 <body>
 
-<h2>My Booking History</h2>
+<h2 align="center">My Booking History</h2>
+
 <div id="historyContainer"></div>
 
 <script>
 
-let history = JSON.parse(localStorage.getItem("bookingHistory")) || [];
+const currentUser =
+localStorage.getItem("currentUser");
 
-const container = document.getElementById("historyContainer");
+const container =
+document.getElementById("historyContainer");
 
-if(history.length === 0){
-    container.innerHTML = "<p style='text-align:center;color:red;'>No Bookings Yet</p>";
+/* ================= LOAD BOOKINGS ================= */
+
+function loadBookingHistory(){
+
+const bookings =
+JSON.parse(
+localStorage.getItem("booking_"+currentUser)
+) || [];
+
+container.innerHTML="";
+
+/* empty */
+if(bookings.length===0){
+container.innerHTML=
+"<p style='color:red;text-align:center'>No Bookings Yet</p>";
+return;
 }
-else{
-    history.forEach(booking => {
-        container.innerHTML += `
-        <div class="card">
-            <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
-            <p><strong>Package:</strong> ${booking.package}</p>
-            <p><strong>Name:</strong> ${booking.name}</p>
-            <p><strong>Members:</strong> ${booking.members}</p>
-            <p><strong>Payment:</strong> ${booking.payment}</p>
-            <p class="total">Total: ₹${booking.total}</p>
-        </div>
-        `;
-    });
+
+/* render cards */
+bookings.forEach(b=>{
+
+container.innerHTML+=`
+<div class="card">
+<p><b>ID:</b> ${b.bookingId}</p>
+<p><b>Package:</b> ${b.package}</p>
+<p><b>Name:</b> ${b.name}</p>
+<p><b>Members:</b> ${b.members}</p>
+<p><b>Total:</b> ₹${b.total}</p>
+</div>
+`;
+
+});
+
 }
+
+/* ================= INITIAL LOAD ================= */
+
+loadBookingHistory();
+
+/* ================= AUTO UPDATE ================= */
+/* detects admin cancellation */
+
+window.addEventListener("storage",function(){
+loadBookingHistory();
+});
 
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="jquery-effects.js"></script>
 
 </body>
 </html>

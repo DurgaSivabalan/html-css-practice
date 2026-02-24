@@ -3,300 +3,375 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuestVoyage Filter</title>
+<title>Packages</title>
 
 <style>
+
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f6fb;
+margin:0;
+font-family:Arial;
+background:#f4f6fb;
 }
 
 h1{
-    text-align:center;
-    padding:20px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color:white;
-    margin:0;
+text-align:center;
+padding:20px;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+margin:0;
 }
 
-.filter-box{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    padding:20px;
-    background:white;
-}
-
-.search-box{
-    display:flex;   
-    justify-content:center;
-    width:100%;
-}
-
-.filter-controls{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-input[type="text"]{
-    width:100%;
-    max-width:400px;
-}
-
-select, input[type="text"]{
-    padding:8px;
-    border-radius:5px;
-    border:1px solid #ccc;
-    font-size:14px;
-}
-
-button{
-    padding:8px 12px;
-    border:none;
-    border-radius:5px;
-    background:#1565c0;
-    color:white;
-    cursor:pointer;
+.nav{
+text-align:right;
+padding:10px 20px;
 }
 
 .container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    padding:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:30px;
 }
 
 .card{
-    background:white;
-    padding:15px;
-    border-radius:8px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
-}
-
-.card h3{
-    margin:0 0 8px;
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
 }
 
 .price{
-    color:green;
-    font-weight:bold;
+color:green;
+font-weight:bold;
 }
 
-.no-result{
-    text-align:center;
-    color:red;
-    font-weight:bold;
-}
 .button-group{
-    margin-top:10px;
-    display:flex;
-    gap:10px;
+margin-top:10px;
+display:flex;
+gap:10px;
 }
 
 .wishlist-btn{
-    background:#ff9800;
-    color:white;
+background:#ff9800;
+color:white;
+border:none;
+padding:8px;
+cursor:pointer;
+border-radius:5px;
 }
 
 .book-btn{
-    background:#4caf50;
-    color:white;
+background:#4caf50;
+color:white;
+border:none;
+padding:8px;
+cursor:pointer;
+border-radius:5px;
+}
+/* hidden initially */
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:all 0.5s ease;
+}
+
+/* visible after scroll */
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+/* Wishlist click animation */
+.wishlist-btn.active{
+transform:scale(1.2);
+background:#e91e63;
+transition:0.3s;
+}
+
+.wishlist-btn{
+transition:0.3s;
+}
+.filter-box{
+display:flex;
+gap:15px;
+padding:20px;
+justify-content:center;
+background:white;
+flex-wrap:wrap;
+}
+
+.filter-box select,
+.filter-box button{
+padding:8px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+/* heart pulse */
+@keyframes heartBeat{
+0%{transform:scale(1);}
+50%{transform:scale(1.3);}
+100%{transform:scale(1);}
 }
 </style>
 </head>
 
 <body>
 
-<h1>QuestVoyage Travel Packages</h1>
+<h1>QuestVoyage Packages</h1>
 
-<div class="filter-box">
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search packages..." aria-label="Search packages">
-    </div>
-
-    <div class="filter-controls">
-        <label for="priceFilter">Price:</label>
-        <select id="priceFilter" aria-label="Filter by price">
-            <option value="all">All Prices</option>
-            <option value="low">Below ₹20000</option>
-            <option value="mid">₹20000 - ₹40000</option>
-            <option value="high">Above ₹40000</option>
-        </select>
-
-        <label for="durationFilter">Duration:</label>
-        <select id="durationFilter" aria-label="Filter by duration">
-            <option value="all">All Duration</option>
-            <option value="short">1-3 Days</option>
-            <option value="medium">4-6 Days</option>
-            <option value="long">7+ Days</option>
-        </select>
-
-        <label for="themeFilter">Theme:</label>
-        <select id="themeFilter" aria-label="Filter by theme">
-            <option value="all">All Theme</option>
-        <option value="beach">Beach</option>
-        <option value="mountain">Mountain</option>
-        <option value="city">City</option>
-    </select>
-
-    <button onclick="resetFilter()">Reset</button>
-    </div>
+<div class="nav">
+<a href="wishlist.html">
+❤️ Wishlist (<span id="wishlistCount">0</span>)
+</a>
 </div>
+<div class="filter-box">
 
-<div class="container" id="packageContainer"></div>
+<select id="priceFilter">
+<option value="all">All Prices</option>
+<option value="low">Below ₹20000</option>
+<option value="mid">₹20000–₹40000</option>
+<option value="high">Above ₹40000</option>
+</select>
+
+<select id="typeFilter">
+<option value="all">All Types</option>
+<option value="beach">Beach</option>
+<option value="mountain">Mountain</option>
+<option value="city">City</option>
+</select>
+
+<select id="durationFilter">
+<option value="all">All Duration</option>
+<option value="short">1-3 Days</option>
+<option value="medium">4-6 Days</option>
+<option value="long">7+ Days</option>
+</select>
+
+<button onclick="filterPackages()">Apply Filter</button>
+
+</div>
+<div id="packageContainer" class="container"></div>
 
 <script>
-function bookTrip(id){
-    window.location.href = `book.html?id=${id}`;
+
+/* ================= USER CHECK ================= */
+
+const currentUser =
+localStorage.getItem("currentUser");
+
+if(!currentUser){
+alert("Login First");
+window.location.href="login.html";
 }
 
-const packages = [
-    {id:1,name:"Goa Trip", price:15000, duration:3, theme:"beach"},
-    {id:2,name:"Manali Tour", price:35000, duration:5, theme:"mountain"},
-    {id:3,name:"Delhi Visit", price:18000, duration:2, theme:"city"},
-    {id:4,name:"Maldives Luxury", price:60000, duration:7, theme:"beach"},
-    {id:5,name:"Kashmir Tour", price:45000, duration:6, theme:"mountain"},
-    {id:6,name:"Andaman Escape", price:41000, duration:7, theme:"beach"},
-    {id:7,name:"Ooty Hills", price:22000, duration:3, theme:"mountain"},
-    {id:8,name:"Mumbai Explorer", price:25000, duration:4, theme:"city"},
-    {id:9,name:"Shimla Retreat", price:32000, duration:5, theme:"mountain"},
-    {id:10,name:"Pondicherry Relax", price:17000, duration:2, theme:"beach"},
-    {id:11,name:"Jaipur Heritage", price:21000, duration:3, theme:"city"},
-    {id:12,name:"Ladakh Adventure", price:55000, duration:8, theme:"mountain"},
-    {id:13,name:"Kerala Backwaters", price:38000, duration:6, theme:"beach"},
-    {id:14,name:"Hyderabad City Tour", price:16000, duration:2, theme:"city"},
-    {id:15,name:"Darjeeling Delight", price:34000, duration:5, theme:"mountain"}
+/* ================= PACKAGES ================= */
+
+const packages=[
+{id:1,name:"Goa Trip",price:15000,type:"beach",duration:3},
+{id:2,name:"Manali Tour",price:35000,type:"mountain",duration:5},
+{id:3,name:"Mumbai Explorer",price:25000,type:"city",duration:2},
+{id:4,name:"Kerala Backwaters",price:38000,type:"beach",duration:6},
+{id:5,name:"Ooty Hills",price:22000,type:"mountain",duration:3},
+{id:6,name:"Kashmir Paradise",price:45000,type:"mountain",duration:7},
+{id:7,name:"Shimla Retreat",price:32000,type:"mountain",duration:5},
+{id:8,name:"Darjeeling Delight",price:34000,type:"mountain",duration:6},
+{id:9,name:"Andaman Escape",price:41000,type:"beach",duration:7},
+{id:10,name:"Pondicherry Relax",price:17000,type:"beach",duration:2},
+{id:11,name:"Jaipur Heritage",price:21000,type:"city",duration:3},
+{id:12,name:"Hyderabad City Tour",price:16000,type:"city",duration:2},
+{id:13,name:"Ladakh Adventure",price:55000,type:"mountain",duration:8},
+{id:14,name:"Coorg Nature Stay",price:28000,type:"mountain",duration:4},
+{id:15,name:"Mysore Palace Tour",price:19000,type:"city",duration:2},
+{id:16,name:"Rishikesh River Camp",price:24000,type:"mountain",duration:3}
 ];
-localStorage.setItem("allPackages", JSON.stringify(packages));
-function displayPackages(data){
-    const container = document.getElementById("packageContainer");
-    container.innerHTML = "";
 
-    if(data.length === 0){
-        container.innerHTML = "<p class='no-result'>No Packages Found</p>";
-        return;
-    }
+/* ================= DISPLAY ================= */
 
-    data.forEach(pkg => {
-        container.innerHTML += `
-        <div class="card">
-            <h3>${pkg.name}</h3>
-            <p class="price">₹${pkg.price}</p>
-            <p>Duration: ${pkg.duration} Days</p>
-            <p>Theme: ${pkg.theme}</p>
+function displayPackages(){
 
-            <div class="button-group">
-                <button class="wishlist-btn" onclick="addToWishlist(${pkg.id})">
-                    Wishlist
-                </button>
-                <button class="book-btn" onclick="window.location.href='book.html?package=${pkg.name}'">
-    Book Trip
+const container=
+document.getElementById("packageContainer");
+
+container.innerHTML="";
+
+packages.forEach(pkg=>{
+
+container.innerHTML+=`
+<div class="card reveal">
+<h3>${pkg.name}</h3>
+<p class="price">₹${pkg.price}</p>
+
+<div class="button-group">
+
+<button class="wishlist-btn"
+onclick="addToWishlist(${pkg.id}, this)">
+❤️ Wishlist
 </button>
-            </div>
-        </div>
-        `;
-    });
-}
 
+<button class="book-btn"
+onclick="window.location.href='book.html?id=${pkg.id}'">
+Book
+</button>
+
+</div>
+</div>`;
+});
+}
 function filterPackages(){
 
-    const searchValue = document.getElementById("searchInput").value.toLowerCase();
-    const priceValue = document.getElementById("priceFilter").value;
-    const durationValue = document.getElementById("durationFilter").value;
-    const themeValue = document.getElementById("themeFilter").value;
+const priceValue =
+document.getElementById("priceFilter").value;
 
-    const filtered = packages.filter(pkg => {
+const typeValue =
+document.getElementById("typeFilter").value;
 
-        let searchMatch = pkg.name.toLowerCase().includes(searchValue);
+const durationValue =
+document.getElementById("durationFilter").value;
 
-        let priceMatch = false;
-        if(priceValue === "all") priceMatch = true;
-        else if(priceValue === "low" && pkg.price < 20000) priceMatch = true;
-        else if(priceValue === "mid" && pkg.price >= 20000 && pkg.price <= 40000) priceMatch = true;
-        else if(priceValue === "high" && pkg.price > 40000) priceMatch = true;
+const filtered =
+packages.filter(pkg=>{
 
-        let durationMatch = false;
-        if(durationValue === "all") durationMatch = true;
-        else if(durationValue === "short" && pkg.duration <= 3) durationMatch = true;
-        else if(durationValue === "medium" && pkg.duration >= 4 && pkg.duration <= 6) durationMatch = true;
-        else if(durationValue === "long" && pkg.duration >= 7) durationMatch = true;
+/* PRICE */
+let priceMatch=false;
 
-        let themeMatch = (themeValue === "all" || pkg.theme === themeValue);
+if(priceValue==="all") priceMatch=true;
+else if(priceValue==="low" && pkg.price<20000)
+priceMatch=true;
+else if(priceValue==="mid" &&
+pkg.price>=20000 && pkg.price<=40000)
+priceMatch=true;
+else if(priceValue==="high" &&
+pkg.price>40000)
+priceMatch=true;
 
-        return searchMatch && priceMatch && durationMatch && themeMatch;
-    });
+/* TYPE */
+let typeMatch =
+(typeValue==="all" ||
+pkg.type===typeValue);
 
-    displayPackages(filtered);
+/* DURATION */
+let durationMatch=false;
+
+if(durationValue==="all")
+durationMatch=true;
+
+else if(durationValue==="short"
+&& pkg.duration<=3)
+durationMatch=true;
+
+else if(durationValue==="medium"
+&& pkg.duration>=4 && pkg.duration<=6)
+durationMatch=true;
+
+else if(durationValue==="long"
+&& pkg.duration>=7)
+durationMatch=true;
+
+return priceMatch &&
+typeMatch &&
+durationMatch;
+
+});
+
+/* reset pagination */
+currentPage=1;
+
+/* show filtered */
+displayFiltered(filtered);
+
 }
 
-function resetFilter(){
-    document.getElementById("searchInput").value = "";
-    document.getElementById("priceFilter").value = "all";
-    document.getElementById("durationFilter").value = "all";
-    document.getElementById("themeFilter").value = "all";
-    displayPackages(packages);
-}
+function displayFiltered(data){
 
-/* ================= WISHLIST FUNCTION ================= */
+const container =
+document.getElementById("packageContainer");
+
+container.innerHTML="";
+
+data.forEach(pkg=>{
+
+container.innerHTML+=`
+<div class="card">
+
+<h3>${pkg.name}</h3>
+<p class="price">₹${pkg.price}</p>
+<p>${pkg.type}</p>
+<p>${pkg.duration} Days</p>
+
+
+</div>`;
+});
+
+}
+/* ================= ADD WISHLIST ================= */
 
 function addToWishlist(id){
 
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+const pkg=
+packages.find(p=>p.id===id);
 
-    const selectedPackage = packages.find(pkg => pkg.id === id);
+let wishlist=
+JSON.parse(
+localStorage.getItem(
+"wishlist_"+currentUser
+))||[];
 
-    let alreadyAdded = wishlist.some(item => item.id === id);
-
-    if(!alreadyAdded){
-        wishlist.push(selectedPackage);
-        localStorage.setItem("wishlist", JSON.stringify(wishlist));
-        alert("Added to Wishlist");
-    } else {
-        alert("Already in Wishlist");
-    }
-
-    updateWishlistCount();
+if(wishlist.some(item=>item.id===id)){
+alert("Already Added");
+return;
 }
+
+wishlist.push(pkg);
+
+localStorage.setItem(
+"wishlist_"+currentUser,
+JSON.stringify(wishlist)
+);
+
+updateWishlistCount();
+alert("Added to Wishlist ✅");
+}
+
+/* ================= COUNT ================= */
+
+
 function updateWishlistCount(){
 
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+const currentUser =
+localStorage.getItem("currentUser");
 
-    let countElement = document.getElementById("wishlistCount");
+if(!currentUser) return;
 
-    if(countElement){
-        countElement.textContent = wishlist.length;
-    }
+const wishlist =
+JSON.parse(
+localStorage.getItem(
+"wishlist_" + currentUser
+)
+) || [];
+
+const countElement =
+document.getElementById("wishlistCount");
+
+if(countElement){
+countElement.textContent =
+wishlist.length;
+}
 }
 
-/* ================= BOOK TRIP FUNCTION ================= */
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+    displayPackages();       // ✅ SHOW CARDS
+    updateWishlistCount();   // ✅ UPDATE COUNT
+});
 
-function bookTrip(id){
-
-    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-    const selectedPackage = packages.find(pkg => pkg.id === id);
-
-    bookings.push(selectedPackage);
-
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-
-    alert("Trip Booked Successfully 🎉");
-}
-
-/* ================= EVENT LISTENERS ================= */
-
-document.getElementById("searchInput").addEventListener("input", filterPackages);
-document.getElementById("priceFilter").addEventListener("change", filterPackages);
-document.getElementById("durationFilter").addEventListener("change", filterPackages);
-document.getElementById("themeFilter").addEventListener("change", filterPackages);
-
-displayPackages(packages);
-updateWishlistCount();
+/* auto update if wishlist changes */
+window.addEventListener(
+"storage",
+updateWishlistCount
+);
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="jquery-effects.js"></script>
 
 </body>
 </html>

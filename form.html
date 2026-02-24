@@ -4,7 +4,7 @@
  
 
     body {
-      background-image: url(images/form.png);
+      background-image: url(images/cnt.jpg);
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -12,7 +12,7 @@
     .form1 {
       justify-content: center;
       text-align: center;
-      border: 2px solid #667eea;
+      border: 2px solid cadetblue;
       height: auto;
       width: 600px;
       border-radius: 20px;
@@ -313,10 +313,10 @@
       const errorMsg = document.getElementById("errorMessage");
       const successMsg = document.getElementById("successMessage");
 
-      // ❌ VALIDATION
+    
       if(!fname || !lname || !email || !number || !enquiryType){
         errorMsg.style.display = "block";
-        errorMsg.innerText = "❌ Please fill all fields!";
+        errorMsg.innerText = "! Please fill all fields!";
         successMsg.style.display = "none";
         return;
       }
@@ -384,4 +384,7 @@
     }
 
   </script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="jquery-effects.js"></script>
+
 </body>

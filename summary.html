@@ -1,109 +1,257 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Booking Summary</title>
-    <style>
-        body{
-            font-family:Arial;
-            background:#f4f6fb;
-            padding:30px;
-        }
-        .box{
-            background:white;
-            padding:20px;
-            border-radius:8px;
-            max-width:500px;
-            margin:auto;
-            box-shadow:0 3px 8px rgba(0,0,0,0.1);
-        }
-        h2{
-            text-align:center;
-            color:#1565c0;
-        }
-        p{
-            margin:8px 0;
-        }
-        .total{
-            font-weight:bold;
-            color:green;
-            font-size:18px;
-        }
-        button{
-            padding:10px;
-            margin-top:15px;
-            width:100%;
-            background:#1565c0;
-            color:white;
-            border:none;
-            border-radius:5px;
-            cursor:pointer;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Booking Summary</title>
+
+<style>
+
+/* PAGE BACKGROUND */
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f4f6fb;
+}
+
+/* HEADER */
+.header{
+text-align:center;
+padding:20px;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+font-size:24px;
+font-weight:bold;
+}
+
+/* MAIN BOX */
+.summary-box{
+max-width:650px;
+margin:40px auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* SECTION TITLE */
+.summary-box h2{
+text-align:center;
+color:#1565c0;
+margin-bottom:25px;
+}
+
+/* DETAILS GRID */
+.details{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-bottom:20px;
+}
+
+/* LABEL STYLE */
+.label{
+font-weight:bold;
+color:#555;
+}
+
+/* VALUE STYLE */
+.value{
+color:#222;
+}
+
+/* TOTAL BOX */
+.total-box{
+background:#eef2ff;
+padding:18px;
+border-radius:10px;
+text-align:center;
+margin-top:20px;
+}
+
+.total-box span{
+font-size:24px;
+font-weight:bold;
+color:green;
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:14px;
+margin-top:25px;
+background:#1565c0;
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#0d47a1;
+transform:scale(1.02);
+}
+
+/* MOBILE */
+@media(max-width:600px){
+.details{
+grid-template-columns:1fr;
+}
+}   
+
+</style>
 </head>
 
 <body>
 
-<div class="box">
-    <h2>Booking Summary</h2>
-    <div id="summaryData"></div>
-    <button onclick="confirmBooking()">Confirm Booking</button>
+<div class="header">
+Booking Summary
 </div>
 
+<div class="summary-box">
+
+<h2>Review Your Booking</h2>
+
+<div id="summaryData"></div>
+
+<button onclick="flexBooking()">
+Confirm Booking ✅
+</button>
+
+</div>
+<div id="bookingPopup" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 5px 25px rgba(0,0,0,0.3);
+z-index:9999;
+text-align:center;
+">
+<h3>✅ Booking Successful!</h3>
+<p>Redirecting to Invoice...</p>
+</div>
 <script>
 
-// Get booking
-let booking = JSON.parse(localStorage.getItem("currentBooking"));
-const summaryDiv = document.getElementById("summaryData");
+let booking =
+JSON.parse(localStorage.getItem("currentBooking"));
+
+const container =
+document.getElementById("summaryData");
 
 if(!booking){
-    summaryDiv.innerHTML = "<p style='color:red;'>No Booking Found</p>";
+container.innerHTML="<p>No Booking Found</p>";
 }
 else{
 
-    // Generate booking ID
-    booking.bookingId = "QV" + Math.floor(Math.random() * 100000);
+booking.bookingId="QV"+Date.now();
+booking.total=booking.price*booking.members;
 
-    // Calculate total
-    booking.total = booking.price * booking.members;
-    localStorage.setItem("currentBooking", JSON.stringify(booking));
+localStorage.setItem(
+"currentBooking",
+JSON.stringify(booking)
+);
 
-    summaryDiv.innerHTML = `
-        <p><strong>Booking ID:</strong> ${booking.bookingId}</p>
-        <p><strong>Package:</strong> ${booking.package}</p>
-        <p><strong>Name:</strong> ${booking.name}</p>
-        <p><strong>Email:</strong> ${booking.email}</p>
-        <p><strong>Mobile:</strong> ${booking.mobile}</p>
-        <p><strong>Members:</strong> ${booking.members}</p>
-        <p><strong>Payment:</strong> ${booking.payment}</p>
-        <p style="color:green; font-weight:bold;">
-            Total Amount: ₹${booking.total}
-        </p>
-    `;
+container.innerHTML=`
 
-    localStorage.setItem("currentBooking", JSON.stringify(booking));
+<div class="details">
+<div class="label">Booking ID</div>
+<div class="value">${booking.bookingId}</div>
+
+<div class="label">Package</div>
+<div class="value">${booking.package}</div>
+
+<div class="label">Customer</div>
+<div class="value">${booking.name}</div>
+
+<div class="label">Members</div>
+<div class="value">${booking.members}</div>
+
+<div class="label">Travel Date</div>
+<div class="value">${booking.travelDate}</div>
+
+<div class="label">Payment</div>
+<div class="value">${booking.payment}</div>
+</div>
+
+<div class="total-box">
+Total Amount<br>
+<span>₹${booking.total}</span>
+</div>
+`;
 }
 
+function flexBooking(){
 
-function confirmBooking(){
+const currentUser =
+localStorage.getItem("currentUser");
 
-    if(!booking){
-        alert("No booking data found!");
-        return;
-    }
-
-    // Save booking to history
-    let history = JSON.parse(localStorage.getItem("bookingHistory")) || [];
-    history.push(booking);
-    localStorage.setItem("bookingHistory", JSON.stringify(history));
-
-    // VERY IMPORTANT: Save updated booking again
-    localStorage.setItem("currentBooking", JSON.stringify(booking));
-
-    // Redirect to invoice
-    window.location.href = "invoice.html";
+if(!currentUser){
+alert("Login required");
+return;
 }
+
+/* attach logged user */
+booking.email = currentUser;
+
+/* ================= USER HISTORY ================= */
+let userBookings =
+JSON.parse(
+localStorage.getItem(
+"booking_" + currentUser
+)
+) || [];
+
+userBookings.push(booking);
+
+localStorage.setItem(
+"booking_" + currentUser,
+JSON.stringify(userBookings)
+);
+
+
+/* ================= ADMIN HISTORY ================= */
+let allBookings =
+JSON.parse(
+localStorage.getItem("bookingHistory")
+) || [];
+
+allBookings.push(booking);
+
+localStorage.setItem(
+"bookingHistory",
+JSON.stringify(allBookings)
+);
+
+
+/* ================= CLEAN TEMP DATA ================= */
+localStorage.setItem(
+"currentBooking",
+JSON.stringify(booking)
+);
+
+/* SHOW SUCCESS POPUP */
+$("#bookingPopup").fadeIn(400);
+
+setTimeout(function(){
+
+$("#bookingPopup").fadeOut(3000);
+window.location.href="invoice.html";
+
+},2000);
+}
+
+/* ================= REDIRECT ================= */
 
 </script>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="jquery-effects.js"></script>
 </body>
 </html>

@@ -4,293 +4,392 @@
 <title>Admin Dashboard - QuestVoyage</title>
 
 <style>
+
 body{
-    margin:0;
-    font-family:Arial;
-    background:#f4f6fb;
+margin:0;
+font-family:Arial;
+background:#f4f6fb;
 }
 
+/* HEADER */
 header{
-    background:linear-gradient(135deg,#667eea,#764ba2);
-    color:white;
-    padding:15px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+padding:15px 25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
+header button{
+background:red;
+border:none;
+color:white;
+padding:8px 15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* DASHBOARD */
 .dashboard{
-    padding:30px;
+padding:30px;
 }
 
+/* CARDS */
 .cards{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
 }
 
 .card{
-    background:white;
-    padding:20px;
-    border-radius:8px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
-    flex:1;
-    min-width:200px;
+flex:1;
+min-width:220px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 .card h3{
-    margin:0;
+margin:0;
+color:#555;
 }
 
+.card p{
+font-size:22px;
+font-weight:bold;
+margin-top:10px;
+}
+
+/* TABLE */
 .table-container{
-    margin-top:30px;
-    background:white;
-    padding:20px;
-    border-radius:8px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+margin-top:30px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
+width:100%;
+border-collapse:collapse;
 }
 
-th, td{
-    padding:10px;
-    border-bottom:1px solid #ddd;
-    text-align:left;
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:left;
 }
 
-button{
-    padding:6px 10px;
-    background:#1565c0;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
+th{
+background:#eef2ff;
 }
 
-.logout{
-    background:red;
+button.cancel{
+background:#1565c0;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:5px;
+cursor:pointer;
 }
 
+/* SAVE SECTION */
 .save-section{
-    margin-top:40px;
-    padding:20px;
-    background:white;
-    border-radius:8px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
-    text-align:center;
+margin-top:40px;
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
 }
 
 .save-btn{
-    padding:12px 30px;
-    background:#4caf50;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    margin:10px 5px;
+padding:12px 25px;
+margin:10px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
 }
 
-.save-btn:hover{
-    background:#45a049;
-    transform:scale(1.05);
-    transition:all 0.3s ease;
-}
+.green{background:#4caf50;color:white;}
+.orange{background:#ff9800;color:white;}
 
 .save-message{
-    margin-top:15px;
-    font-weight:bold;
-    font-size:14px;
-    padding:10px;
-    border-radius:5px;
-    display:none;
+margin-top:10px;
+display:none;
+padding:10px;
+border-radius:6px;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <h2>Admin Dashboard</h2>
-<button onclick="adminLogout()">Logout</button></header>
+<h2>Admin Dashboard</h2>
+<button onclick="adminLogout()">Logout</button>
+</header>
 
 <div class="dashboard">
 
-    <div class="cards">
-        <div class="card">
-            <h3>Total Bookings</h3>
-            <p id="totalBookings">0</p>
-        </div>
+<div class="cards">
+<div class="card">
+<h3>Total Bookings</h3>
+<p id="totalBookings">0</p>
+</div>
 
-        <div class="card">
-            <h3>Total Revenue</h3>
-            <p id="totalRevenue">₹0</p>
-        </div>
+<div class="card">
+<h3>Total Revenue</h3>
+<p id="totalRevenue">₹0</p>
+</div>
 
-        <div class="card">
-            <h3>Total Wishlist Items</h3>
-            <p id="totalWishlist">0</p>
-        </div>
-    </div>
+<div class="card">
+<h3>Total Wishlist Items</h3>
+<p id="totalWishlist">0</p>
+</div>
+</div>
 
-    <div class="table-container">
-        <h3>All Bookings</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Name</th>
-                    <th>Package</th>
-                    <th>Members</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="bookingTable"></tbody>
-        </table>
-    </div>
 
-    <div class="save-section">
-        <h3>💾 Save Progress</h3>
-        <p>Backup and save all admin dashboard data</p>
-        <button class="save-btn" onclick="saveProgress()">Save All Data</button>
-        <button class="save-btn" style="background:#ff9800;" onclick="downloadBackup()">Download Backup</button>
-        <div id="saveMessage" class="save-message"></div>
-    </div>
+<div class="table-container">
+<h3>All Bookings</h3>
+
+<table>
+<thead>
+<tr>
+<th>Booking ID</th>
+<th>User</th>
+<th>Package</th>
+<th>Members</th>
+<th>Total</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="bookingTable"></tbody>
+
+</table>
+</div>
+
+
+<div class="save-section">
+<h3>💾 Save Progress</h3>
+
+<button class="save-btn green"
+onclick="saveProgress()">
+Save All Data
+</button>
+
+<button class="save-btn orange"
+onclick="downloadBackup()">
+Download Backup
+</button>
+
+<div id="saveMessage"
+class="save-message"></div>
+
+</div>
 
 </div>
 
 <script>
 
-// 🔐 Protect Page
-if(localStorage.getItem("adminLoggedIn") !== "true"){
-    window.location.href = "admin-login.html";
+/* ================= ADMIN PROTECTION ================= */
+if(localStorage.getItem("adminLoggedIn")!=="true"){
+window.location.href="login.html";
 }
 
-// 📊 Load Data
+
+/* ================= LOAD DASHBOARD ================= */
 function loadDashboard(){
 
-    const bookings = JSON.parse(localStorage.getItem("bookingHistory")) || [];
-    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+const bookings =
+JSON.parse(localStorage.getItem("bookingHistory")) || [];
 
-    document.getElementById("totalBookings").innerText = bookings.length;
-    document.getElementById("totalWishlist").innerText = wishlist.length;
+const users =
+JSON.parse(localStorage.getItem("users")) || [];
 
-    let totalRevenue = 0;
-    const table = document.getElementById("bookingTable");
-    table.innerHTML = "";
+let totalRevenue=0;
+let totalWishlist=0;
 
-    bookings.forEach((booking, index) => {
+const table=
+document.getElementById("bookingTable");
 
-        totalRevenue += booking.total || 0;
+table.innerHTML="";
 
-        table.innerHTML += `
-            <tr>
-                <td>${booking.bookingId}</td>
-                <td>${booking.name}</td>
-                <td>${booking.package}</td>
-                <td>${booking.members}</td>
-                <td>₹${booking.total}</td>
-                <td>
-                    <button onclick="cancelBooking(${index})">Cancel</button>
-                </td>
-            </tr>
-        `;
-    });
+/* BOOKINGS */
+bookings.forEach((booking,index)=>{
 
-    document.getElementById("totalRevenue").innerText = "₹" + totalRevenue;
+totalRevenue += booking.total || 0;
+
+table.innerHTML+=`
+<tr>
+<td>${booking.bookingId || "-"}</td>
+<td>${booking.email || "-"}</td>
+<td>${booking.package}</td>
+<td>${booking.members}</td>
+<td>₹${booking.total || 0}</td>
+<td>
+<button class="cancel"
+onclick="cancelBooking(${index})">
+Cancel
+</button>
+</td>
+</tr>`;
+});
+
+document.getElementById("totalBookings")
+.innerText=bookings.length;
+
+document.getElementById("totalRevenue")
+.innerText="₹"+totalRevenue;
+
+
+/* WISHLIST COUNT FROM ALL USERS */
+users.forEach(user=>{
+
+const list=
+JSON.parse(
+localStorage.getItem(
+"wishlist_"+user.email
+)
+)||[];
+
+totalWishlist+=list.length;
+
+});
+
+document.getElementById("totalWishlist")
+.innerText=totalWishlist;
+
 }
 
-// ❌ Cancel Booking
+
+/* ================= CANCEL BOOKING ================= */
 function cancelBooking(index){
 
-    let bookings = JSON.parse(localStorage.getItem("bookingHistory")) || [];
+let bookings =
+JSON.parse(localStorage.getItem("bookingHistory")) || [];
 
-    bookings.splice(index, 1);
+/* booking to remove */
+const removedBooking = bookings[index];
 
-    localStorage.setItem("bookingHistory", JSON.stringify(bookings));
+/* remove from admin list */
+bookings.splice(index,1);
 
-    loadDashboard();
+localStorage.setItem(
+"bookingHistory",
+JSON.stringify(bookings)
+);
+
+/* ================= REMOVE FROM USER HISTORY ================= */
+
+const userEmail = removedBooking.email;
+
+let userBookings =
+JSON.parse(
+localStorage.getItem("booking_"+userEmail)
+) || [];
+
+/* remove same booking */
+userBookings =
+userBookings.filter(b =>
+b.bookingId !== removedBooking.bookingId
+);
+
+localStorage.setItem(
+"booking_"+userEmail,
+JSON.stringify(userBookings)
+);
+
+/* reload dashboard */
+loadDashboard();
+
+alert("Booking Cancelled Successfully ✅");
 }
-
-// � SAVE PROGRESS FUNCTION
+/* ================= SAVE BACKUP ================= */
 function saveProgress(){
-    const bookings = JSON.parse(localStorage.getItem("bookingHistory")) || [];
-    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    
-    // Create backup object
-    const backup = {
-        bookingHistory: bookings,
-        wishlist: wishlist,
-        users: users,
-        savedAt: new Date().toLocaleString(),
-        totalBookings: bookings.length,
-        totalRevenue: bookings.reduce((sum, b) => sum + (b.total || 0), 0)
-    };
-    
-    // Save backup to localStorage
-    localStorage.setItem("adminBackup", JSON.stringify(backup));
-    
-    const messageDiv = document.getElementById("saveMessage");
-    messageDiv.style.display = "block";
-    messageDiv.style.background = "#d4edda";
-    messageDiv.style.color = "#155724";
-    messageDiv.style.border = "1px solid #c3e6cb";
-    messageDiv.innerText = `✅ Progress saved successfully at ${backup.savedAt}`;
-    
-    // Hide message after 5 seconds
-    setTimeout(() => {
-        messageDiv.style.display = "none";
-    }, 5000);
-    
-    console.log("Backup saved:", backup);
+
+const backup={
+users:JSON.parse(localStorage.getItem("users"))||[],
+bookingHistory:
+JSON.parse(localStorage.getItem("bookingHistory"))||[],
+savedAt:new Date().toLocaleString()
+};
+
+localStorage.setItem(
+"adminBackup",
+JSON.stringify(backup)
+);
+
+showMessage("✅ Data Saved Successfully","#d4edda","#155724");
 }
 
-// 📥 DOWNLOAD BACKUP AS JSON FILE
+
+/* ================= DOWNLOAD ================= */
 function downloadBackup(){
-    const backup = JSON.parse(localStorage.getItem("adminBackup")) || 
-                   JSON.parse(localStorage.getItem("bookingHistory")) || {};
-    
-    const dataStr = JSON.stringify(backup, null, 2);
-    const dataBlob = new Blob([dataStr], {type: "application/json"});
-    const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `QuestVoyage_Backup_${new Date().getTime()}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    const messageDiv = document.getElementById("saveMessage");
-    messageDiv.style.display = "block";
-    messageDiv.style.background = "#cfe2ff";
-    messageDiv.style.color = "#084298";
-    messageDiv.style.border = "1px solid #b6d4fe";
-    messageDiv.innerText = "📥 Backup downloaded successfully!";
-    
-    setTimeout(() => {
-        messageDiv.style.display = "none";
-    }, 5000);
+
+const backup=
+localStorage.getItem("adminBackup");
+
+if(!backup){
+alert("No backup available");
+return;
 }
 
-// �🚪 Logout
-function logoutAdmin(){
-    localStorage.removeItem("adminLoggedIn");
-    window.location.href = "admin-login.html";
+const blob=
+new Blob([backup],
+{type:"application/json"});
+
+const link=
+document.createElement("a");
+
+link.href=
+URL.createObjectURL(blob);
+
+link.download=
+"QuestVoyage_Backup.json";
+
+link.click();
+
+showMessage("📥 Backup Downloaded",
+"#cfe2ff","#084298");
 }
+
+
+/* ================= MESSAGE ================= */
+function showMessage(text,bg,color){
+
+const msg=
+document.getElementById("saveMessage");
+
+msg.style.display="block";
+msg.style.background=bg;
+msg.style.color=color;
+msg.innerText=text;
+
+setTimeout(()=>{
+msg.style.display="none";
+},4000);
+}
+
+
+/* ================= LOGOUT ================= */
+function adminLogout(){
+localStorage.removeItem("adminLoggedIn");
+window.location.href="login.html";
+}
+
+
+/* AUTO UPDATE */
+window.addEventListener("storage",loadDashboard);
 
 loadDashboard();
-if(localStorage.getItem("adminLoggedIn") !== "true"){
-    window.location.href = "login.html";
-}
-function adminLogout(){
-    localStorage.removeItem("adminLoggedIn");
-    window.location.href = "login.html";
-}
-</script>
 
+</script>
 
 </body>
 </html>

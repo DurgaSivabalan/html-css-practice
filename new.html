@@ -25,10 +25,11 @@
    <div class="nav-right">
 
     <!-- Wishlist Icon -->
-    <a href="wishlist.html" class="wishlist-icon">
-        <img src="images/wishlist1.jpg" alt="Wishlist">
-        <span id="wishlistCount" class="wishlist-count">0</span>
-    </a>
+   <div style="text-align:right;padding:10px 20px;">
+<a href="wishlist.html">
+<img src="images/wlt.jpg" alt="wishlist" style="width: 40px; height: 40px;">(<span id="wishlistCount">0</span>)
+</a>
+</div>
 
     <!-- Book Trip Button -->
     <a href="filter.html" class="book-trip-btn" style="
@@ -139,42 +140,42 @@
     <section class="grid-section">
       <h2>Our Popular Destinations</h2>
       <div class="grid-container">
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/paris.jpg" alt="Destination 1" />
           <h3>Paris</h3>
           <p>Experience the city of lights and romance.</p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/tokyo.jpg" alt="Destination 2" />
           <h3>Tokyo</h3>
           <p>Discover modern culture and ancient traditions.</p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/newyork.jpg" alt="Destination 3" />
           <h3>New York</h3>
           <p>The city that never sleeps awaits you.</p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/london.jpg" alt="Destination 4" />
           <h3>London</h3>
           <p>Explore royal heritage and historic landmarks.</p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/dubai.jpg" alt="Destination 5" />
           <h3>Dubai</h3>
           <p>Luxury and innovation combined.</p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/singapore.jpg" alt="Destination 6" />
           <h3>Singapore</h3>
           <p>Modern city with vibrant culture.</p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/barcelona.jpg" alt="Destination 7" />
           <h3>Barcelona</h3>
           <p>Art, architecture, and beach vibes.</p>
         </div>
-        <div class="grid-item">
+        <div class="grid-item reveal">
           <img src="images/sydney.jpg" alt="Destination 8" />
           <h3>Sydney</h3>
           <p>Beautiful beaches and iconic landmarks.</p>
@@ -271,5 +272,8 @@ function updateWishlistCount(){
 
 updateWishlistCount();
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="jquery-effects.js"></script>
+
   </body>
 </html>

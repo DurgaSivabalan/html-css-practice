@@ -3,204 +3,328 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book Trip - QuestVoyage</title>
+<title>Book Your Trip</title>
 
 <style>
+
+/* ================= PAGE ================= */
 body{
-    margin:0;
-    font-family:Arial;
-    background:#f4f6fb;
+margin:0;
+font-family:Arial, sans-serif;
+background:#f4f6fb;
 }
 
+/* ================= HEADER ================= */
 h1{
-    text-align:center;
-    padding:20px;
-    background:linear-gradient(135deg,#667eea,#764ba2);
-    color:white;
-    margin:0;
+text-align:center;
+padding:22px;
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+margin:0;
+letter-spacing:1px;
+}
+
+/* ================= FORM CONTAINER ================= */
+.form-container{
+max-width:900px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:14px;
+box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ================= GRID ================= */
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px 40px;   /* row gap | column gap */
+}
+
+/* ================= LABEL ================= */
+label{
+font-weight:600;
+margin-bottom:6px;
+display:block;
+color:#333;
+}
+
+/* ================= INPUTS ================= */
+input,
+select,
+textarea{
+width:100%;
+padding:12px 14px;
+border-radius:8px;
+border:1px solid #d0d0d0;
+font-size:15px;
+background:#fafafa;
+transition:0.3s;
+}
+
+/* focus effect */
+input:focus,
+select:focus,
+textarea:focus{
+outline:none;
+border-color:#667eea;
+background:white;
+box-shadow:0 0 6px rgba(102,126,234,0.25);
+}
+
+/* ================= TEXTAREA ================= */
+textarea{
+resize:none;
+min-height:110px;
+margin-top:10px;
+}
+
+/* ================= PRICE BOX ================= */
+.price-box{
+background:linear-gradient(135deg,#eef2ff,#e3e8ff);
+padding:18px;
+border-radius:10px;
+margin-top:30px;
+font-size:20px;
+font-weight:bold;
+color:#1a4fbf;
+text-align:center;
+}
+
+/* ================= BUTTON ================= */
+button{
+margin-top:25px;
+width:100%;
+padding:14px;
+background:linear-gradient(135deg,#1565c0,#0d47a1);
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* ================= FIELD SPACING FIX ================= */
+.form-grid > div{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+
+.form-grid{
+grid-template-columns:1fr;
+gap:25px;
 }
 
 .form-container{
-    max-width:800px;
-    margin:30px auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+padding:25px;
 }
 
-input, select, textarea{
-    width:100%;
-    padding:10px;
-    margin-top:5px;
-    margin-bottom:15px;
-    border-radius:5px;
-    border:1px solid #ccc;
 }
 
-button{
-    padding:10px;
-    background:#1565c0;
-    color:white;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-.member-box{
-    background:#f0f3ff;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:8px;
-}
-
-.success{
-    text-align:center;
-    color:green;
-    font-weight:bold;
-    margin-top:20px;
-}
 </style>
 </head>
 
 <body>
 
-<h1>Book Your Trip</h1>
+<h1>Book Your Dream Trip ✈️</h1>
 
 <div class="form-container">
 
-<form id="bookingForm">
+<form id="bookingForm"
+class="booking-form">
+<div class="form-grid">
 
-<label>Your Name</label>
-<input type="text" id="customerName" required>
+<div>
+<label>Name</label>
+<input id="customerName" required>
+</div>
 
+<div>
 <label>Email</label>
-<input type="email" id="email" required>
+<input id="email" type="email" required>
+</div>
 
-<label>Mobile Number</label>
-<input type="tel" id="mobile" required>
+<div>
+<label>Mobile</label>
+<input id="mobile" required>
+</div>
 
+<div>
+<label>Travel Date</label>
+<input type="date" id="travelDate" required>
+</div>
+
+<div>
 <label>Select Package</label>
-<select id="packageName" required>
-    <option value="">--Select--</option>
-    <option>Goa Trip</option>
-    <option>Manali Tour</option>
-    <option>Maldives Luxury</option>
-    <option>Delhi visit</option>
-    <option>Andhaman Escapes</option>
-    <option>Ooty Hills</option>
-    <option>Mumbai Explorer</option>
-    <option>Shimla Retreat</option>
-    <option>Pondicherry Relax</option>
-    <option>Jaipur Heritage</option>
-    <option>Ladakh Adventure</option>
-    <option>Kerala Backwaterss</option>
-    <option>Hyderabad City Tour</option>
-    <option>Shimla Retreat</option>
+<select id="packageName">
+<option>Goa Trip</option>
+<option>Kerala Backwater</option>
+<option>Ooty Hills</option>
+<option>Kashmir Paradise</option>
+<option>Shimla Retreat</option>
+<option>"Darjeeling Delight</option>
+<option>Andaman Escape</option>
+<option>Pondicherry Relax</option>
+<option>Jaipur Heritage</option>
+<option>Hyderabad City Tour</option>
+<option>Ladakh Adventure</option>
+<option>Coorg Nature Stay</option>
+<option>Mysore Palace Tour</option>
+<option>Rishikesh River Camp</option>
+<option>Varanasi Spiritual Trip</option>
+<option>Udaipur Lake View</option>
+<option>Sikkim Snow Journey</option>
+<option>Meghalaya Explorer</option>
+<option>Manali Tour</option>
+<option>Mumbai Explorer</option>
 </select>
+</div>
 
-<label>Number of Members</label>
-<select id="memberCount" required>
-    <option value="">--Select--</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-</select>
+<div>
+<label>Adults</label>
+<input type="number" id="adults" value="1" min="1">
+</div>
 
-<div id="membersContainer"></div>
+<div>
+<label>Children</label>
+<input type="number" id="children" value="0" min="0">
+</div>
 
-<label>Payment Option</label>
-<select id="payment" required>
-    <option value="">--Select--</option>
-    <option>UPI</option>
-    <option>Credit Card</option>
-    <option>Debit Card</option>
-    <option>Net Banking</option>
-</select>
-
-<label>Extra Query</label>
-<textarea id="query" rows="4"></textarea>
-
-<button type="submit">Confirm Booking</button>
-
-</form>
-
-<div id="successMessage" class="success"></div>
+<div>
+<label>Pickup Location</label>
+<input id="pickup">
+</div>
 
 </div>
 
+<label>Special Request</label>
+<textarea id="request" rows="3"></textarea>
+
+<div class="price-box">
+Total Amount: ₹ <span id="totalPrice">0</span>
+</div>
+
+<button type="submit">
+Continue to Summary
+</button>
+
+</form>
+
+</div>
+window.addEventListener("storage", updateWishlistCount);
 <script>
 
-// � Get all packages from localStorage
-const packages = JSON.parse(localStorage.getItem("allPackages")) || [];
-let selectedPackagePrice = 0;
+/* PACKAGE PRICE */
+const priceList={
+"Goa Trip":15000,
+"Manali Tour":35000,
+"Mumbai Explorer":25000,
+"Kerala Backwaters":38000,
 
-// 🔍 Get package ID from URL
-const urlParams = new URLSearchParams(window.location.search);
-const packageId = parseInt(urlParams.get("id"));
+"Ooty Hills":22000,
+"Kashmir Paradise":45000,
+"Shimla Retreat":32000,
+"Darjeeling Delight":34000,
 
-console.log("All packages:", packages);
-console.log("Package ID from URL:", packageId);
+"Andaman Escape":41000,
+"Pondicherry Relax":17000,
+"Jaipur Heritage":21000,
+"Hyderabad City Tour":16000,
 
-document.addEventListener("DOMContentLoaded", function(){
+"Ladakh Adventure":55000,
+"Coorg Nature Stay":28000,
+"Mysore Palace Tour":19000,
+"Rishikesh River Camp":24000,
 
-    const packageSelect = document.getElementById("packageName");
-    const form = document.getElementById("bookingForm");
+"Varanasi Spiritual Trip":20000,
+"Udaipur Lake View":30000,
+"Sikkim Snow Journey":42000,
+"Meghalaya Explorer":39000
 
-    // 🎯 Function to update price when package changes
-    function updatePackagePrice(){
-        const selectedName = packageSelect.value;
-        const selectedPackage = packages.find(pkg => pkg.name === selectedName);
-        
-        if(selectedPackage){
-            selectedPackagePrice = selectedPackage.price;
-            console.log("Selected package:", selectedPackage.name, "Price:", selectedPackagePrice);
-        } else {
-            selectedPackagePrice = 0;
-            console.log("Package not found:", selectedName);
-        }
-    }
+};
 
-    // ✅ Pre-fill package name if coming from filter.html
-    if(packageId){
-        const selectedPackage = packages.find(pkg => pkg.id === packageId);
-        
-        if(selectedPackage){
-            packageSelect.value = selectedPackage.name;
-            selectedPackagePrice = selectedPackage.price;
-            console.log("Pre-filled package:", selectedPackage.name, "Price:", selectedPackagePrice);
-        }
-    }
+const pkg=document.getElementById("packageName");
+const adults=document.getElementById("adults");
+const children=document.getElementById("children");
+const totalPrice=document.getElementById("totalPrice");
 
-    // 📍 Update price when user changes package selection
-    packageSelect.addEventListener("change", updatePackagePrice);
+/* PRICE CALCULATION */
+function calculatePrice(){
 
-    // 📝 Form submission
-    form.addEventListener("submit", function(e){
+const price=priceList[pkg.value];
 
-        e.preventDefault();  // 🚨 THIS STOPS PAGE REFRESH
+const totalMembers=
+parseInt(adults.value)+
+parseInt(children.value);
 
-        // ✅ Use the ACTUAL price instead of hardcoded 20000
-        const bookingData = {
-            package: document.getElementById("packageName").value,
-            name: document.getElementById("customerName").value,
-            email: document.getElementById("email").value,
-            mobile: document.getElementById("mobile").value,
-            members: parseInt(document.getElementById("memberCount").value),
-            payment: document.getElementById("payment").value,
-            price: selectedPackagePrice  // ✅ NOW USING ACTUAL PRICE
-        };
+totalPrice.textContent=
+price*totalMembers;
+}
 
-        console.log("Final booking data:", bookingData);
+pkg.addEventListener("change",calculatePrice);
+adults.addEventListener("input",calculatePrice);
+children.addEventListener("input",calculatePrice);
 
-        localStorage.setItem("currentBooking", JSON.stringify(bookingData));
+calculatePrice();
 
-        window.location.href = "summary.html";
-    });
+/* BOOKING SUBMIT */
+
+document
+.getElementById("bookingForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const currentUser=
+localStorage.getItem("currentUser");
+
+if(!currentUser){
+alert("Login First");
+return;
+}
+
+const totalMembers=
+parseInt(adults.value)+
+parseInt(children.value);
+
+const bookingData={
+
+package:pkg.value,
+name:customerName.value,
+email:currentUser,
+mobile:mobile.value,
+travelDate:travelDate.value,
+adults:adults.value,
+children:children.value,
+pickup:pickup.value,
+request:request.value,
+members:totalMembers,
+payment:"Pending",
+price:priceList[pkg.value]
+
+};
+
+localStorage.setItem(
+"currentBooking",
+JSON.stringify(bookingData)
+);
+
+window.location.href="summary.html";
 
 });
 
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="jquery-effects.js"></script>
 </body>
 </html>
