@@ -10,6 +10,138 @@
       href="C:\Users\Kaar User\Desktop\Assgnment\html-css-practice\images\logo.jpg"
       type="image/x-icon"
     />
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+.wishlist-wrapper{
+    position:relative;
+  }
+
+.wishlist-icon{
+    width:30px;
+    height:30px;
+}
+
+/* RED COUNT BADGE */
+.wishlist-badge{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+
+    background:red;
+    color:white;
+
+    font: size 11px;
+    font-weight:bold;
+
+    min-width:20px;
+    height:20px;
+
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+}
+.profile-wrapper{
+position:relative;
+cursor:pointer;
+}
+
+.profile-icon{
+width:30px;
+height:30px;
+border-radius:50%;
+}
+
+/* DROPDOWN */
+.profile-dropdown{
+position:absolute;
+right:0;
+top:50px;
+
+width:260px;
+background:white;
+padding:15px;
+
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+display:none;
+z-index:999;
+}
+
+.profile-dropdown h3{
+margin:0;
+}
+
+.profile-dropdown p{
+margin:5px 0;
+font-size:14px;
+color:#555;
+}
+.profile-dropdown{
+z-index:9999;
+position:absolute;
+right:0;
+top:55px;
+display:none;
+}
+.profile-dropdown button{
+width:100%;
+margin-top:10px;
+background:#e53935;
+color:white;
+border:none;
+padding:8px;
+border-radius:6px;
+cursor:pointer;
+}
+/* ================= NAV ICON BUTTON STYLE ================= */
+
+/* ===== NAV RIGHT ===== */
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+/* ===== COMMON BUTTON STYLE ===== */
+.nav-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px 12px;   /* SMALLER */
+    border-radius:8px;
+
+    background:#6fa6a4;
+
+    width:auto;          /* IMPORTANT */
+    height:auto;         /* IMPORTANT */
+
+    cursor:pointer;
+    transition:.3s;
+}
+
+/* ICON SIZE */
+.nav-btn img,
+.nav-btn i{
+    width:20px;
+    height:20px;
+}
+
+/* Hover */
+.nav-btn:hover{
+    background:#5c908e;
+}
+/* ================= KEEP HAMBURGER NORMAL ================= */
+
+.hamburger{
+    background:none !important;
+    padding:0 !important;
+}
+    </style>
   </head>
 
   <body class="Hero-bg">
@@ -25,11 +157,6 @@
    <div class="nav-right">
 
     <!-- Wishlist Icon -->
-   <div style="text-align:right;padding:10px 20px;">
-<a href="wishlist.html">
-<img src="images/wlt.jpg" alt="wishlist" style="width: 40px; height: 40px;">(<span id="wishlistCount">0</span>)
-</a>
-</div>
 
     <!-- Book Trip Button -->
     <a href="filter.html" class="book-trip-btn" style="
@@ -45,9 +172,22 @@
           
 >   <b> Book Trip</b>  
     </a>
+ <div class="nav-btn wishlist-wrapper">
+  
+    <a href="wishlist.html">
+        <img src="images/wishlist icon.png" alt="Sample Images" class="wishlist-icon">
+        <span id="wishlistCount" class="wishlist-badge">0</span>
+    </a>
+</div>
+ <div class="nav-btn wishlist-wrapper">
+  
+    <a href="filter.html">
+        <img src="images/filter.png" alt="Sample Images" class="wishlist-icon">
+    </a>
+</div>
 
 
-      <section class="logout">
+      <!--<section class="logout">
         <li
           style="
           padding-top: 10px;
@@ -61,7 +201,29 @@
             ><b>Logout</b></a
           >
         </li>
-      </section>
+      </section>-->
+    <div class="nav-btn profile-wrapper">
+
+<img src="images/user (1).png"
+     class="profile-icon"
+     id="profileToggle">
+
+<div class="profile-dropdown" id="profileBox">
+
+<h3 id="profileName"></h3>
+<p id="profileEmail"></p>
+<p id="profilePhone"></p>
+
+<hr>
+
+<h4>My Bookings</h4>
+<div id="profileBookings"></div>
+
+<button onclick="logoutUser()">Logout</button>
+
+</div>
+
+</div>
             <li>
               <label
                 for="sidebar-toggle"
@@ -103,24 +265,18 @@
                 ><b>Testimonial</b></a
               >
             </li>
-            <li>
-              <a href="filter.html" target="_blank" style="color: black"
-                ><b>Filter</b></a
-              >
+          
             </li>
             <li onclick="window.location.href='history.html'" style="font-weight: bolder; cursor: pointer;">
     Booking History 
             </li>
-            <li>
-              <a href="form.html" target="_blank" style="color: black"
-                ><b>Contact</b></a>
-            </li>
+          
              
           </ul>
           <section class="sidebar-box contact-box">
             <h4>📞 Contact Us</h4>
             <p><strong>Phone:</strong> +91 98765 43210</p>
-            <p><strong>Email:</strong> support@travelagency.com</p>
+            <p><strong>Email:</strong> support@questvoyage.com</p>
             <a href="form.html" class="contact-link">Send Message</a>
           </section>
         </aside>
@@ -271,9 +427,120 @@ function updateWishlistCount(){
 }
 
 updateWishlistCount();
+
+$("#profileToggle").click(function(){
+$("#profileBox").fadeToggle();
+});
+
+function loadProfile(){
+
+const currentUser =
+localStorage.getItem("currentUser");
+
+if(!currentUser) return;
+
+const users =
+JSON.parse(localStorage.getItem("users"))||[];
+
+const user =
+users.find(u=>u.email===currentUser);
+
+if(user){
+
+$("#profileName").text(user.name);
+$("#profileEmail").text(user.email);
+$("#profilePhone").text(user.phone);
+
+}
+
+/* LOAD BOOKINGS */
+const bookings =
+JSON.parse(
+localStorage.getItem(
+"booking_"+currentUser
+)
+)||[];
+
+let html="";
+
+bookings.slice(-3).forEach(b=>{
+html+=`
+<p>✈ ${b.package}
+<br>₹${b.total}</p>
+`;
+});
+
+$("#profileBookings").html(
+html || "No bookings yet"
+);
+
+}
+
+loadProfile();
+
+function logoutUser(){
+
+localStorage.removeItem("currentUser");
+localStorage.removeItem("userLoggedIn");
+
+window.location.href="login.html";
+
+}
+
+function logoutUser(){
+
+localStorage.removeItem("currentUser");
+localStorage.removeItem("userLoggedIn");
+
+window.location.href="login.html";
+
+}
+
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="jquery-effects.js"></script>
+
+<script>
+
+function loadProfile(){
+
+const currentUser =
+localStorage.getItem("currentUser");
+
+if(!currentUser) return;
+
+const users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+const user =
+users.find(u=>u.email===currentUser);
+
+if(user){
+$("#profileName").text(user.name);
+$("#profileEmail").text(user.email);
+$("#profilePhone").text(user.phone);
+}
+
+const bookings =
+JSON.parse(
+localStorage.getItem("booking_"+currentUser)
+)||[];
+
+let html="";
+
+bookings.slice(-3).forEach(b=>{
+html+=`<p>✈ ${b.package} - ₹${b.total}</p>`;
+});
+
+$("#profileBookings").html(
+html || "No bookings yet"
+);
+
+}
+
+loadProfile();
+
+</script>
 
   </body>
 </html>

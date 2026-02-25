@@ -174,8 +174,14 @@ container.innerHTML=`
 <div class="label">Members</div>
 <div class="value">${booking.members}</div>
 
-<div class="label">Travel Date</div>
-<div class="value">${booking.travelDate}</div>
+
+
+<div class="label">Departure</div>
+<div class="value">${booking.departureDate}</div>
+
+<div class="label">Arrival</div>
+<div class="value">${booking.arrivalDate}</div>
+
 
 <div class="label">Payment</div>
 <div class="value">${booking.payment}</div>
@@ -200,7 +206,8 @@ return;
 
 /* attach logged user */
 booking.email = currentUser;
-
+booking.action="Pending";
+booking.process="Booked";
 /* ================= USER HISTORY ================= */
 let userBookings =
 JSON.parse(

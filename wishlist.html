@@ -84,7 +84,21 @@ text-align:center;
 color:red;
 font-size:18px;
 }
+.book{
+background:#4caf50;
+color:white;
+border:none;
+padding:10px;
+border-radius:6px;
+cursor:pointer;
+flex:1;
+transition:0.3s;
+}
 
+.book:hover{
+background:#2e7d32;
+transform:scale(1.05);
+}
 </style>
 </head>
 
@@ -156,9 +170,9 @@ onclick="removeItem(${item.id})">
 Remove
 </button>
 
-<button class="save"
-onclick="alert('Saved ✅')">
-Save
+<button class="book"
+onclick="bookTrip(${item.id})">
+Book Trip
 </button>
 
 </div>
@@ -195,7 +209,30 @@ renderWishlist();
 }
 
 renderWishlist();
+function bookTrip(id){
 
+const currentUser =
+localStorage.getItem("currentUser");
+
+let wishlist =
+JSON.parse(
+localStorage.getItem(
+"wishlist_" + currentUser
+)) || [];
+
+/* find package */
+const selectedPackage =
+wishlist.find(item => item.id === id);
+
+/* ✅ store FULL package */
+localStorage.setItem(
+"selectedPackage",
+JSON.stringify(selectedPackage)
+);
+
+/* redirect */
+window.location.href="book.html";
+}
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="jquery-effects.js"></script>

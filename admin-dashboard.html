@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Admin Dashboard - QuestVoyage</title>
 
 <style>
@@ -59,7 +62,6 @@ color:#555;
 .card p{
 font-size:22px;
 font-weight:bold;
-margin-top:10px;
 }
 
 /* TABLE */
@@ -79,20 +81,15 @@ border-collapse:collapse;
 th,td{
 padding:10px;
 border-bottom:1px solid #ddd;
-text-align:left;
 }
 
 th{
 background:#eef2ff;
 }
 
-button.cancel{
-background:#1565c0;
-color:white;
-border:none;
-padding:6px 10px;
+select{
+padding:5px;
 border-radius:5px;
-cursor:pointer;
 }
 
 /* SAVE SECTION */
@@ -131,7 +128,7 @@ border-radius:6px;
 
 <header>
 <h2>Admin Dashboard</h2>
-<button onclick="adminLogout()">Logout</button>
+<button id="logoutBtn">Logout</button>
 </header>
 
 <div class="dashboard">
@@ -153,7 +150,6 @@ border-radius:6px;
 </div>
 </div>
 
-
 <div class="table-container">
 <h3>All Bookings</h3>
 
@@ -166,6 +162,7 @@ border-radius:6px;
 <th>Members</th>
 <th>Total</th>
 <th>Action</th>
+<th>Process</th>
 </tr>
 </thead>
 
@@ -174,22 +171,21 @@ border-radius:6px;
 </table>
 </div>
 
-
 <div class="save-section">
-<h3>💾 Save Progress</h3>
 
-<button class="save-btn green"
-onclick="saveProgress()">
-Save All Data
+<button class="save-btn green" onclick="saveProgress()">
+Save Data
 </button>
 
-<button class="save-btn orange"
-onclick="downloadBackup()">
+<button class="save-btn orange" onclick="downloadBackup()">
 Download Backup
 </button>
-
-<div id="saveMessage"
-class="save-message"></div>
+<button class="save-btn"
+style="background:#d32f2f;color:white"
+onclick="clearBookingsOnly()">
+ Clear Bookings
+</button>
+<div id="saveMessage" class="save-message"></div>
 
 </div>
 
@@ -202,7 +198,6 @@ if(localStorage.getItem("adminLoggedIn")!=="true"){
 window.location.href="login.html";
 }
 
-
 /* ================= LOAD DASHBOARD ================= */
 function loadDashboard(){
 
@@ -212,111 +207,110 @@ JSON.parse(localStorage.getItem("bookingHistory")) || [];
 const users =
 JSON.parse(localStorage.getItem("users")) || [];
 
-let totalRevenue=0;
-let totalWishlist=0;
+let totalRevenue = 0;
+let totalWishlist = 0;
 
-const table=
+const table =
 document.getElementById("bookingTable");
 
 table.innerHTML="";
 
-/* BOOKINGS */
 bookings.forEach((booking,index)=>{
 
 totalRevenue += booking.total || 0;
 
-table.innerHTML+=`
+table.innerHTML += `
 <tr>
 <td>${booking.bookingId || "-"}</td>
 <td>${booking.email || "-"}</td>
-<td>${booking.package}</td>
-<td>${booking.members}</td>
+<td>${booking.package || "-"}</td>
+<td>${booking.members || 0}</td>
 <td>₹${booking.total || 0}</td>
+
 <td>
-<button class="cancel"
-onclick="cancelBooking(${index})">
-Cancel
-</button>
+<select onchange="updateAction(${index},this.value)">
+<option ${booking.action==="Pending"?"selected":""}>Pending</option>
+<option ${booking.action==="Confirmed"?"selected":""}>Confirmed</option>
+<option ${booking.action==="Hold"?"selected":""}>Hold</option>
+<option ${booking.action==="Cancelled"?"selected":""}>Cancelled</option>
+</select>
 </td>
-</tr>`;
+
+<td>
+<select onchange="updateProcess(${index},this.value)">
+<option ${booking.process==="Booked"?"selected":""}>Booked</option>
+<option ${booking.process==="Visa Processing"?"selected":""}>Visa Processing</option>
+<option ${booking.process==="Ticket Issued"?"selected":""}>Ticket Issued</option>
+<option ${booking.process==="Departed"?"selected":""}>Departed</option>
+<option ${booking.process==="Arrived"?"selected":""}>Arrived</option>
+<option ${booking.process==="Completed"?"selected":""}>Completed</option>
+</select>
+</td>
+</tr>
+`;
 });
 
-document.getElementById("totalBookings")
-.innerText=bookings.length;
+/* TOTALS */
+document.getElementById("totalBookings").innerText =
+bookings.length;
 
-document.getElementById("totalRevenue")
-.innerText="₹"+totalRevenue;
+document.getElementById("totalRevenue").innerText =
+"₹"+totalRevenue;
 
-
-/* WISHLIST COUNT FROM ALL USERS */
+/* WISHLIST COUNT */
 users.forEach(user=>{
-
-const list=
-JSON.parse(
-localStorage.getItem(
+const list =
+JSON.parse(localStorage.getItem(
 "wishlist_"+user.email
-)
-)||[];
+)) || [];
 
-totalWishlist+=list.length;
-
+totalWishlist += list.length;
 });
 
 document.getElementById("totalWishlist")
-.innerText=totalWishlist;
-
+.innerText = totalWishlist;
 }
 
-
-/* ================= CANCEL BOOKING ================= */
-function cancelBooking(index){
+/* ================= UPDATE ACTION ================= */
+function updateAction(index,value){
 
 let bookings =
 JSON.parse(localStorage.getItem("bookingHistory")) || [];
 
-/* booking to remove */
-const removedBooking = bookings[index];
-
-/* remove from admin list */
-bookings.splice(index,1);
+bookings[index].action=value;
 
 localStorage.setItem(
 "bookingHistory",
 JSON.stringify(bookings)
 );
 
-/* ================= REMOVE FROM USER HISTORY ================= */
+loadDashboard();
+}
 
-const userEmail = removedBooking.email;
+/* ================= UPDATE PROCESS ================= */
+function updateProcess(index,value){
 
-let userBookings =
-JSON.parse(
-localStorage.getItem("booking_"+userEmail)
-) || [];
+let bookings =
+JSON.parse(localStorage.getItem("bookingHistory")) || [];
 
-/* remove same booking */
-userBookings =
-userBookings.filter(b =>
-b.bookingId !== removedBooking.bookingId
-);
+bookings[index].process=value;
 
 localStorage.setItem(
-"booking_"+userEmail,
-JSON.stringify(userBookings)
+"bookingHistory",
+JSON.stringify(bookings)
 );
 
-/* reload dashboard */
 loadDashboard();
-
-alert("Booking Cancelled Successfully ✅");
 }
+
 /* ================= SAVE BACKUP ================= */
 function saveProgress(){
 
 const backup={
-users:JSON.parse(localStorage.getItem("users"))||[],
 bookingHistory:
 JSON.parse(localStorage.getItem("bookingHistory"))||[],
+users:
+JSON.parse(localStorage.getItem("users"))||[],
 savedAt:new Date().toLocaleString()
 };
 
@@ -325,9 +319,8 @@ localStorage.setItem(
 JSON.stringify(backup)
 );
 
-showMessage("✅ Data Saved Successfully","#d4edda","#155724");
+showMessage("✅ Data Saved");
 }
-
 
 /* ================= DOWNLOAD ================= */
 function downloadBackup(){
@@ -336,7 +329,7 @@ const backup=
 localStorage.getItem("adminBackup");
 
 if(!backup){
-alert("No backup available");
+alert("No backup found");
 return;
 }
 
@@ -344,49 +337,69 @@ const blob=
 new Blob([backup],
 {type:"application/json"});
 
-const link=
-document.createElement("a");
+const link=document.createElement("a");
 
-link.href=
-URL.createObjectURL(blob);
-
-link.download=
-"QuestVoyage_Backup.json";
-
+link.href=URL.createObjectURL(blob);
+link.download="QuestVoyage_Backup.json";
 link.click();
 
-showMessage("📥 Backup Downloaded",
-"#cfe2ff","#084298");
+showMessage("📥 Backup Downloaded");
 }
 
-
 /* ================= MESSAGE ================= */
-function showMessage(text,bg,color){
+function showMessage(text){
 
 const msg=
 document.getElementById("saveMessage");
 
 msg.style.display="block";
-msg.style.background=bg;
-msg.style.color=color;
+msg.style.background="#d4edda";
 msg.innerText=text;
 
 setTimeout(()=>{
 msg.style.display="none";
-},4000);
+},3000);
 }
-
 
 /* ================= LOGOUT ================= */
-function adminLogout(){
+document
+.getElementById("logoutBtn")
+.addEventListener("click",function(){
+
 localStorage.removeItem("adminLoggedIn");
+
 window.location.href="login.html";
+
+});
+
+function clearBookingsOnly(){
+
+const confirmDelete =
+confirm("⚠️ Delete ALL BOOKINGS?\nThis cannot be undone.");
+
+if(!confirmDelete) return;
+
+
+/* ================= REMOVE ADMIN BOOKINGS ================= */
+localStorage.removeItem("bookingHistory");
+
+
+/* ================= REMOVE USER BOOKINGS ================= */
+const users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+users.forEach(user=>{
+localStorage.removeItem("booking_" + user.email);
+});
+
+
+/* ================= REFRESH DASHBOARD ================= */
+loadDashboard();
+
+alert("✅ All Bookings Cleared Successfully");
+
 }
-
-
-/* AUTO UPDATE */
-window.addEventListener("storage",loadDashboard);
-
+/* AUTO LOAD */
 loadDashboard();
 
 </script>

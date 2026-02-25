@@ -17,7 +17,8 @@ body {
 .navi {
   display: flex;
   justify-content: space-between;  
-  align-items: center;              
+  align-items: center;    
+  flex-wrap: wrap;          
   padding: 20px;
   background: rgba(255,255,255,0.7);
   border-radius: 10px;
@@ -26,6 +27,9 @@ body {
   display: flex;
   align-items: center;   
   gap: 10px;
+}
+.logo h2{
+  white-space: nowrap;
 }
 .logo img{
   height: 40px;
@@ -181,7 +185,40 @@ background-color: red;}
   border-radius: 10px;
   text-align: cnter;
 }
+/* wrapper */
+.wishlist-wrapper{
+    position:relative;
+    display:inline-block;
+}
 
+/* icon */
+.wishlist-icon{
+    width:45px;
+    height:45px;
+}
+
+/* RED COUNT BADGE */
+.wishlist-badge{
+    position:absolute;
+    top:-6px;
+    right:-8px;
+
+    background:red;
+    color:white;
+
+    font-size:12px;
+    font-weight:bold;
+
+    min-width:20px;
+    height:20px;
+
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:0 0 5px rgba(0,0,0,0.3);
+}
 .newsletter-section h2 {
   color: white ;
   font-size: 2rem;
@@ -199,7 +236,7 @@ background-color: red;}
   gap: 10px;
   max-width: 400px;
   margin: 0 auto 15px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
   justify-content: center;
 }
 
@@ -579,3 +616,36 @@ header:has(.explore button:hover) .logo img {
   filter:  brightness(1.2) saturate(1.3);
 }
 
+@media(max-width:900px){
+  .nav-right{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  nav ul{
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width:700px){
+
+.navi{
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
+  
+.logo{
+justify-content:center;
+width:100%;
+}
+
+.nav-right{
+width:100%;
+justify-content:center;
+}
+
+}

@@ -105,12 +105,7 @@ padding:8px;
 border-radius:6px;
 border:1px solid #ccc;
 }
-/* heart pulse */
-@keyframes heartBeat{
-0%{transform:scale(1);}
-50%{transform:scale(1.3);}
-100%{transform:scale(1);}
-}
+
 </style>
 </head>
 
@@ -118,11 +113,7 @@ border:1px solid #ccc;
 
 <h1>QuestVoyage Packages</h1>
 
-<div class="nav">
-<a href="wishlist.html">
-❤️ Wishlist (<span id="wishlistCount">0</span>)
-</a>
-</div>
+
 <div class="filter-box">
 
 <select id="priceFilter">
@@ -166,22 +157,22 @@ window.location.href="login.html";
 /* ================= PACKAGES ================= */
 
 const packages=[
-{id:1,name:"Goa Trip",price:15000,type:"beach",duration:3},
-{id:2,name:"Manali Tour",price:35000,type:"mountain",duration:5},
-{id:3,name:"Mumbai Explorer",price:25000,type:"city",duration:2},
-{id:4,name:"Kerala Backwaters",price:38000,type:"beach",duration:6},
-{id:5,name:"Ooty Hills",price:22000,type:"mountain",duration:3},
-{id:6,name:"Kashmir Paradise",price:45000,type:"mountain",duration:7},
-{id:7,name:"Shimla Retreat",price:32000,type:"mountain",duration:5},
+{id:1,name:"Goa Trip",price:15000,type:"Beach",duration:3},
+{id:2,name:"Manali Tour",price:35000,type:"Mountain",duration:5},
+{id:3,name:"Mumbai Explorer",price:25000,type:"City",duration:2},
+{id:4,name:"Kerala Backwaters",price:38000,type:"Beach",duration:6},
+{id:5,name:"Ooty Hills",price:22000,type:"Mountain",duration:3},
+{id:6,name:"Kashmir Paradise",price:45000,type:"Mountain",duration:7},
+{id:7,name:"Shimla Retreat",price:32000,type:"Mountain",duration:5},
 {id:8,name:"Darjeeling Delight",price:34000,type:"mountain",duration:6},
-{id:9,name:"Andaman Escape",price:41000,type:"beach",duration:7},
-{id:10,name:"Pondicherry Relax",price:17000,type:"beach",duration:2},
-{id:11,name:"Jaipur Heritage",price:21000,type:"city",duration:3},
-{id:12,name:"Hyderabad City Tour",price:16000,type:"city",duration:2},
-{id:13,name:"Ladakh Adventure",price:55000,type:"mountain",duration:8},
-{id:14,name:"Coorg Nature Stay",price:28000,type:"mountain",duration:4},
-{id:15,name:"Mysore Palace Tour",price:19000,type:"city",duration:2},
-{id:16,name:"Rishikesh River Camp",price:24000,type:"mountain",duration:3}
+{id:9,name:"Andaman Escape",price:41000,type:"Beach",duration:7},
+{id:10,name:"Pondicherry Relax",price:17000,type:"Beach",duration:2},
+{id:11,name:"Jaipur Heritage",price:21000,type:"City",duration:3},
+{id:12,name:"Hyderabad City Tour",price:16000,type:"City",duration:2},
+{id:13,name:"Ladakh Adventure",price:55000,type:"Mountain",duration:8},
+{id:14,name:"Coorg Nature Stay",price:28000,type:"Mountain",duration:4},
+{id:15,name:"Mysore Palace Tour",price:19000,type:"City",duration:2},
+{id:16,name:"Rishikesh River Camp",price:24000,type:"Mountain",duration:3}
 ];
 
 /* ================= DISPLAY ================= */
@@ -207,10 +198,10 @@ onclick="addToWishlist(${pkg.id}, this)">
 ❤️ Wishlist
 </button>
 
-<button class="book-btn"
-onclick="window.location.href='book.html?id=${pkg.id}'">
-Book
-</button>
+    <button class="book-btn"
+    onclick="window.location.href='book.html?id=${pkg.id}'">
+    Book
+    </button>
 
 </div>
 </div>`;
@@ -371,7 +362,22 @@ updateWishlistCount
 );
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="jquery-effects.js"></script>
+<script>
+    $(window).scroll(function(){
 
+$(".reveal").each(function(){
+
+let top=$(this).offset().top;
+let scroll=$(window).scrollTop();
+let height=$(window).height();
+
+if(scroll > top - height + 100){
+$(this).addClass("active");
+}
+
+});
+
+});
+</script>
 </body>
 </html>

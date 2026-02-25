@@ -1,15 +1,14 @@
-$(window).scroll(function(){
 
-$(".reveal").each(function(){
+$(document).ready(function(){
 
-let top=$(this).offset().top;
-let scroll=$(window).scrollTop();
-let height=$(window).height();
+$("#profileToggle").click(function(e){
+e.stopPropagation();
+$("#profileBox").fadeToggle();
+});
 
-if(scroll > top - height + 100){
-$(this).addClass("active");
-}
-
+$(document).click(function(){
+$("#profileBox").fadeOut();
 });
 
 });
+
