@@ -68,19 +68,16 @@ padding:8px;
 cursor:pointer;
 border-radius:5px;
 }
-/* hidden initially */
 .reveal{
 opacity:0;
 transform:translateY(60px);
 transition:all 0.5s ease;
 }
 
-/* visible after scroll */
 .reveal.active{
 opacity:1;
 transform:translateY(0);
 }
-/* Wishlist click animation */
 .wishlist-btn.active{
 transform:scale(1.2);
 background:#e91e63;
@@ -144,7 +141,6 @@ border:1px solid #ccc;
 
 <script>
 
-/* ================= USER CHECK ================= */
 
 const currentUser =
 localStorage.getItem("currentUser");
@@ -154,7 +150,6 @@ alert("Login First");
 window.location.href="login.html";
 }
 
-/* ================= PACKAGES ================= */
 
 const packages=[
 {id:1,name:"Goa Trip",price:15000,type:"Beach",duration:3},
@@ -175,7 +170,6 @@ const packages=[
 {id:16,name:"Rishikesh River Camp",price:24000,type:"Mountain",duration:3}
 ];
 
-/* ================= DISPLAY ================= */
 
 function displayPackages(){
 
@@ -221,7 +215,6 @@ document.getElementById("durationFilter").value;
 const filtered =
 packages.filter(pkg=>{
 
-/* PRICE */
 let priceMatch=false;
 
 if(priceValue==="all") priceMatch=true;
@@ -234,12 +227,10 @@ else if(priceValue==="high" &&
 pkg.price>40000)
 priceMatch=true;
 
-/* TYPE */
 let typeMatch =
 (typeValue==="all" ||
 pkg.type===typeValue);
 
-/* DURATION */
 let durationMatch=false;
 
 if(durationValue==="all")
@@ -263,10 +254,8 @@ durationMatch;
 
 });
 
-/* reset pagination */
 currentPage=1;
 
-/* show filtered */
 displayFiltered(filtered);
 
 }
@@ -293,7 +282,6 @@ container.innerHTML+=`
 });
 
 }
-/* ================= ADD WISHLIST ================= */
 
 function addToWishlist(id){
 
@@ -322,7 +310,6 @@ updateWishlistCount();
 alert("Added to Wishlist ✅");
 }
 
-/* ================= COUNT ================= */
 
 
 function updateWishlistCount(){
@@ -351,11 +338,10 @@ wishlist.length;
 document.addEventListener(
 "DOMContentLoaded",
 function(){
-    displayPackages();       // ✅ SHOW CARDS
-    updateWishlistCount();   // ✅ UPDATE COUNT
+    displayPackages();       
+    updateWishlistCount();   
 });
 
-/* auto update if wishlist changes */
 window.addEventListener(
 "storage",
 updateWishlistCount
@@ -379,5 +365,7 @@ $(this).addClass("active");
 
 });
 </script>
+<script src="authcheck.js"></script>
+
 </body>
 </html>

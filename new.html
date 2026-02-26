@@ -22,7 +22,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     height:30px;
 }
 
-/* RED COUNT BADGE */
 .wishlist-badge{
     position:absolute;
     top:-6px;
@@ -54,7 +53,6 @@ height:30px;
 border-radius:50%;
 }
 
-/* DROPDOWN */
 .profile-dropdown{
 position:absolute;
 right:0;
@@ -97,28 +95,26 @@ padding:8px;
 border-radius:6px;
 cursor:pointer;
 }
-/* ================= NAV ICON BUTTON STYLE ================= */
 
-/* ===== NAV RIGHT ===== */
 .nav-right{
     display:flex;
     align-items:center;
     gap:12px;
 }
 
-/* ===== COMMON BUTTON STYLE ===== */
+
 .nav-btn{
     display:inline-flex;
     align-items:center;
     justify-content:center;
 
-    padding:8px 12px;   /* SMALLER */
+    padding:8px 12px;   
     border-radius:8px;
 
     background:#6fa6a4;
 
-    width:auto;          /* IMPORTANT */
-    height:auto;         /* IMPORTANT */
+    width:auto;         
+    height:auto;         
 
     cursor:pointer;
     transition:.3s;
@@ -135,7 +131,6 @@ cursor:pointer;
 .nav-btn:hover{
     background:#5c908e;
 }
-/* ================= KEEP HAMBURGER NORMAL ================= */
 
 .hamburger{
     background:none !important;
@@ -143,8 +138,23 @@ cursor:pointer;
 }
     </style>
   </head>
+  <script>
 
-  <body class="Hero-bg">
+const currentUser =
+localStorage.getItem("currentUser");
+
+const userLoggedIn =
+localStorage.getItem("userLoggedIn");
+
+if(!currentUser || userLoggedIn !== "true"){
+    
+    alert("Please login first");
+
+    window.location.replace("login.html");
+}
+  </script>
+
+<body class="Hero-bg">
     <header style="display:flex; flex-direction: column; gap: 20px">
       <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" />
       <section class="navi" id="navi">
@@ -156,9 +166,7 @@ cursor:pointer;
           <ul>
    <div class="nav-right">
 
-    <!-- Wishlist Icon -->
 
-    <!-- Book Trip Button -->
     <a href="filter.html" class="book-trip-btn" style="
             padding-top: 10px;
             list-style-type: none;
@@ -187,21 +195,7 @@ cursor:pointer;
 </div>
 
 
-      <!--<section class="logout">
-        <li
-          style="
-          padding-top: 10px;
-            list-style-type: none;
-            background-color: cadetblue;
-            display: inline-block;
-            padding: 10px;
-            border-radius: 5px;
-            float: right;">
-          <a href="login.html" style="text-decoration: none; color: black"
-            ><b>Logout</b></a
-          >
-        </li>
-      </section>-->
+     
     <div class="nav-btn profile-wrapper">
 
 <img src="images/user (1).png"
@@ -453,7 +447,6 @@ $("#profilePhone").text(user.phone);
 
 }
 
-/* LOAD BOOKINGS */
 const bookings =
 JSON.parse(
 localStorage.getItem(
@@ -541,6 +534,6 @@ html || "No bookings yet"
 loadProfile();
 
 </script>
-
+<script src="authcheck.js"></script>
   </body>
 </html>

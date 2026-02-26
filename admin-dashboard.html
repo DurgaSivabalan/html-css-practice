@@ -33,12 +33,10 @@ border-radius:5px;
 cursor:pointer;
 }
 
-/* DASHBOARD */
 .dashboard{
 padding:30px;
 }
 
-/* CARDS */
 .cards{
 display:flex;
 gap:20px;
@@ -193,12 +191,10 @@ onclick="clearBookingsOnly()">
 
 <script>
 
-/* ================= ADMIN PROTECTION ================= */
 if(localStorage.getItem("adminLoggedIn")!=="true"){
 window.location.href="login.html";
 }
 
-/* ================= LOAD DASHBOARD ================= */
 function loadDashboard(){
 
 const bookings =
@@ -250,14 +246,12 @@ table.innerHTML += `
 `;
 });
 
-/* TOTALS */
 document.getElementById("totalBookings").innerText =
 bookings.length;
 
 document.getElementById("totalRevenue").innerText =
 "₹"+totalRevenue;
 
-/* WISHLIST COUNT */
 users.forEach(user=>{
 const list =
 JSON.parse(localStorage.getItem(
@@ -271,7 +265,6 @@ document.getElementById("totalWishlist")
 .innerText = totalWishlist;
 }
 
-/* ================= UPDATE ACTION ================= */
 function updateAction(index,value){
 
 let bookings =
@@ -287,7 +280,6 @@ JSON.stringify(bookings)
 loadDashboard();
 }
 
-/* ================= UPDATE PROCESS ================= */
 function updateProcess(index,value){
 
 let bookings =
@@ -303,7 +295,6 @@ JSON.stringify(bookings)
 loadDashboard();
 }
 
-/* ================= SAVE BACKUP ================= */
 function saveProgress(){
 
 const backup={
@@ -322,7 +313,6 @@ JSON.stringify(backup)
 showMessage("✅ Data Saved");
 }
 
-/* ================= DOWNLOAD ================= */
 function downloadBackup(){
 
 const backup=
@@ -346,7 +336,6 @@ link.click();
 showMessage("📥 Backup Downloaded");
 }
 
-/* ================= MESSAGE ================= */
 function showMessage(text){
 
 const msg=
@@ -361,7 +350,6 @@ msg.style.display="none";
 },3000);
 }
 
-/* ================= LOGOUT ================= */
 document
 .getElementById("logoutBtn")
 .addEventListener("click",function(){
@@ -380,11 +368,9 @@ confirm("⚠️ Delete ALL BOOKINGS?\nThis cannot be undone.");
 if(!confirmDelete) return;
 
 
-/* ================= REMOVE ADMIN BOOKINGS ================= */
 localStorage.removeItem("bookingHistory");
 
 
-/* ================= REMOVE USER BOOKINGS ================= */
 const users =
 JSON.parse(localStorage.getItem("users")) || [];
 
@@ -393,16 +379,15 @@ localStorage.removeItem("booking_" + user.email);
 });
 
 
-/* ================= REFRESH DASHBOARD ================= */
 loadDashboard();
 
 alert("✅ All Bookings Cleared Successfully");
 
 }
-/* AUTO LOAD */
 loadDashboard();
 
 </script>
+<script src="authcheck.js"></script>
 
 </body>
 </html>

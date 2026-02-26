@@ -6,7 +6,6 @@
     <title>Book Your Trip</title>
 
     <style>
-      /* ================= PAGE ================= */
       body {
         margin: 0;
         font-family: Arial;
@@ -21,7 +20,6 @@
         margin: 0;
       }
 
-      /* ================= FORM ================= */
       .form-container {
         max-width: 900px;
         margin: 40px auto;
@@ -63,7 +61,6 @@
         min-height: 100px;
       }
 
-      /* ================= BUTTON ================= */
       button {
         margin-top: 20px;
         width: 100%;
@@ -75,7 +72,6 @@
         cursor: pointer;
       }
 
-      /* ================= TRAVELLERS ================= */
 
       #addTravellersBtn {
         margin-top: 35px;
@@ -132,7 +128,6 @@ font-size:18px;
       label {
         margin-top: 10px;
       }
-      /* ================= PRICE ================= */
 
       .price-box {
         background: #eef2ff;
@@ -241,7 +236,6 @@ font-size:18px;
     </div>
 
     <script>
-      /* ================= PRICE ================= */
 
       const priceList = {
         "Goa Trip": 15000,
@@ -286,7 +280,6 @@ font-size:18px;
 
       calculatePrice();
 
-      /* ================= GENERATE TRAVELLERS ================= */
 
       document
         .getElementById("addTravellersBtn")
@@ -315,7 +308,6 @@ font-size:18px;
 </div>`;
           }
 
-          /* Children */
           for (let i = 1; i <= childCount; i++) {
             container.innerHTML += `
 <div class="traveller-card">
@@ -333,7 +325,6 @@ font-size:18px;
           }
         });
 
-      /* ================= SUBMIT ================= */
 
       document
         .getElementById("bookingForm")
@@ -359,7 +350,6 @@ font-size:18px;
             });
           });
 
-          /* children */
           document.querySelectorAll(".childName").forEach((name, index) => {
             travellerDetails.push({
               type: "Child",
@@ -385,5 +375,7 @@ font-size:18px;
           window.location.href = "summary.html";
         });
     </script>
+    <script src="authcheck.js"></script>
+
   </body>
 </html>

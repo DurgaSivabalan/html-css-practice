@@ -1,13 +1,8 @@
 console.log("Auth JS Connected");
 
-/* =====================================================
-   WAIT UNTIL PAGE LOADS
-===================================================== */
 document.addEventListener("DOMContentLoaded", function () {
 
-/* =====================================================
-   WISHLIST COUNT (USER BASED)
-===================================================== */
+
 function updateWishlistCount(){
 
 const currentUser =
@@ -34,9 +29,7 @@ wishlist.length;
 updateWishlistCount();
 
 
-/* =====================================================
-   PASSWORD STRENGTH CHECK
-===================================================== */
+
 function isStrongPassword(pwd){
 const regex =
 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*])[A-Za-z\d@$!%*]{8,}$/;
@@ -44,9 +37,7 @@ return regex.test(pwd);
 }
 
 
-/* =====================================================
-   REGISTER SYSTEM
-===================================================== */
+
 const registerForm =
 document.getElementById("registerForm");
 
@@ -78,14 +69,12 @@ let users =
 JSON.parse(localStorage.getItem("users")) || [];
 
 
-/* password match */
 if(password !== confirmPassword){
 message.style.color="red";
 message.innerText="Passwords do not match!";
 return;
 }
 
-/* strong password */
 if(!isStrongPassword(password)){
 message.style.color="red";
 message.innerText=
@@ -93,7 +82,6 @@ message.innerText=
 return;
 }
 
-/* duplicate user */
 const existingUser =
 users.find(user => user.email===email);
 
@@ -103,7 +91,6 @@ message.innerText="User already exists!";
 return;
 }
 
-/* save user */
 users.push({
 name,
 phone,
@@ -129,9 +116,7 @@ window.location.href="login.html";
 }
 
 
-/* =====================================================
-   LOGIN SYSTEM
-===================================================== */
+
 const loginForm =
 document.getElementById("loginForm");
 
@@ -151,7 +136,6 @@ const role =
 document.getElementById("role").value;
 
 
-/* ---------- ADMIN LOGIN ---------- */
 if(role==="admin"){
 
 if(
@@ -174,7 +158,6 @@ return;
 }
 
 
-/* ---------- USER LOGIN ---------- */
 if(role==="user"){
 
 let users =
@@ -188,7 +171,6 @@ user.password===password
 
 if(validUser){
 
-/* ⭐ MAIN SESSION */
 localStorage.setItem(
 "currentUser",
 email
@@ -196,7 +178,6 @@ email
 
 alert("Login Successful ✅");
 
-/* redirect main page */
 window.location.href="new.html";
 
 }else{
@@ -213,9 +194,7 @@ alert("Please select role");
 }
 
 
-/* =====================================================
-   LOGOUT FUNCTION (GLOBAL)
-===================================================== */
+
 window.logoutUser=function(){
 
 localStorage.removeItem("currentUser");
@@ -226,9 +205,7 @@ window.location.href="login.html";
 };
 
 
-/* =====================================================
-   AUTO COUNT UPDATE BETWEEN TABS
-===================================================== */
+
 window.addEventListener(
 "storage",
 updateWishlistCount

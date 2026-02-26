@@ -8,14 +8,12 @@
 
 <style>
 
-/* PAGE BACKGROUND */
 body{
 margin:0;
 font-family:Arial, sans-serif;
 background:#f4f6fb;
 }
 
-/* HEADER */
 .header{
 text-align:center;
 padding:20px;
@@ -25,7 +23,6 @@ font-size:24px;
 font-weight:bold;
 }
 
-/* MAIN BOX */
 .summary-box{
 max-width:650px;
 margin:40px auto;
@@ -35,14 +32,12 @@ border-radius:12px;
 box-shadow:0 6px 18px rgba(0,0,0,0.1);
 }
 
-/* SECTION TITLE */
 .summary-box h2{
 text-align:center;
 color:#1565c0;
 margin-bottom:25px;
 }
 
-/* DETAILS GRID */
 .details{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -50,18 +45,15 @@ gap:15px;
 margin-bottom:20px;
 }
 
-/* LABEL STYLE */
 .label{
 font-weight:bold;
 color:#555;
 }
 
-/* VALUE STYLE */
 .value{
 color:#222;
 }
 
-/* TOTAL BOX */
 .total-box{
 background:#eef2ff;
 padding:18px;
@@ -76,7 +68,6 @@ font-weight:bold;
 color:green;
 }
 
-/* BUTTON */
 button{
 width:100%;
 padding:14px;
@@ -95,7 +86,6 @@ background:#0d47a1;
 transform:scale(1.02);
 }
 
-/* MOBILE */
 @media(max-width:600px){
 .details{
 grid-template-columns:1fr;
@@ -204,11 +194,9 @@ alert("Login required");
 return;
 }
 
-/* attach logged user */
 booking.email = currentUser;
 booking.action="Pending";
 booking.process="Booked";
-/* ================= USER HISTORY ================= */
 let userBookings =
 JSON.parse(
 localStorage.getItem(
@@ -224,7 +212,6 @@ JSON.stringify(userBookings)
 );
 
 
-/* ================= ADMIN HISTORY ================= */
 let allBookings =
 JSON.parse(
 localStorage.getItem("bookingHistory")
@@ -238,13 +225,11 @@ JSON.stringify(allBookings)
 );
 
 
-/* ================= CLEAN TEMP DATA ================= */
 localStorage.setItem(
 "currentBooking",
 JSON.stringify(booking)
 );
 
-/* SHOW SUCCESS POPUP */
 $("#bookingPopup").fadeIn(400);
 
 setTimeout(function(){
@@ -255,7 +240,6 @@ window.location.href="invoice.html";
 },2000);
 }
 
-/* ================= REDIRECT ================= */
 
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

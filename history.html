@@ -34,7 +34,6 @@ localStorage.getItem("currentUser");
 const container =
 document.getElementById("historyContainer");
 
-/* ================= LOAD BOOKINGS ================= */
 
 function loadBookingHistory(){
 
@@ -71,12 +70,10 @@ container.innerHTML+=`
 
 }
 
-/* ================= INITIAL LOAD ================= */
 
 loadBookingHistory();
 
-/* ================= AUTO UPDATE ================= */
-/* detects admin cancellation */
+
 
 window.addEventListener("storage",function(){
 loadBookingHistory();

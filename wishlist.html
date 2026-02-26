@@ -1,163 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wishlist</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
 
-<style>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial;
+        background: #f4f6fb;
+      }
 
-body{
-margin:0;
-font-family:Arial;
-background:#f4f6fb;
-}
+      .header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 22px;    
+      }
 
-.header{
-background:linear-gradient(135deg,#667eea,#764ba2);
-color:white;
-text-align:center;
-padding:20px;
-font-size:22px;
-}
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 30px;
+      }
 
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:30px;
-}
+      .card {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      }
 
-.card{
-background:white;
-padding:15px;
-border-radius:8px;
-box-shadow:0 3px 8px rgba(0,0,0,0.1);
-}
+      .price {
+        color: green;
+        font-weight: bold;
+      }
 
-.price{
-color:green;
-font-weight:bold;
-}
+      .btn-group {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+      }
 
-.btn-group{
-margin-top:10px;
-display:flex;
-gap:10px;
-}
+      button {
+        flex: 1;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
 
-button{
-flex:1;
-padding:8px;
-border:none;
-border-radius:5px;
-color:white;
-cursor:pointer;
-}
+      .remove {
+        background: #e53935;
+      }
 
-.remove{
-background:#e53935;
-}
+      .save {
+        background: #43a047;
+      }
 
-.save{
-background:#43a047;
-}
+      .footer {
+        text-align: center;
+        margin-bottom: 30px;
+      }
 
-.footer{
-text-align:center;
-margin-bottom:30px;
-}
+      .back {
+        background: #1565c0;
+        padding: 10px 20px;
+      }
 
-.back{
-background:#1565c0;
-padding:10px 20px;
-}
+      .clear {
+        background: black;
+        padding: 10px 20px;
+        margin-left: 10px;
+      }
 
-.clear{
-background:black;
-padding:10px 20px;
-margin-left:10px;
-}
+      .empty {
+        text-align: center;
+        color: red;
+        font-size: 18px;
+      }
+      .book {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        flex: 1;
+        transition: 0.3s;
+      }
 
-.empty{
-text-align:center;
-color:red;
-font-size:18px;
-}
-.book{
-background:#4caf50;
-color:white;
-border:none;
-padding:10px;
-border-radius:6px;
-cursor:pointer;
-flex:1;
-transition:0.3s;
-}
+      .book:hover {
+        background: #2e7d32;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
 
-.book:hover{
-background:#2e7d32;
-transform:scale(1.05);
-}
-</style>
-</head>
+  <body>
+    <div class="header">❤️ My Wishlist</div>
 
-<body>
+    <div id="wishlistContainer" class="container"></div>
 
-<div class="header">
-❤️ My Wishlist
-</div>
+    <div class="footer">
+      <button class="back" onclick="window.location.href = 'filter.html'">
+        Back to Packages
+      </button>
 
-<div id="wishlistContainer" class="container"></div>
+      <button class="clear" onclick="clearWishlist()">Clear Wishlist</button>
+    </div>
 
-<div class="footer">
+    <script>
+      const currentUser = localStorage.getItem("currentUser");
 
-<button class="back"
-onclick="window.location.href='filter.html'">
-Back to Packages
-</button>
+      if (!currentUser) {
+        alert("Login First");
+        window.location.href = "login.html";
+      }
 
-<button class="clear"
-onclick="clearWishlist()">
-Clear Wishlist
-</button>
+      let wishlist =
+        JSON.parse(localStorage.getItem("wishlist_" + currentUser)) || [];
 
-</div>
+      const container = document.getElementById("wishlistContainer");
 
-<script>
+      function renderWishlist() {
+        container.innerHTML = "";
 
-const currentUser=
-localStorage.getItem("currentUser");
+        if (wishlist.length === 0) {
+          container.innerHTML = "<p class='empty'>Wishlist Empty</p>";
+          return;
+        }
 
-if(!currentUser){
-alert("Login First");
-window.location.href="login.html";
-}
-
-let wishlist=
-JSON.parse(
-localStorage.getItem(
-"wishlist_"+currentUser
-))||[];
-
-const container=
-document.getElementById("wishlistContainer");
-
-/* ================= RENDER ================= */
-
-function renderWishlist(){
-
-container.innerHTML="";
-
-if(wishlist.length===0){
-container.innerHTML=
-"<p class='empty'>Wishlist Empty</p>";
-return;
-}
-
-wishlist.forEach(item=>{
-
-container.innerHTML+=`
+        wishlist.forEach((item) => {
+          container.innerHTML += `
 <div class="card">
 
 <h3>${item.name}</h3>
@@ -178,64 +157,45 @@ Book Trip
 </div>
 
 </div>`;
-});
-}
+        });
+      }
 
-/* ================= REMOVE ================= */
+      function removeItem(id) {
+        wishlist = wishlist.filter((item) => item.id !== id);
 
-function removeItem(id){
+        localStorage.setItem(
+          "wishlist_" + currentUser,
+          JSON.stringify(wishlist),
+        );
 
-wishlist=
-wishlist.filter(item=>item.id!==id);
+        renderWishlist();
+      }
 
-localStorage.setItem(
-"wishlist_"+currentUser,
-JSON.stringify(wishlist)
-);
+      function clearWishlist() {
+        localStorage.removeItem("wishlist_" + currentUser);
 
-renderWishlist();
-}
+        wishlist = [];
+        renderWishlist();
+      }
 
-/* ================= CLEAR ================= */
+      renderWishlist();
+      function bookTrip(id) {
+        const currentUser = localStorage.getItem("currentUser");
 
-function clearWishlist(){
+        let wishlist =
+          JSON.parse(localStorage.getItem("wishlist_" + currentUser)) || [];
 
-localStorage.removeItem(
-"wishlist_"+currentUser
-);
+        const selectedPackage = wishlist.find((item) => item.id === id);
 
-wishlist=[];
-renderWishlist();
-}
+        localStorage.setItem(
+          "selectedPackage",
+          JSON.stringify(selectedPackage),
+        );
 
-renderWishlist();
-function bookTrip(id){
-
-const currentUser =
-localStorage.getItem("currentUser");
-
-let wishlist =
-JSON.parse(
-localStorage.getItem(
-"wishlist_" + currentUser
-)) || [];
-
-/* find package */
-const selectedPackage =
-wishlist.find(item => item.id === id);
-
-/* ✅ store FULL package */
-localStorage.setItem(
-"selectedPackage",
-JSON.stringify(selectedPackage)
-);
-
-/* redirect */
-window.location.href="book.html";
-}
-</script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="jquery-effects.js"></script>
-
-</body>
+        window.location.href = "book.html";
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="jquery-effects.js"></script>
+  </body>
 </html>
