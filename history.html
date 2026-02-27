@@ -44,14 +44,13 @@ localStorage.getItem("booking_"+currentUser)
 
 container.innerHTML="";
 
-/* empty */
+
 if(bookings.length===0){
 container.innerHTML=
 "<p style='color:red;text-align:center'>No Bookings Yet</p>";
 return;
 }
 
-/* render cards */
 bookings.forEach(b=>{
 
 container.innerHTML+=`

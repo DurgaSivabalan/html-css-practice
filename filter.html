@@ -1,371 +1,371 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Packages</title>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages</title>
 
-<style>
+    <style>
 
-body{
-margin:0;
-font-family:Arial;
-background:#f4f6fb;
-}
+    body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6fb;
+    }
 
-h1{
-text-align:center;
-padding:20px;
-background:linear-gradient(135deg,#667eea,#764ba2);
-color:white;
-margin:0;
-}
+    h1{
+    text-align:center;
+    padding:20px;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    margin:0;
+    }
 
-.nav{
-text-align:right;
-padding:10px 20px;
-}
+    .nav{
+    text-align:right;
+    padding:10px 20px;
+    }
 
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:30px;
-}
+    .container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:30px;
+    }
 
-.card{
-background:white;
-padding:15px;
-border-radius:8px;
-box-shadow:0 3px 8px rgba(0,0,0,0.1);
-}
+    .card{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    }
 
-.price{
-color:green;
-font-weight:bold;
-}
+    .price{
+    color:green;
+    font-weight:bold;
+    }
 
-.button-group{
-margin-top:10px;
-display:flex;
-gap:10px;
-}
+    .button-group{
+    margin-top:10px;
+    display:flex;
+    gap:10px;
+    }
 
-.wishlist-btn{
-background:#ff9800;
-color:white;
-border:none;
-padding:8px;
-cursor:pointer;
-border-radius:5px;
-}
+    .wishlist-btn{
+    background:#ff9800;
+    color:white;
+    border:none;
+    padding:8px;
+    cursor:pointer;
+    border-radius:5px;
+    }
 
-.book-btn{
-background:#4caf50;
-color:white;
-border:none;
-padding:8px;
-cursor:pointer;
-border-radius:5px;
-}
-.reveal{
-opacity:0;
-transform:translateY(60px);
-transition:all 0.5s ease;
-}
+    .book-btn{
+    background:#4caf50;
+    color:white;
+    border:none;
+    padding:8px;
+    cursor:pointer;
+    border-radius:5px;
+    }
+    .reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:all 0.5s ease;
+    }
 
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
-.wishlist-btn.active{
-transform:scale(1.2);
-background:#e91e63;
-transition:0.3s;
-}
+    .reveal.active{
+    opacity:1;
+    transform:translateY(0);
+    }
+    .wishlist-btn.active{
+    transform:scale(1.2);
+    background:#e91e63;
+    transition:0.3s;
+    }
 
-.wishlist-btn{
-transition:0.3s;
-}
-.filter-box{
-display:flex;
-gap:15px;
-padding:20px;
-justify-content:center;
-background:white;
-flex-wrap:wrap;
-}
+    .wishlist-btn{
+    transition:0.3s;
+    }
+    .filter-box{
+    display:flex;
+    gap:15px;
+    padding:20px;
+    justify-content:center;
+    background:white;
+    flex-wrap:wrap;
+    }
 
-.filter-box select,
-.filter-box button{
-padding:8px;
-border-radius:6px;
-border:1px solid #ccc;
-}
+    .filter-box select,
+    .filter-box button{
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    }
 
-</style>
-</head>
+    </style>
+    </head>
 
-<body>
+    <body>
 
-<h1>QuestVoyage Packages</h1>
-
-
-<div class="filter-box">
-
-<select id="priceFilter">
-<option value="all">All Prices</option>
-<option value="low">Below ₹20000</option>
-<option value="mid">₹20000–₹40000</option>
-<option value="high">Above ₹40000</option>
-</select>
-
-<select id="typeFilter">
-<option value="all">All Types</option>
-<option value="beach">Beach</option>
-<option value="mountain">Mountain</option>
-<option value="city">City</option>
-</select>
-
-<select id="durationFilter">
-<option value="all">All Duration</option>
-<option value="short">1-3 Days</option>
-<option value="medium">4-6 Days</option>
-<option value="long">7+ Days</option>
-</select>
-
-<button onclick="filterPackages()">Apply Filter</button>
-
-</div>
-<div id="packageContainer" class="container"></div>
-
-<script>
+    <h1>QuestVoyage Packages</h1>
 
 
-const currentUser =
-localStorage.getItem("currentUser");
+    <div class="filter-box">
 
-if(!currentUser){
-alert("Login First");
-window.location.href="login.html";
-}
+    <select id="priceFilter">
+    <option value="all">All Prices</option>
+    <option value="low">Below ₹20000</option>
+    <option value="mid">₹20000–₹40000</option>
+    <option value="high">Above ₹40000</option>
+    </select>
+
+    <select id="typeFilter">
+    <option value="all">All Types</option>
+    <option value="beach">Beach</option>
+    <option value="mountain">Mountain</option>
+    <option value="city">City</option>
+    </select>
+
+    <select id="durationFilter">
+    <option value="all">All Duration</option>
+    <option value="short">1-3 Days</option>
+    <option value="medium">4-6 Days</option>
+    <option value="long">7+ Days</option>
+    </select>
+
+    <button onclick="filterPackages()">Apply Filter</button>
+
+    </div>
+    <div id="packageContainer" class="container"></div>
+
+    <script>
 
 
-const packages=[
-{id:1,name:"Goa Trip",price:15000,type:"Beach",duration:3},
-{id:2,name:"Manali Tour",price:35000,type:"Mountain",duration:5},
-{id:3,name:"Mumbai Explorer",price:25000,type:"City",duration:2},
-{id:4,name:"Kerala Backwaters",price:38000,type:"Beach",duration:6},
-{id:5,name:"Ooty Hills",price:22000,type:"Mountain",duration:3},
-{id:6,name:"Kashmir Paradise",price:45000,type:"Mountain",duration:7},
-{id:7,name:"Shimla Retreat",price:32000,type:"Mountain",duration:5},
-{id:8,name:"Darjeeling Delight",price:34000,type:"mountain",duration:6},
-{id:9,name:"Andaman Escape",price:41000,type:"Beach",duration:7},
-{id:10,name:"Pondicherry Relax",price:17000,type:"Beach",duration:2},
-{id:11,name:"Jaipur Heritage",price:21000,type:"City",duration:3},
-{id:12,name:"Hyderabad City Tour",price:16000,type:"City",duration:2},
-{id:13,name:"Ladakh Adventure",price:55000,type:"Mountain",duration:8},
-{id:14,name:"Coorg Nature Stay",price:28000,type:"Mountain",duration:4},
-{id:15,name:"Mysore Palace Tour",price:19000,type:"City",duration:2},
-{id:16,name:"Rishikesh River Camp",price:24000,type:"Mountain",duration:3}
-];
+    const currentUser =
+    localStorage.getItem("currentUser");
+
+    if(!currentUser){
+    alert("Login First");
+    window.location.href="login.html";
+    }
 
 
-function displayPackages(){
+    const packages=[
+    {id:1,name:"Goa Trip",price:15000,type:"Beach",duration:3},
+    {id:2,name:"Manali Tour",price:35000,type:"Mountain",duration:5},
+    {id:3,name:"Mumbai Explorer",price:25000,type:"City",duration:2},
+    {id:4,name:"Kerala Backwaters",price:38000,type:"Beach",duration:6},
+    {id:5,name:"Ooty Hills",price:22000,type:"Mountain",duration:3},
+    {id:6,name:"Kashmir Paradise",price:45000,type:"Mountain",duration:7},
+    {id:7,name:"Shimla Retreat",price:32000,type:"Mountain",duration:5},
+    {id:8,name:"Darjeeling Delight",price:34000,type:"mountain",duration:6},
+    {id:9,name:"Andaman Escape",price:41000,type:"Beach",duration:7},
+    {id:10,name:"Pondicherry Relax",price:17000,type:"Beach",duration:2},
+    {id:11,name:"Jaipur Heritage",price:21000,type:"City",duration:3},
+    {id:12,name:"Hyderabad City Tour",price:16000,type:"City",duration:2},
+    {id:13,name:"Ladakh Adventure",price:55000,type:"Mountain",duration:8},
+    {id:14,name:"Coorg Nature Stay",price:28000,type:"Mountain",duration:4},
+    {id:15,name:"Mysore Palace Tour",price:19000,type:"City",duration:2},
+    {id:16,name:"Rishikesh River Camp",price:24000,type:"Mountain",duration:3}
+    ];
 
-const container=
-document.getElementById("packageContainer");
 
-container.innerHTML="";
+    function displayPackages(){
 
-packages.forEach(pkg=>{
+    const container=
+    document.getElementById("packageContainer");
 
-container.innerHTML+=`
-<div class="card reveal">
-<h3>${pkg.name}</h3>
-<p class="price">₹${pkg.price}</p>
+    container.innerHTML="";
 
-<div class="button-group">
+    packages.forEach(pkg=>{
 
-<button class="wishlist-btn"
-onclick="addToWishlist(${pkg.id}, this)">
-❤️ Wishlist
-</button>
+    container.innerHTML+=`
+    <div class="card reveal">
+    <h3>${pkg.name}</h3>
+    <p class="price">₹${pkg.price}</p>
 
-    <button class="book-btn"
-    onclick="window.location.href='book.html?id=${pkg.id}'">
-    Book
+    <div class="button-group">
+
+    <button class="wishlist-btn"
+    onclick="addToWishlist(${pkg.id}, this)">
+    ❤️ Wishlist
     </button>
 
-</div>
-</div>`;
-});
-}
-function filterPackages(){
+        <button class="book-btn"
+        onclick="window.location.href='book.html?id=${pkg.id}'">
+        Book
+        </button>
 
-const priceValue =
-document.getElementById("priceFilter").value;
+    </div>
+    </div>`;
+    });
+    }
+    function filterPackages(){
 
-const typeValue =
-document.getElementById("typeFilter").value;
+    const priceValue =
+    document.getElementById("priceFilter").value;
 
-const durationValue =
-document.getElementById("durationFilter").value;
+    const typeValue =
+    document.getElementById("typeFilter").value;
 
-const filtered =
-packages.filter(pkg=>{
+    const durationValue =
+    document.getElementById("durationFilter").value;
 
-let priceMatch=false;
+    const filtered =
+    packages.filter(pkg=>{
 
-if(priceValue==="all") priceMatch=true;
-else if(priceValue==="low" && pkg.price<20000)
-priceMatch=true;
-else if(priceValue==="mid" &&
-pkg.price>=20000 && pkg.price<=40000)
-priceMatch=true;
-else if(priceValue==="high" &&
-pkg.price>40000)
-priceMatch=true;
+    let priceMatch=false;
 
-let typeMatch =
-(typeValue==="all" ||
-pkg.type===typeValue);
+    if(priceValue==="all") priceMatch=true;
+    else if(priceValue==="low" && pkg.price<20000)
+    priceMatch=true;
+    else if(priceValue==="mid" &&
+    pkg.price>=20000 && pkg.price<=40000)
+    priceMatch=true;
+    else if(priceValue==="high" &&
+    pkg.price>40000)
+    priceMatch=true;
 
-let durationMatch=false;
+    let typeMatch =
+    (typeValue==="all" ||
+    pkg.type===typeValue);
 
-if(durationValue==="all")
-durationMatch=true;
+    let durationMatch=false;
 
-else if(durationValue==="short"
-&& pkg.duration<=3)
-durationMatch=true;
+    if(durationValue==="all")
+    durationMatch=true;
 
-else if(durationValue==="medium"
-&& pkg.duration>=4 && pkg.duration<=6)
-durationMatch=true;
+    else if(durationValue==="short"
+    && pkg.duration<=3)
+    durationMatch=true;
 
-else if(durationValue==="long"
-&& pkg.duration>=7)
-durationMatch=true;
+    else if(durationValue==="medium"
+    && pkg.duration>=4 && pkg.duration<=6)
+    durationMatch=true;
 
-return priceMatch &&
-typeMatch &&
-durationMatch;
+    else if(durationValue==="long"
+    && pkg.duration>=7)
+    durationMatch=true;
 
-});
+    return priceMatch &&
+    typeMatch &&
+    durationMatch;
 
-currentPage=1;
+    });
 
-displayFiltered(filtered);
+    currentPage=1;
 
-}
+    displayFiltered(filtered);
 
-function displayFiltered(data){
+    }
 
-const container =
-document.getElementById("packageContainer");
+    function displayFiltered(data){
 
-container.innerHTML="";
+    const container =
+    document.getElementById("packageContainer");
 
-data.forEach(pkg=>{
+    container.innerHTML="";
 
-container.innerHTML+=`
-<div class="card">
+    data.forEach(pkg=>{
 
-<h3>${pkg.name}</h3>
-<p class="price">₹${pkg.price}</p>
-<p>${pkg.type}</p>
-<p>${pkg.duration} Days</p>
+    container.innerHTML+=`
+    <div class="card">
 
-
-</div>`;
-});
-
-}
-
-function addToWishlist(id){
-
-const pkg=
-packages.find(p=>p.id===id);
-
-let wishlist=
-JSON.parse(
-localStorage.getItem(
-"wishlist_"+currentUser
-))||[];
-
-if(wishlist.some(item=>item.id===id)){
-alert("Already Added");
-return;
-}
-
-wishlist.push(pkg);
-
-localStorage.setItem(
-"wishlist_"+currentUser,
-JSON.stringify(wishlist)
-);
-
-updateWishlistCount();
-alert("Added to Wishlist ✅");
-}
+    <h3>${pkg.name}</h3>
+    <p class="price">₹${pkg.price}</p>
+    <p>${pkg.type}</p>
+    <p>${pkg.duration} Days</p>
 
 
+    </div>`;
+    });
 
-function updateWishlistCount(){
+    }
 
-const currentUser =
-localStorage.getItem("currentUser");
+    function addToWishlist(id){
 
-if(!currentUser) return;
+    const pkg=
+    packages.find(p=>p.id===id);
 
-const wishlist =
-JSON.parse(
-localStorage.getItem(
-"wishlist_" + currentUser
-)
-) || [];
+    let wishlist=
+    JSON.parse(
+    localStorage.getItem(
+    "wishlist_"+currentUser
+    ))||[];
 
-const countElement =
-document.getElementById("wishlistCount");
+    if(wishlist.some(item=>item.id===id)){
+    alert("Already Added");
+    return;
+    }
 
-if(countElement){
-countElement.textContent =
-wishlist.length;
-}
-}
+    wishlist.push(pkg);
 
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-    displayPackages();       
-    updateWishlistCount();   
-});
+    localStorage.setItem(
+    "wishlist_"+currentUser,
+    JSON.stringify(wishlist)
+    );
 
-window.addEventListener(
-"storage",
-updateWishlistCount
-);
-</script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-    $(window).scroll(function(){
+    updateWishlistCount();
+    alert("Added to Wishlist ✅");
+    }
 
-$(".reveal").each(function(){
 
-let top=$(this).offset().top;
-let scroll=$(window).scrollTop();
-let height=$(window).height();
 
-if(scroll > top - height + 100){
-$(this).addClass("active");
-}
+    function updateWishlistCount(){
 
-});
+    const currentUser =
+    localStorage.getItem("currentUser");
 
-});
-</script>
-<script src="authcheck.js"></script>
+    if(!currentUser) return;
 
-</body>
-</html>
+    const wishlist =
+    JSON.parse(
+    localStorage.getItem(
+    "wishlist_" + currentUser
+    )
+    ) || [];
+
+    const countElement =
+    document.getElementById("wishlistCount");
+
+    if(countElement){
+    countElement.textContent =
+    wishlist.length;
+    }
+    }
+
+    document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+        displayPackages();       
+        updateWishlistCount();   
+    });
+
+    window.addEventListener(
+    "storage",
+    updateWishlistCount
+    );
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(window).scroll(function(){
+
+    $(".reveal").each(function(){
+
+    let top=$(this).offset().top;
+    let scroll=$(window).scrollTop();
+    let height=$(window).height();
+
+    if(scroll > top - height + 100){
+    $(this).addClass("active");
+    }
+
+    });
+
+    });
+    </script>
+    <script src="authcheck.js"></script>
+
+    </body>
+    </html>

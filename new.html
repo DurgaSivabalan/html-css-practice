@@ -189,7 +189,7 @@ if(!currentUser || userLoggedIn !== "true"){
 </div>
  <div class="nav-btn wishlist-wrapper">
   
-    <a href="filter.html">
+    <a href="Packages.html">
         <img src="images/filter.png" alt="Sample Images" class="wishlist-icon">
     </a>
 </div>
@@ -277,9 +277,8 @@ if(!currentUser || userLoggedIn !== "true"){
         <section class="main-content">
           <h1>Welcome to "Dream Destination"</h1>
           <h3>
-            "Travel far enough, you meet yourself."<em>
-              "Let us plan the journey you'll never forget."</em
-            >
+            "Travel far enough, you meet yourself,
+              Let us plan the journey you'll never forget."
           </h3>
           <section class="explore">
             <button><a href="flights.html">Explore More</a></button>
@@ -421,73 +420,11 @@ function updateWishlistCount(){
 }
 
 updateWishlistCount();
-
+//jquery for profile
 $("#profileToggle").click(function(){
 $("#profileBox").fadeToggle();
 });
 
-function loadProfile(){
-
-const currentUser =
-localStorage.getItem("currentUser");
-
-if(!currentUser) return;
-
-const users =
-JSON.parse(localStorage.getItem("users"))||[];
-
-const user =
-users.find(u=>u.email===currentUser);
-
-if(user){
-
-$("#profileName").text(user.name);
-$("#profileEmail").text(user.email);
-$("#profilePhone").text(user.phone);
-
-}
-
-const bookings =
-JSON.parse(
-localStorage.getItem(
-"booking_"+currentUser
-)
-)||[];
-
-let html="";
-
-bookings.slice(-3).forEach(b=>{
-html+=`
-<p>✈ ${b.package}
-<br>₹${b.total}</p>
-`;
-});
-
-$("#profileBookings").html(
-html || "No bookings yet"
-);
-
-}
-
-loadProfile();
-
-function logoutUser(){
-
-localStorage.removeItem("currentUser");
-localStorage.removeItem("userLoggedIn");
-
-window.location.href="login.html";
-
-}
-
-function logoutUser(){
-
-localStorage.removeItem("currentUser");
-localStorage.removeItem("userLoggedIn");
-
-window.location.href="login.html";
-
-}
 
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -532,7 +469,14 @@ html || "No bookings yet"
 }
 
 loadProfile();
+function logoutUser(){
 
+localStorage.removeItem("currentUser");
+localStorage.removeItem("userLoggedIn");
+
+window.location.href="login.html";
+
+}
 </script>
 <script src="authcheck.js"></script>
   </body>

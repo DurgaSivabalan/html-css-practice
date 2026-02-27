@@ -1,4 +1,121 @@
 [
-{"name":"John","age":22},
-{"name":"Sara","age":25}
+  {
+    "id": 1,
+    "name": "Goa Trip",
+    "price": 15000,
+    "type": "Beach",
+    "duration": 3
+  },
+  {
+    "id": 2,
+    "name": "Manali Tour",
+    "price": 35000,
+    "type": "Mountain",
+    "duration": 5
+  },
+  {
+    "id": 3,
+    "name": "Mumbai Explorer",
+    "price": 25000,
+    "type": "City",
+    "duration": 2
+  },
+  {
+    "id": 4,
+    "name": "Kerala Backwaters",
+    "price": 38000,
+    "type": "Beach",
+    "duration": 6
+  },
+  {
+    "id": 5,
+    "name": "Ooty Hills",
+    "price": 22000,
+    "type": "Mountain",
+    "duration": 3
+  },
+  {
+    "id": 6,
+    "name": "Kashmir Paradise",
+    "price": 45000,
+    "type": "Mountain",
+    "duration": 7
+  },
+  {
+    "id": 7,
+    "name": "Shimla Retreat",
+    "price": 32000,
+    "type": "Mountain",
+    "duration": 5
+  },
+  {
+    "id": 8,
+    "name": "Darjeeling Delight",
+    "price": 34000,
+    "type": "Mountain",
+    "duration": 6
+  },
+  {
+    "id": 9,
+    "name": "Andaman Escape",
+    "price": 41000,
+    "type": "Beach",
+    "duration": 7
+  },
+  {
+    "id": 10,
+    "name": "Pondicherry Relax",
+    "price": 17000,
+    "type": "Beach",
+    "duration": 2
+  },
+  {
+    "id": 11,
+    "name": "Jaipur Heritage",
+    "price": 21000,
+    "type": "City",
+    "duration": 3
+  },
+  {
+    "id": 12,
+    "name": "Hyderabad City Tour",
+    "price": 16000,
+    "type": "City",
+    "duration": 2
+  },
+  {
+    "id": 13,
+    "name": "Ladakh Adventure",
+    "price": 55000,
+    "type": "Mountain",
+    "duration": 8
+  },
+  {
+    "id": 14,
+    "name": "Coorg Nature Stay",
+    "price": 28000,
+    "type": "Mountain",
+    "duration": 4
+  },
+  {
+    "id": 15,
+    "name": "Mysore Palace Tour",
+    "price": 19000,
+    "type": "City",
+    "duration": 2
+  },
+  {
+    "id": 16,
+    "name": "Rishikesh River Camp",
+    "price": 24000,
+    "type": "Mountain",
+    "duration": 3
+  },
+  {
+    "id": 17,
+    "name": "Taj Mahal",
+    "price": 30000,
+    "type": "City",
+    "duration": 5
+  }
 ]

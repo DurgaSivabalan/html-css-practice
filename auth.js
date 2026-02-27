@@ -2,7 +2,6 @@ console.log("Auth JS Connected");
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
 function updateWishlistCount(){
 
 const currentUser =
@@ -35,8 +34,6 @@ const regex =
 /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*])[A-Za-z\d@$!%*]{8,}$/;
 return regex.test(pwd);
 }
-
-
 
 const registerForm =
 document.getElementById("registerForm");
@@ -115,15 +112,13 @@ window.location.href="login.html";
 
 }
 
-
-
 const loginForm =
 document.getElementById("loginForm");
 
 if(loginForm){
 
 loginForm.addEventListener("submit", function(e){
-
+    
 e.preventDefault();
 
 const email =

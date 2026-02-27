@@ -123,8 +123,7 @@ padding:30px;
 border-radius:10px;
 box-shadow:0 5px 25px rgba(0,0,0,0.3);
 z-index:9999;
-text-align:center;
-">
+text-align:center;">
 <h3>✅ Booking Successful!</h3>
 <p>Redirecting to Invoice...</p>
 </div>
@@ -230,14 +229,7 @@ localStorage.setItem(
 JSON.stringify(booking)
 );
 
-$("#bookingPopup").fadeIn(400);
-
-setTimeout(function(){
-
-$("#bookingPopup").fadeOut(3000);
-window.location.href="invoice.html";
-
-},2000);
+    
 }
 
 

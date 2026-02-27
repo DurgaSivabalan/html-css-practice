@@ -111,12 +111,11 @@ border-color:#667eea;
 box-shadow:0 0 6px rgba(102,126,234,0.25);
 }
     
-     .traveller-card{
+.traveller-card{
 background:#ffffff;
 padding:25px;
 margin-top:25px;
 border-radius:14px;
-box-shadow:0 6px 18px rgba(0,0,0,0.08);
 border-left:5px solid #667eea;
 }
 .traveller-card h3{
@@ -148,7 +147,7 @@ font-size:18px;
   </head>
 
   <body>
-    <h1>Book Your Dream Trip ✈️</h1>
+    <h1>Book Your Dream Trip</h1>
 
     <div class="form-container">
       <form id="bookingForm">
@@ -216,7 +215,7 @@ font-size:18px;
         </div>
 
         <button type="button" id="addTravellersBtn">
-          ➕ Add Traveller Details
+           Add Traveller Details
         </button>
 
         <div id="travellersContainer"></div>
@@ -267,7 +266,6 @@ font-size:18px;
 
       function calculatePrice() {
         const price = priceList[pkg.value] || 0;
-
         const members =
           (Number(adults.value) || 0) + (Number(children.value) || 0);
 
@@ -291,9 +289,8 @@ font-size:18px;
           const adultCount = parseInt(adults.value) || 0;
           const childCount = parseInt(children.value) || 0;
 
-          /* Adults */
           for (let i = 1; i <= adultCount; i++) {
-            container.innerHTML += `
+          container.innerHTML += `
 <div class="traveller-card">
 <h3>Adult ${i}</h3>
 <div class="traveller-grid">
@@ -340,7 +337,6 @@ font-size:18px;
 
           const travellerDetails = [];
 
-          /* adults */
           document.querySelectorAll(".adultName").forEach((name, index) => {
             travellerDetails.push({
               type: "Adult",
@@ -374,6 +370,15 @@ font-size:18px;
 
           window.location.href = "summary.html";
         });
+        const selectedPackage =
+JSON.parse(localStorage.getItem("selectedPackage"));
+
+if(selectedPackage){
+
+document.getElementById("packageName").value =
+selectedPackage.name;
+
+}
     </script>
     <script src="authcheck.js"></script>
 
