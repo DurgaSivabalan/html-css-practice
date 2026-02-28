@@ -229,12 +229,28 @@ localStorage.setItem(
 JSON.stringify(booking)
 );
 
-    
+
 }
 
 
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="jquery-effects.js"></script>
+<script>
+    $(document).ready(function(){
+
+
+
+$("#bookingPopup").fadeIn(400);
+
+setTimeout(function(){
+
+$("#bookingPopup").fadeOut(3000);
+window.location.href="invoice.html";
+
+},2000);
+});
+
+
+</script>
 </body>
 </html>

@@ -23,7 +23,6 @@ color:white;
 margin:0;
 }
 
-/* FILTER */
 .filter-box{
 display:flex;
 gap:15px;
@@ -41,7 +40,6 @@ border:1px solid #ccc;
 cursor:pointer;
 }
 
-/* GRID */
 .container{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -49,7 +47,6 @@ gap:20px;
 padding:30px;
 }
 
-/* CARD */
 .card{
 background:white;
 padding:18px;
@@ -67,7 +64,6 @@ color:green;
 font-weight:bold;
 }
 
-/* BUTTONS */
 .button-group{
 margin-top:12px;
 display:flex;
@@ -91,14 +87,7 @@ padding:8px 12px;
 border-radius:6px;
 cursor:pointer;
 }
-/*.discount{
-    background-color: #ff9800;
-    display: inline;
-    padding: 7px;
-    border-radius: 10px;
-    justify-content: end;
-    text-align: end;
-    align-items: end;}*/
+
 </style>
 </head>
 
@@ -107,22 +96,21 @@ cursor:pointer;
 <h1>QuestVoyage Packages</h1>
 
 <div class="filter-box">
-
-<select id="priceFilter">
+<select id="priceFilter"  aria-label="Price Filter">
 <option value="all">All Prices</option>
 <option value="low">Below 20000</option>
 <option value="mid">20000–40000</option>
 <option value="high">Above 40000</option>
 </select>
 
-<select id="typeFilter">
+<select id="typeFilter"  aria-label="Type Filter">
 <option value="all">All Types</option>
 <option value="beach">Beach</option>
 <option value="mountain">Mountain</option>
 <option value="city">City</option>
 </select>
 
-<select id="durationFilter">
+<select id="durationFilter"  aria-label="Duration Filter">
 <option value="all">All Duration</option>
 <option value="Above 2 days">2 Days</option>
 <option value="Above 5 days">3-5 Days</option>
@@ -172,7 +160,7 @@ container.innerHTML += `
 
 <button class="wishlist-btn"
 onclick="addToWishlist(${pkg.id})">
-❤️ Wishlist
+ Wishlist
 </button>
 
 <button class="book-btn"
@@ -263,7 +251,7 @@ JSON.stringify(wishlist)
 
 console.log("Saved Wishlist:", wishlist);
 
-alert("Added to Wishlist ❤️");
+alert("Added to Wishlist ");
 }
 
 function bookPackage(id){

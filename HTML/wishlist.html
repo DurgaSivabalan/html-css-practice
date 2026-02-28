@@ -107,7 +107,7 @@
     <div id="wishlistContainer" class="container"></div>
 
     <div class="footer">
-      <button class="back" onclick="window.location.href = 'filter.html'">
+      <button class="back" onclick="window.location.href = 'Packages.html'">
         Back to Packages
       </button>
 
@@ -116,16 +116,15 @@
 
     <script>
       const currentUser = localStorage.getItem("currentUser");
-
       if (!currentUser) {
         alert("Login First");
         window.location.href = "login.html";
       }
-
       let wishlist =
         JSON.parse(localStorage.getItem("wishlist_" + currentUser)) || [];
 
       const container = document.getElementById("wishlistContainer");
+      //const container1=${'#wishlistcontainer'}.val():
 
       function renderWishlist() {
         container.innerHTML = "";
@@ -179,6 +178,9 @@ Book Trip
       }
 
       renderWishlist();
+
+
+      
       function bookTrip(id) {
         const currentUser = localStorage.getItem("currentUser");
 
@@ -195,7 +197,5 @@ Book Trip
         window.location.href = "book.html";
       }
     </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="jquery-effects.js"></script>
   </body>
 </html>
