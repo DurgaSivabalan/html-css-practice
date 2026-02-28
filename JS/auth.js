@@ -105,7 +105,7 @@ message.innerText=
 "Registration Successful ✅ Redirecting...";
 
 setTimeout(()=>{
-window.location.href="C:\Users\Kaar User\Desktop\Assgnment\Travel website\HTML\login.html";
+window.location.href="login.html";
 },1500);
 
 });
@@ -143,7 +143,7 @@ localStorage.setItem(
 );
 
 window.location.href=
-"HTML\admin-dashboard.html";
+"admin-dashboard.html";
 }
 else{
 alert("Invalid Admin Credentials");
@@ -173,7 +173,7 @@ email
 
 alert("Login Successful ✅");
 
-window.location.href="HTML/new.html";
+window.location.href="new.html";
 
 }else{
 alert("Invalid User Credentials");
@@ -195,7 +195,7 @@ window.logoutUser=function(){
 localStorage.removeItem("currentUser");
 localStorage.removeItem("adminLoggedIn");
 
-window.location.href="C:\Users\Kaar User\Desktop\Assgnment\Travel website\HTML\login.html";
+window.location.href="login.html";
 
 };
 

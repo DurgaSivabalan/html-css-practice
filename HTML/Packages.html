@@ -128,7 +128,7 @@ cursor:pointer;
 let packages = [];
 
 
-fetch("packages.json")
+fetch("../packages.json")
 .then(res => res.json())
 .then(data=>{
 packages = data;

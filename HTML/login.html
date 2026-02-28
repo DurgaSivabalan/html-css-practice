@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QuestVoyage - Login</title>
-  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="../CSS/auth.css">
   <link rel="shortcut icon" href="images/logo.jpg" type="image/x-icon"/>
 </head>
 <body>
@@ -17,7 +17,7 @@
     <form id="loginForm">
       <input type="email" id="loginEmail" placeholder="Enter Email" autocomplete="off"required>
       <input type="password" id="loginPassword" placeholder="Enter Password" autocomplete="new-password" required>
-          <label>Select Type</label>
+          <label for="role">Select Type</label>
 <select id="role" required style="margin-bottom: 10px;">
     <option value="">--Role--</option>
     <option value="user">User</option>
@@ -32,12 +32,12 @@
     <p id="loginMessage" class="message"></p>
 
     <p class="switch-link">
-      New user? <a href="register.html">Register here</a>
+      New user? <a href="../HTML/register.html">Register here</a>
     </p>
   </div>
 </div>
 
-<script src="auth.js"></script>
+<script src="../JS/auth.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="jquery-effects.js"></script>
 
