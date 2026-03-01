@@ -80,7 +80,14 @@ body {
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
 }
-
+}
 #loginform{
   padding-right: 10px;
+}
+#role{
+  margin-bottom: 10px;
+}
+.login #loginForm #sbtn1{
+  margin-bottom: 10px;
+ padding: 10px 150px;
 }

@@ -37,8 +37,6 @@
       margin-bottom: 25px;
     }
 
-    .forming {
-    }
 
     .fname,
     .lname,
@@ -232,6 +230,18 @@
         font-size: 0.85rem;
       }
     }
+    #successMessage{
+      color: green; 
+      font-weight: bold;
+      margin-top: 15px;
+       display: none;
+    }
+    #errorMessage{
+      color: red; 
+      font-weight: bold; 
+      margin-top: 15px; 
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -290,8 +300,8 @@
         <section class="button">
           <button type="submit">Submit</button>
         </section>
-        <p id="successMessage" style="color: green; font-weight: bold; margin-top: 15px; display: none;"></p>
-        <p id="errorMessage" style="color: red; font-weight: bold; margin-top: 15px; display: none;"></p>
+        <p id="successMessage"></p>
+        <p id="errorMessage"></p>
       </form>
     </section>
   </section>
