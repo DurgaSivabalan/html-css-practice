@@ -1,0 +1,79 @@
+   body {
+        margin: 0;
+        font-family: Arial;
+        background: #f4f6fb;
+      }
+      .header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 22px;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 30px;
+      }
+      .card {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      }
+      .price {
+        color: green;
+        font-weight: bold;
+      }
+      .btn-group {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+      }
+      button {
+        flex: 1;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
+      .remove {
+        background: #e53935;
+      }
+      .save {
+        background: #43a047;
+      }
+      .footer {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .back {
+        background: #1565c0;
+        padding: 10px 20px;
+      }
+      .clear {
+        background: black;
+        padding: 10px 20px;
+        margin-left: 10px;
+      }
+      .empty {
+        text-align: center;
+        color: red;
+        font-size: 18px;
+      }
+      .book {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        flex: 1;
+        transition: 0.3s;
+      }
+      .book:hover {
+        background: #2e7d32;
+        transform: scale(1.05);
+      }

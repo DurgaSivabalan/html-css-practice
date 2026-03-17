@@ -1,0 +1,112 @@
+body{
+margin:0;
+font-family:Arial;
+background:#f4f6fb;
+}
+
+/* HEADER */
+header{
+background:linear-gradient(135deg,#667eea,#764ba2);
+color:white;
+padding:15px 25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+header button{
+background:red;
+border:none;
+color:white;
+padding:8px 15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.dashboard{
+padding:30px;
+}
+
+.cards{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.card{
+flex:1;
+min-width:220px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.card h3{
+margin:0;
+color:#555;
+}
+
+.card p{
+font-size:22px;
+font-weight:bold;
+}
+
+/* TABLE */
+.table-container{
+margin-top:30px;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+}
+
+th{
+background:#eef2ff;
+}
+
+select{
+padding:5px;
+border-radius:5px;
+}
+
+/* SAVE SECTION */
+.save-section{
+margin-top:40px;
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.save-btn{
+padding:12px 25px;
+margin:10px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+.save-btn{
+    background:#d32f2f;color:white
+}
+.green{background:#4caf50;color:white;}
+.orange{background:#ff9800;color:white;}
+
+.save-message{
+margin-top:10px;
+display:none;
+padding:10px;
+border-radius:6px;
+}

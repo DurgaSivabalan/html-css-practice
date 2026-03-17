@@ -1,0 +1,327 @@
+@keyframes fadeIn {
+        from {
+          opacity: var(--opacity);
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      body {
+        background-image: url(images/BD.png);
+        opacity: 0.95;
+      }
+:root{
+  --background-color:white;
+  --opacity:0;
+
+}
+      h2 {
+        animation: fadeIn 1.5s ease-in-out;
+        color: #2c3e50;
+        font-weight: bold;
+      }
+.flights h2{
+  font-size: 41px; text-align: center;
+}
+      .flights {
+        background-color:var(--background-color);
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        padding: 10px;
+        background-size: cover;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+
+      .flights1 {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .indigo,
+      .airindia,
+      .spicejet {
+        border: 2px solid cadetblue;
+        width: 235px;
+        height: 330px;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+.indigo h4,
+.airindia h4,
+.spicejet h4{
+  text-align: center;
+}
+      .indigo {
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      .airindia {
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      .spicejet {
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      .indigo:hover,
+      .airindia:hover,
+      .spicejet:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .indigo ul li,
+      .airindia ul li,
+      .spicejet ul li {
+        list-style-type: none;
+        text-align: center;
+        padding-right: 20px;
+        color: #555;
+      }
+
+      .places {
+        background-color: var(--background-color);
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        padding: 20px;
+        background-size: cover;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      .places1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 20px;
+      }
+
+      .Taj,
+      .Raj,
+      .Aaj {
+        width: 235px;
+        border: 2px solid cadetblue;
+        border-radius: 10px;
+        padding: 10px;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .Taj {
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      .Raj {
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      .Aaj {
+        animation: fadeIn 1.2s ease-in-out;
+      }
+
+      .Taj:hover,
+      .Raj:hover,
+      .Aaj:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(118, 75, 162, 0.3);
+      }
+
+      .Taj h4,
+      .Raj h4,
+      .Aaj h4 {
+        color: #2c3e50;
+        font-weight: 600;
+      }
+
+      .Hotels {
+        background-color: var(--background-color);
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        padding: 10px;
+        background-size: cover;
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        list-style: none;
+        animation: fadeIn 1.5s ease-in-out;
+      }
+
+      .Hotels1 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        gap: 20px;
+        padding: 20px 0;
+      }
+
+      .lake,
+      .desert,
+      .city,
+      .hill {
+        border: 2px solid cadetblue;
+        width: 235px;
+        height: auto;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, rgba(67, 233, 123, 0.05) 0%, rgba(56, 249, 215, 0.05) 100%);
+      }
+
+      .lake {
+        animation: fadeIn 1.2s ease-in-out;
+        border-color: cadetblue;
+      }
+
+      .desert {
+        animation: fadeIn 1.2s ease-in-out;
+        border-color: cadetblue;
+      }
+
+      .city {
+        animation: fadeIn 1.2s ease-in-out;
+        border-color: cadetblue;
+      }
+
+      .hill {
+        animation: fadeIn 1.2s ease-in-out 0.3s both;
+        border-color: cadetblue;
+      }
+
+      .lake:hover,
+      .desert:hover,
+      .city:hover,
+      .hill:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .lake h4,
+      .desert h4,
+      .city h4,
+      .hill h4 {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .lake button,
+      .desert button,
+      .city button,
+      .hill button {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .lake button:hover,
+      .desert button:hover,
+      .city button:hover,
+      .hill button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
+
+      .lake button a,
+      .desert button a,
+      .city button a,
+      .hill button a {
+        text-decoration: none;
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .flights1,
+        .places1,
+        .Hotels1 {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .indigo,
+        .airindia,
+        .spicejet,
+        .Taj,
+        .Raj,
+        .Aaj,
+        .lake,
+        .desert,
+        .city,
+        .hill {
+          width: 90%;
+          max-width: 280px;
+        }
+
+        h2 {
+          font-size: 24px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .flights,
+        .places,
+        .Hotels {
+          margin-left: 10px;
+          margin-right: 10px;
+          padding: 8px;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        .indigo,
+        .airindia,
+        .spicejet,
+        .Taj,
+        .Raj,
+        .Aaj,
+        .lake,
+        .desert,
+        .city,
+        .hill {
+          width: 95%;
+        }
+      }
+      .flights1 .indigo{
+        font-size: medium;
+      }
+      .places h2{
+        font-size: 41px;
+         text-align: center;
+      }
+      .places ,.places1 .Taj h4,
+       .places ,.places1 .Raj h4,
+        .places ,.places1 .Aaj h4
+      {
+      text-align: center;
+      }
+      .places ,.places1 .Taj p,
+       .places ,.places1 .Raj p,
+        .places ,.places1 .Aaj p{
+margin: 2px; 
+text-align: center;
+        }
+        .Hotels h2{
+          font-size: 41px; 
+          text-align: center;
+        }
+        .Hotels .Hotels1 .lake,
+         .Hotels .Hotels1 .desert,
+          .Hotels .Hotels1 .city{
+          list-style: none;
+        }
