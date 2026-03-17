@@ -10,25 +10,10 @@
       href="../images/logo.jpg"
       type="image/x-icon"
     />
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
    
   </head>
-  <script>
 
-const currentUser =
-localStorage.getItem("currentUser");
-
-const userLoggedIn =
-localStorage.getItem("userLoggedIn");
-
-if(!currentUser || userLoggedIn !== "true"){
-    
-    alert("Please login first");
-
-    window.location.replace("../login.html");
-}
-  </script>
 
 <body class="Hero-bg">
     <header style="display:flex; flex-direction: column; gap: 20px">
@@ -281,95 +266,12 @@ if(!currentUser || userLoggedIn !== "true"){
       <p class="footer-bottom">© 2026 Travel Agency. All Rights Reserved.</p>
     </footer>
 
-    <script src="../JS/auth.js"></script>
+    
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="../JS/new.js"></script>
+<script src="../JS/auth.js"></script>
+
     <script src="../JS/newsletter.js"></script>
-<script>
-function updateWishlistCount(){
-
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-
-    let countElement = document.getElementById("wishlistCount");
-
-    if(countElement){
-        countElement.textContent = wishlist.length;
-    }
-}
-
-updateWishlistCount();
-//jquery for profile
-$("#profileToggle").click(function(){
-$("#profileBox").fadeToggle();
-});
-
-
-</script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<script>
-
-function loadProfile(){
-
-const currentUser =
-localStorage.getItem("currentUser");
-
-if(!currentUser) return;
-
-const users =
-JSON.parse(localStorage.getItem("users")) || [];
-
-const user =
-users.find(u=>u.email===currentUser);
-
-if(user){
-$("#profileName").text(user.name);
-$("#profileEmail").text(user.email);
-$("#profilePhone").text(user.phone);
-}
-
-const bookings =
-JSON.parse(
-localStorage.getItem("booking_"+currentUser)
-)||[];
-
-let html="";
-
-bookings.slice(-3).forEach(b=>{
-html+=`<p>✈ ${b.package} - ₹${b.total}</p>`;
-});
-
-$("#profileBookings").html(
-html || "No bookings yet"
-);
-
-}
-
-loadProfile();
-function logoutUser(){
-
-localStorage.removeItem("currentUser");
-localStorage.removeItem("userLoggedIn");
-
-window.location.href="login.html";
-
-}
-</script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-  
-$(document).ready(function(){
-
-$("#profileToggle").click(function(e){
-e.stopPropagation();
-$("#profileBox").fadeToggle();
-});
-
-$(document).click(function(){
-$("#profileBox").fadeOut();
-});
-
-})
-
-</script>
-<script src="../JS/authcheck.js"></script>
   </body>
 </html>
